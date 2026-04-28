@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DEC Électrique — Maîtres électriciens · Résidentiel · Commercial · Industriel · Québec</title>
+<meta name="description" content="Maîtres électriciens au Québec. Panneaux, bornes de recharge, génératrices, domotique. Soumission gratuite, RBQ certifié, urgences 24/7." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============== RESET ============== */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+img,svg{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+input,textarea,select{font:inherit;color:inherit}
+
+:root{
+  /* Progression noir → turquoise */
+  --bg-0:#050B0A;          /* le plus noir */
+  --bg-1:#070F0D;          /* hero bg */
+  --bg-2:#091814;          /* secteurs */
+  --bg-3:#0C211C;          /* expertise */
+  --bg-4:#0F2C25;          /* approche - le plus turquoise */
+  --bg-5:#143830;          /* card hover */
+
+  /* Texte */
+  --text:#E8F0EE;
+  --text-2:#9DAEA9;
+  --text-3:#6F807B;
+  --text-4:#4A5B57;
+
+  /* Lignes */
+  --line:#15302A;
+  --line-hi:#1F4039;
+  --line-bright:#2A5A50;
+
+  /* Turquoise — accent unique */
+  --turq:#14B8A6;
+  --turq-bright:#2DD4BF;
+  --turq-light:#5EEAD4;
+  --turq-pale:#99F6E4;
+  --turq-dim:rgba(45,212,191,.10);
+  --turq-glow:rgba(45,212,191,.42);
+
+  --radius:14px;
+  --radius-sm:8px;
+
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'Manrope',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+
+  --container:1280px;
+  --pad:clamp(20px,4vw,56px);
+  --ease:cubic-bezier(.2,.7,.15,1);
+}
+
+body{
+  background:var(--bg-1);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+::selection{background:var(--turq);color:var(--bg-0)}
+
+.container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+/* ============== SVG PATTERNS — global ============== */
+.pattern-bg{position:absolute;inset:0;pointer-events:none;opacity:.5;z-index:0}
+.pattern-bg svg{width:100%;height:100%;display:block}
+
+/* ============== NAV ============== */
+.nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(16px) saturate(120%);-webkit-backdrop-filter:blur(16px) saturate(120%);
+  background:rgba(7,15,13,.78);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+.nav-links{display:flex;gap:38px;font-size:13.5px;color:var(--text-2);font-weight:500;letter-spacing:.01em}
+.nav-links a{transition:color .2s var(--ease)}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 20px;background:var(--turq);color:var(--bg-0);
+  font-weight:700;font-size:13.5px;border-radius:999px;
+  transition:transform .2s var(--ease),background .2s var(--ease);
+}
+.nav-cta:hover{transform:translateY(-1px);background:var(--turq-bright)}
+.nav-cta svg{width:13px;height:13px}
+@media(max-width:880px){.nav-links{display:none}}
+
+/* ============== LOGO ============== */
+.logo{display:inline-flex;align-items:center;gap:12px;color:var(--text)}
+.logo-mark{width:38px;height:38px;flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-text .l1{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.025em}
+.logo-text .l2{font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;color:var(--text-3);margin-top:5px;text-transform:uppercase}
+
+/* ============== HERO ============== */
+.hero{
+  position:relative;
+  background:var(--bg-1);
+  min-height:calc(100vh - 74px);
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* IMAGE EN ARRIÈRE-PLAN */
+.hero-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+}
+.hero-bg img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 35%;
+  /* desat + tonalité turquoise */
+  filter:saturate(.55) brightness(.6) contrast(1.05) hue-rotate(-8deg);
+  display:block;
+}
+/* overlay sombre dégradé pour lisibilité du texte */
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(7,15,13,.96) 0%,
+      rgba(7,15,13,.88) 30%,
+      rgba(7,15,13,.65) 55%,
+      rgba(7,15,13,.45) 75%,
+      rgba(7,15,13,.55) 100%),
+    linear-gradient(180deg,
+      rgba(7,15,13,.4) 0%,
+      transparent 30%,
+      transparent 65%,
+      rgba(7,15,13,.85) 100%);
+  pointer-events:none;
+}
+/* teinte turquoise sur l'ensemble pour cohérence */
+.hero-bg::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse 80% 60% at 75% 50%, rgba(20,184,166,.18), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(15,139,126,.22), transparent 65%);
+  pointer-events:none;
+  mix-blend-mode:screen;
+}
+
+.hero-text{
+  position:relative;z-index:3;
+  width:100%;
+  max-width:var(--container);
+  margin:0 auto;
+  padding:clamp(48px,7vw,96px) var(--pad);
+  display:flex;flex-direction:column;justify-content:center;
+}
+
+/* annotation technique en haut à droite */
+.hero-id{
+  position:absolute;top:32px;right:var(--pad);
+  z-index:4;
+  font-family:var(--mono);font-size:10px;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(232,240,238,.7);
+  border:1px solid rgba(232,240,238,.18);
+  padding:7px 14px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  background:rgba(5,11,10,.35);
+  display:flex;align-items:center;gap:10px;
+}
+.hero-id::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--turq-bright);
+  box-shadow:0 0 8px var(--turq-glow);
+  animation:pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* coin de mire technique */
+.hero-corners{position:absolute;inset:24px;z-index:4;pointer-events:none}
+.hero-corners span{position:absolute;width:18px;height:18px}
+.hero-corners span::before,.hero-corners span::after{
+  content:"";position:absolute;
+  background:rgba(232,240,238,.35);
+}
+.hero-corners .tl{top:0;left:0}
+.hero-corners .tl::before{top:0;left:0;width:18px;height:1px}
+.hero-corners .tl::after{top:0;left:0;width:1px;height:18px}
+.hero-corners .tr{top:0;right:0}
+.hero-corners .tr::before{top:0;right:0;width:18px;height:1px}
+.hero-corners .tr::after{top:0;right:0;width:1px;height:18px}
+.hero-corners .bl{bottom:0;left:0}
+.hero-corners .bl::before{bottom:0;left:0;width:18px;height:1px}
+.hero-corners .bl::after{bottom:0;left:0;width:1px;height:18px}
+.hero-corners .br{bottom:0;right:0}
+.hero-corners .br::before{bottom:0;right:0;width:18px;height:1px}
+.hero-corners .br::after{bottom:0;right:0;width:1px;height:18px}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text-2);margin-bottom:36px;
+}
+.eyebrow .dash{width:36px;height:1px;background:var(--turq-bright)}
+.eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--turq-bright);box-shadow:0 0 8px var(--turq-glow)}
+
+.hero h1{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(48px,7vw,108px);
+  line-height:.92;
+  letter-spacing:-.04em;
+  margin:0 0 32px;
+  color:var(--text);
+  max-width:14ch;
+  text-shadow:0 2px 30px rgba(5,11,10,.4);
+}
+.hero h1 .accent{
+  font-weight:300;
+  color:var(--turq-bright);
+  font-style:italic;
+  letter-spacing:-.03em;
+}
+
+.hero p.lead{
+  font-size:clamp(15.5px,1.2vw,17.5px);
+  color:var(--text);
+  max-width:540px;
+  line-height:1.65;
+  margin:0 0 44px;
+  text-shadow:0 1px 20px rgba(5,11,10,.5);
+}
+
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:64px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 28px;font-weight:600;font-size:14.5px;
+  border-radius:999px;
+  transition:transform .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
+  white-space:nowrap;
+}
+.btn-primary{background:var(--turq);color:var(--bg-0);font-weight:700;box-shadow:0 12px 40px -8px var(--turq-glow)}
+.btn-primary:hover{transform:translateY(-2px);background:var(--turq-bright)}
+.btn-ghost{background:rgba(5,11,10,.3);color:var(--text);border:1px solid rgba(232,240,238,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.btn-ghost:hover{border-color:var(--turq-bright);color:var(--turq-bright);background:rgba(20,184,166,.08)}
+.btn svg{width:15px;height:15px}
+
+/* hero meta */
+.hero-meta{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:1px solid rgba(232,240,238,.18);
+  padding-top:32px;
+  max-width:580px;
+}
+.hero-meta>div{padding-right:20px;border-right:1px solid rgba(232,240,238,.12)}
+.hero-meta>div:last-child{border-right:none;padding-left:24px;padding-right:0}
+.hero-meta>div:nth-child(2){padding-left:24px}
+.hero-meta .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
+.hero-meta .val{font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:-.012em;color:var(--text)}
+
+@media(max-width:980px){
+  .hero{min-height:auto;padding:80px 0 100px}
+  .hero-bg img{object-position:center 25%}
+  .hero-bg::after{
+    background:
+      linear-gradient(180deg,
+        rgba(7,15,13,.85) 0%,
+        rgba(7,15,13,.7) 40%,
+        rgba(7,15,13,.85) 100%);
+  }
+  .hero h1{font-size:clamp(44px,9vw,72px)}
+}
+
+/* ============== SECTION ============== */
+.section{padding:clamp(80px,11vw,160px) 0;position:relative;overflow:hidden}
+.section-content{position:relative;z-index:2}
+
+.section-head{margin-bottom:clamp(60px,7vw,100px)}
+.section-tag{
+  font-family:var(--mono);font-size:11px;
+  color:var(--text-3);letter-spacing:.25em;
+  text-transform:uppercase;
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:28px;
+}
+.section-tag::before{content:"";width:32px;height:1px;background:var(--turq)}
+
+.section-title{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(40px,5.5vw,76px);
+  line-height:.96;
+  letter-spacing:-.035em;
+  margin:0;max-width:14ch;
+  color:var(--text);
+}
+.section-title .accent{
+  font-weight:300;font-style:italic;
+  color:var(--turq-bright);
+  letter-spacing:-.025em;
+}
+
+.section-head-row{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr);
+  gap:clamp(40px,6vw,80px);
+  align-items:end;
+}
+@media(max-width:880px){.section-head-row{grid-template-columns:1fr}}
+
+.section-desc{color:var(--text-2);font-size:16px;line-height:1.65;max-width:480px}
+
+/* ============== SECTORS — section bg-2 ============== */
+.section.sectors{background:var(--bg-2)}
+
+.sectors-stack{display:flex;flex-direction:column}
+.sector-row{
+  display:grid;
+  grid-template-columns:90px minmax(0,1.1fr) minmax(0,1fr);
+  gap:clamp(32px,5vw,64px);
+  padding:clamp(48px,6vw,84px) 0;
+  border-top:1px solid var(--line);
+  align-items:start;
+}
+.sector-row:last-child{border-bottom:1px solid var(--line)}
+@media(max-width:880px){.sector-row{grid-template-columns:1fr;gap:24px}}
+
+.sector-num{
+  font-family:var(--display);
+  font-size:clamp(48px,5vw,72px);
+  font-weight:300;
+  line-height:1;
+  color:var(--turq);
+  letter-spacing:-.03em;
+  font-feature-settings:"tnum";
+}
+.sector-info h3{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(30px,3.6vw,44px);
+  line-height:1;letter-spacing:-.028em;
+  margin:0 0 6px;
+  color:var(--text);
+}
+.sector-info .label{
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--turq);margin-bottom:24px;
+}
+.sector-info p{color:var(--text-2);font-size:15.5px;line-height:1.65;margin:24px 0 0;max-width:380px}
+
+.sector-services{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;padding-top:8px}
+@media(max-width:520px){.sector-services{grid-template-columns:1fr}}
+.sector-services .item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid var(--line);
+  font-size:14.5px;color:var(--text);line-height:1.4;
+}
+.sector-services .item:last-child{border-bottom:none}
+.sector-services .item::before{
+  content:"";flex-shrink:0;
+  width:12px;height:1px;margin-top:11px;
+  background:var(--turq);
+}
+
+/* ============== EXPERTISE — bento, bg-3 ============== */
+.section.expertise{background:var(--bg-3)}
+
+.bento{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  grid-auto-rows:minmax(220px,auto);
+  gap:14px;
+}
+@media(max-width:880px){.bento{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.bento{grid-template-columns:1fr}}
+
+.bento-card{
+  position:relative;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  overflow:hidden;
+  transition:transform .35s var(--ease),border-color .25s var(--ease),background .25s var(--ease);
+}
+.bento-card:hover{transform:translateY(-3px);border-color:var(--line-bright);background:var(--bg-1)}
+.bento-card .num{
+  font-family:var(--mono);font-size:11px;
+  color:var(--text-3);letter-spacing:.2em;
+}
+.bento-card .ico{color:var(--turq-bright);width:42px;height:42px;margin-bottom:18px}
+.bento-card .ico svg{width:100%;height:100%}
+.bento-card h4{
+  font-family:var(--display);font-weight:600;
+  font-size:21px;margin:0 0 10px;
+  letter-spacing:-.018em;color:var(--text);
+}
+.bento-card p{font-size:14px;color:var(--text-2);margin:0;line-height:1.6}
+.bento-card .meta{
+  margin-top:18px;display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--turq-bright);
+}
+.bento-card .meta::before{content:"";width:14px;height:1px;background:var(--turq)}
+
+/* Featured */
+.bento-card.feature{
+  grid-column:span 4;grid-row:span 2;
+  background:var(--bg-0);
+  border:1px solid var(--line);
+  padding:clamp(32px,3.5vw,52px);
+}
+.bento-card.feature::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 15% 95%,rgba(45,212,191,.18),transparent 55%),
+    radial-gradient(ellipse at 85% 5%,rgba(20,184,166,.10),transparent 55%);
+  pointer-events:none;
+}
+.bento-card.feature h4{
+  font-size:clamp(28px,3.5vw,42px);
+  font-weight:500;letter-spacing:-.028em;
+  line-height:1;margin-top:auto;margin-bottom:14px;
+  position:relative;z-index:2;
+}
+.bento-card.feature h4 .accent{font-weight:300;font-style:italic;color:var(--turq-bright)}
+.bento-card.feature p{color:var(--text-2);font-size:15.5px;max-width:430px;position:relative;z-index:2}
+.bento-card.feature .feature-visual{position:absolute;right:-30px;top:30px;width:280px;height:280px;z-index:1}
+@media(max-width:880px){
+  .bento-card.feature{grid-column:span 2;grid-row:span 1}
+  .bento-card.feature .feature-visual{display:none}
+}
+@media(max-width:520px){.bento-card.feature{grid-column:span 1}}
+
+.bento-card.wide{grid-column:span 2}
+@media(max-width:880px){.bento-card.wide{grid-column:span 1}}
+
+/* ============== APPROCHE — manifesto, bg-4 le plus turquoise ============== */
+.section.approche{background:var(--bg-4)}
+
+.manifesto{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--line-hi);
+  border:1px solid var(--line-hi);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+@media(max-width:760px){.manifesto{grid-template-columns:1fr}}
+.manifesto-item{
+  background:var(--bg-3);
+  padding:clamp(36px,4.5vw,56px);
+  position:relative;
+  min-height:260px;
+  transition:background .3s var(--ease);
+  display:flex;flex-direction:column;
+}
+.manifesto-item:hover{background:var(--bg-2)}
+.manifesto-item .big-num{
+  font-family:var(--display);
+  font-size:clamp(72px,8vw,112px);
+  font-weight:300;line-height:1;
+  color:var(--turq-bright);
+  letter-spacing:-.04em;
+  position:absolute;top:32px;right:36px;
+  opacity:.16;pointer-events:none;
+  font-feature-settings:"tnum";
+}
+.manifesto-item .marker{
+  font-family:var(--mono);font-size:10.5px;
+  color:var(--turq-bright);
+  letter-spacing:.22em;text-transform:uppercase;
+  margin-bottom:auto;
+  padding-bottom:36px;
+  position:relative;z-index:1;
+}
+.manifesto-item h5{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(22px,2.4vw,28px);
+  letter-spacing:-.022em;line-height:1.1;
+  margin:0 0 14px;
+  color:var(--text);max-width:18ch;
+  position:relative;z-index:1;
+}
+.manifesto-item p{
+  color:var(--text-2);
+  font-size:14.5px;line-height:1.65;
+  margin:0;position:relative;z-index:1;
+}
+
+/* ============== QUOTE ============== */
+.quote-section{
+  position:relative;
+  background:var(--bg-2);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.quote-section::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 12% 18%,rgba(45,212,191,.30),transparent 65%),
+    radial-gradient(ellipse 60% 50% at 88% 82%,rgba(20,184,166,.22),transparent 65%),
+    radial-gradient(ellipse 80% 60% at 50% 100%,rgba(15,139,126,.18),transparent 65%);
+  pointer-events:none;z-index:1;
+}
+.quote-grid{
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:clamp(40px,6vw,80px);
+}
+@media(max-width:980px){.quote-grid{grid-template-columns:1fr}}
+
+.quote-info h2{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(36px,4.2vw,54px);
+  line-height:1;letter-spacing:-.032em;
+  margin:18px 0 24px;color:var(--text);
+}
+.quote-info h2 .accent{font-weight:300;font-style:italic;color:var(--turq-bright)}
+.quote-info p{color:var(--text-2);font-size:15.5px;line-height:1.65;max-width:460px}
+
+.quote-contacts{margin-top:36px;display:flex;flex-direction:column;gap:18px}
+.quote-contacts .item{display:flex;gap:16px;align-items:flex-start}
+.quote-contacts .item .ico{
+  width:38px;height:38px;border-radius:8px;
+  background:var(--bg-1);border:1px solid var(--line);
+  display:grid;place-items:center;
+  color:var(--turq-bright);flex-shrink:0;
+}
+.quote-contacts .item .ico svg{width:16px;height:16px}
+.quote-contacts .item .lbl{
+  font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-3);margin-bottom:3px;
+}
+.quote-contacts .item .val{font-size:15px;color:var(--text);font-weight:500}
+
+.quote-form{
+  background:rgba(7,15,13,.66);
+  border:1px solid var(--line-hi);
+  border-radius:var(--radius);
+  padding:clamp(28px,3.5vw,44px);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.5);
+  backdrop-filter:blur(20px) saturate(120%);
+  -webkit-backdrop-filter:blur(20px) saturate(120%);
+}
+.form-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.form-head h3{font-family:var(--display);font-weight:600;font-size:21px;margin:0;letter-spacing:-.018em}
+.form-head .badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--turq-bright)}
+.form-head .badge .dot{width:6px;height:6px;border-radius:50%;background:var(--turq);box-shadow:0 0 8px var(--turq-glow)}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column}
+.field.full{grid-column:1/-1}
+.field label{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
+.field label .req{color:var(--turq-bright)}
+.field input,.field select,.field textarea{
+  background:var(--bg-1);border:1px solid var(--line);
+  border-radius:var(--radius-sm);padding:13px 16px;
+  color:var(--text);font-size:15px;
+  transition:border-color .2s var(--ease),background .2s var(--ease);
+  font-family:var(--body);
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-4)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--turq);background:var(--bg-2)}
+.field textarea{resize:vertical;min-height:110px}
+.field select{
+  appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236F807B' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;
+}
+
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:520px){.chips{grid-template-columns:1fr}}
+.chip{position:relative;cursor:pointer}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip-content{
+  display:flex;align-items:center;gap:10px;
+  padding:13px 14px;background:var(--bg-1);border:1px solid var(--line);
+  border-radius:var(--radius-sm);font-weight:500;font-size:13.5px;
+  transition:all .2s var(--ease);color:var(--text-2);
+}
+.chip-content svg{width:16px;height:16px;color:var(--text-3);transition:color .2s;flex-shrink:0}
+.chip input:checked+.chip-content{border-color:var(--turq);background:var(--turq-dim);color:var(--text)}
+.chip input:checked+.chip-content svg{color:var(--turq-bright)}
+
+.form-submit{margin-top:8px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.form-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--text-3);text-transform:uppercase}
+.submit-btn{
+  background:var(--turq);color:var(--bg-0);
+  padding:16px 28px;border-radius:999px;
+  font-weight:700;font-size:14px;letter-spacing:.01em;
+  display:inline-flex;align-items:center;gap:12px;
+  transition:transform .2s var(--ease),background .2s var(--ease);
+}
+.submit-btn:hover{transform:translateY(-2px);background:var(--turq-bright)}
+.submit-btn svg{width:15px;height:15px;transition:transform .2s}
+.submit-btn:hover svg{transform:translateX(3px)}
+.form-success{display:none;padding:26px;border:1px solid var(--turq);background:var(--turq-dim);border-radius:var(--radius-sm);color:var(--text);text-align:center}
+.form-success.show{display:block}
+.form-success strong{color:var(--turq-bright)}
+
+/* ============== FOOTER ============== */
+footer{padding:80px 0 36px;border-top:1px solid var(--line);background:var(--bg-0);position:relative;overflow:hidden}
+.footer-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:50px;margin-bottom:60px}
+@media(max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;gap:36px}}
+@media(max-width:520px){.footer-grid{grid-template-columns:1fr}}
+.footer-grid h6{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);margin:0 0 18px}
+.footer-grid ul{list-style:none;padding:0;margin:0}
+.footer-grid ul li{margin-bottom:10px}
+.footer-grid ul li a,.footer-grid ul li{color:var(--text-2);font-size:14px;transition:color .2s}
+.footer-grid ul li a:hover{color:var(--turq-bright)}
+.footer-tag{color:var(--text-2);font-size:14px;line-height:1.65;margin:18px 0 0;max-width:320px}
+.footer-bottom{position:relative;z-index:2;padding-top:28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3)}
+.footer-bottom .rbq{color:var(--turq-bright)}
+
+/* ============== ANIMATIONS ============== */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.hero .eyebrow,.hero h1,.hero p.lead,.hero-actions,.hero-meta{opacity:0;animation:fadeUp .9s var(--ease) forwards}
+.hero .eyebrow{animation-delay:.05s}
+.hero h1{animation-delay:.18s}
+.hero p.lead{animation-delay:.42s}
+.hero-actions{animation-delay:.58s}
+.hero-meta{animation-delay:.72s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-bg img{opacity:0;animation:fadePhoto 1.8s var(--ease) .1s forwards;transform:scale(1.08)}
+@keyframes fadePhoto{to{opacity:1;transform:scale(1)}}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo" aria-label="DEC Électrique — accueil">
+      <svg class="logo-mark" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="42" height="42" rx="10" fill="none" stroke="#2DD4BF" stroke-width="1.5"/>
+        <text x="9" y="29" font-family="Bricolage Grotesque, sans-serif" font-weight="700" font-size="18" fill="#E8F0EE" letter-spacing="-1">DE</text>
+        <path d="M28 9 L23 22 L28 22 L24 35 L34 20 L29 20 L33 9 Z" fill="#2DD4BF" stroke="#5EEAD4" stroke-width=".5" stroke-linejoin="round"/>
+      </svg>
+      <span class="logo-text">
+        <span class="l1">DEC électrique</span>
+        <span class="l2">Maîtres électriciens · QC</span>
+      </span>
+    </a>
+
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="#services">Services</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#approche">Approche</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="#contact" class="nav-cta">
+      Soumission
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO — image en arrière-plan ============ -->
+<section class="hero">
+  <!-- IMAGE BACKGROUND -->
+  <div class="hero-bg" aria-hidden="true">
+    <img src="van.jpg" alt="" />
+  </div>
+
+  <!-- DOT GRID PATTERN superposé -->
+  <div class="pattern-bg" aria-hidden="true" style="z-index:2;opacity:.3">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="heroDots" width="36" height="36" patternUnits="userSpaceOnUse">
+          <circle cx="1.5" cy="1.5" r="1" fill="#2DD4BF" fill-opacity=".18"/>
+        </pattern>
+        <radialGradient id="heroFade" cx="25%" cy="50%" r="65%">
+          <stop offset="0%" stop-color="#070F0D" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#070F0D" stop-opacity=".5"/>
+        </radialGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#heroDots)"/>
+      <rect width="100%" height="100%" fill="url(#heroFade)"/>
+    </svg>
+  </div>
+
+  <!-- CORNERS techniques -->
+  <div class="hero-corners" aria-hidden="true">
+    <span class="tl"></span>
+    <span class="tr"></span>
+    <span class="bl"></span>
+    <span class="br"></span>
+  </div>
+
+  <!-- ID technique -->
+  <div class="hero-id">No. 01 / Unité mobile 01</div>
+
+  <!-- CONTENU -->
+  <div class="hero-text">
+    <span class="eyebrow">
+      <span class="dot"></span>
+      Maîtres électriciens
+      <span class="dash"></span>
+      Québec — depuis 2010
+    </span>
+
+    <h1>
+      Le courant,<br>
+      <span class="accent">avec précision.</span>
+    </h1>
+
+    <p class="lead">
+      Installations électriques résidentielles, commerciales et industrielles. Du panneau électrique aux bornes de recharge — un travail propre, signé par un maître électricien, et garanti par écrit.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">
+        Demander une soumission
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#services" class="btn btn-ghost">Voir nos services</a>
+    </div>
+
+    <div class="hero-meta">
+      <div>
+        <div class="lbl">Certification</div>
+        <div class="val">RBQ · CMEQ</div>
+      </div>
+      <div>
+        <div class="lbl">Service</div>
+        <div class="val">24 / 7</div>
+      </div>
+      <div>
+        <div class="lbl">Réponse</div>
+        <div class="val">&lt; 24 h</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ SECTORS — bg-2 + diagonal pattern ============ -->
+<section class="section sectors" id="services">
+  <!-- DIAGONAL HATCH PATTERN -->
+  <div class="pattern-bg" aria-hidden="true">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="diag" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
+          <line x1="0" y1="0" x2="0" y2="80" stroke="#15302A" stroke-width="1"/>
+        </pattern>
+        <radialGradient id="diagFade" cx="50%" cy="50%" r="70%">
+          <stop offset="0%" stop-color="#091814" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#091814" stop-opacity=".7"/>
+        </radialGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#diag)"/>
+      <rect width="100%" height="100%" fill="url(#diagFade)"/>
+    </svg>
+  </div>
+
+  <div class="container section-content">
+    <div class="section-head reveal">
+      <div class="section-head-row">
+        <div>
+          <div class="section-tag">01 / Secteurs</div>
+          <h2 class="section-title">Trois mondes,<br>une <span class="accent">même rigueur</span>.</h2>
+        </div>
+        <p class="section-desc">Maison, commerce ou usine — les standards demeurent identiques&nbsp;: conformité au Code de l'électricité du Québec, propreté de chantier, et travail signé par un maître électricien.</p>
+      </div>
+    </div>
+
+    <div class="sectors-stack reveal">
+      <div class="sector-row">
+        <div class="sector-num">01</div>
+        <div class="sector-info">
+          <div class="label">Résidentiel</div>
+          <h3>Résidentiel</h3>
+          <p>Du remplacement de panneau électrique à l'installation d'une borne de recharge, en passant par les rénovations complètes et la domotique.</p>
+        </div>
+        <div class="sector-services">
+          <div class="item">Panneaux 100 / 200 / 400&nbsp;A</div>
+          <div class="item">Bornes de recharge VE</div>
+          <div class="item">Filage de rénovation</div>
+          <div class="item">Spas, piscines, thermopompes</div>
+          <div class="item">Éclairage paysager</div>
+          <div class="item">Domotique résidentielle</div>
+          <div class="item">Détection de pannes</div>
+          <div class="item">Mise à la terre</div>
+        </div>
+      </div>
+
+      <div class="sector-row">
+        <div class="sector-num">02</div>
+        <div class="sector-info">
+          <div class="label">Commercial</div>
+          <h3>Commercial</h3>
+          <p>Aménagements, mises aux normes, éclairage haute performance et bornes de recharge multi-utilisateurs — planifiés autour de votre horaire d'opération.</p>
+        </div>
+        <div class="sector-services">
+          <div class="item">Aménagement de locaux</div>
+          <div class="item">Mise aux normes</div>
+          <div class="item">Bornes VE multi-postes</div>
+          <div class="item">Éclairage DEL commercial</div>
+          <div class="item">Génératrices d'urgence</div>
+          <div class="item">Détection / alarme incendie</div>
+          <div class="item">Systèmes de contrôle</div>
+          <div class="item">Entretien préventif annuel</div>
+        </div>
+      </div>
+
+      <div class="sector-row">
+        <div class="sector-num">03</div>
+        <div class="sector-info">
+          <div class="label">Industriel</div>
+          <h3>Industriel</h3>
+          <p>Câblage haute tension, démarreurs de moteurs, automatisation et thermographie. Service prioritaire pour minimiser les arrêts de production.</p>
+        </div>
+        <div class="sector-services">
+          <div class="item">Câblage haute tension</div>
+          <div class="item">Triphasé 600&nbsp;V</div>
+          <div class="item">Démarreurs / VFD moteurs</div>
+          <div class="item">Automatisation et PLC</div>
+          <div class="item">Distribution d'usine</div>
+          <div class="item">Thermographie infrarouge</div>
+          <div class="item">Mise en service</div>
+          <div class="item">Service prioritaire</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERTISE — bg-3 + blueprint grid ============ -->
+<section class="section expertise" id="expertise">
+  <!-- BLUEPRINT GRID PATTERN -->
+  <div class="pattern-bg" aria-hidden="true" style="opacity:.4">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1F4039" stroke-width=".7"/>
+        </pattern>
+        <pattern id="gridLg" width="240" height="240" patternUnits="userSpaceOnUse">
+          <rect width="240" height="240" fill="url(#grid)"/>
+          <path d="M 240 0 L 0 0 0 240" fill="none" stroke="#244038" stroke-width="1"/>
+        </pattern>
+        <radialGradient id="gridFade" cx="50%" cy="50%" r="65%">
+          <stop offset="0%" stop-color="#0C211C" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#0C211C" stop-opacity=".82"/>
+        </radialGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#gridLg)"/>
+      <rect width="100%" height="100%" fill="url(#gridFade)"/>
+    </svg>
+  </div>
+
+  <div class="container section-content">
+    <div class="section-head reveal">
+      <div class="section-head-row">
+        <div>
+          <div class="section-tag">02 / Spécialités</div>
+          <h2 class="section-title">Six <span class="accent">expertises</span><br>techniques.</h2>
+        </div>
+        <p class="section-desc">De l'installation neuve à la modernisation d'infrastructures existantes — chaque spécialité demande son propre savoir-faire, ses outils, et ses certifications.</p>
+      </div>
+    </div>
+
+    <div class="bento reveal">
+      <article class="bento-card feature">
+        <div class="num">Spécialité phare</div>
+        <svg class="feature-visual" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="100" y="40" width="80" height="160" rx="10" fill="none" stroke="#2DD4BF" stroke-width="1.4" opacity=".75"/>
+          <rect x="110" y="55" width="60" height="36" rx="4" fill="#050B0A" stroke="#2DD4BF" stroke-width=".8" opacity=".85"/>
+          <rect x="118" y="63" width="44" height="20" rx="2" fill="#2DD4BF" opacity=".15"/>
+          <text x="140" y="77" font-family="JetBrains Mono, monospace" font-size="8" fill="#2DD4BF" text-anchor="middle">240V · 40A</text>
+          <circle cx="140" cy="120" r="14" fill="none" stroke="#5EEAD4" stroke-width="1.4"/>
+          <circle cx="140" cy="120" r="8" fill="none" stroke="#5EEAD4" stroke-width="1"/>
+          <line x1="135" y1="117" x2="135" y2="123" stroke="#5EEAD4" stroke-width="1.6"/>
+          <line x1="145" y1="117" x2="145" y2="123" stroke="#5EEAD4" stroke-width="1.6"/>
+          <path d="M125 130 Q 100 160 80 200 Q 60 230 90 250" fill="none" stroke="#2DD4BF" stroke-width="1.6" stroke-linecap="round" opacity=".85"/>
+          <circle cx="90" cy="250" r="5" fill="#2DD4BF"/>
+          <circle cx="140" cy="120" r="30" fill="none" stroke="#2DD4BF" stroke-width=".5" opacity=".4"/>
+          <circle cx="140" cy="120" r="42" fill="none" stroke="#2DD4BF" stroke-width=".5" opacity=".25"/>
+          <circle cx="140" cy="120" r="56" fill="none" stroke="#2DD4BF" stroke-width=".5" opacity=".15"/>
+          <text x="40" y="40" font-family="JetBrains Mono, monospace" font-size="9" fill="#6F807B" letter-spacing="1.5">FIG. 02</text>
+          <text x="240" y="270" font-family="JetBrains Mono, monospace" font-size="9" fill="#6F807B" text-anchor="end" letter-spacing="1.5">N2 · N3</text>
+        </svg>
+        <div>
+          <h4>Bornes de recharge<br><span class="accent">pour véhicules électriques.</span></h4>
+          <p>Installation certifiée de bornes niveau 2 (résidentielles) et niveau 3 (commerciales). Compatibles Tesla, FLO, ChargePoint, et toutes marques courantes. Branchement clé en main.</p>
+          <div class="meta">Niveau 2 · Niveau 3</div>
+        </div>
+      </article>
+
+      <article class="bento-card wide">
+        <div class="num">02 / 06</div>
+        <div class="ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="6" width="28" height="36" rx="2"/>
+            <line x1="14" y1="14" x2="22" y2="14"/><line x1="26" y1="14" x2="34" y2="14"/>
+            <line x1="14" y1="20" x2="22" y2="20"/><line x1="26" y1="20" x2="34" y2="20"/>
+            <line x1="14" y1="26" x2="22" y2="26"/><line x1="26" y1="26" x2="34" y2="26"/>
+            <line x1="14" y1="32" x2="22" y2="32"/><line x1="26" y1="32" x2="34" y2="32"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Panneaux électriques</h4>
+          <p>Installation, remplacement et mise à niveau pour véhicules électriques et thermopompes. Étiquetage complet inclus.</p>
+          <div class="meta">100A · 200A · 400A</div>
+        </div>
+      </article>
+
+      <article class="bento-card">
+        <div class="num">03 / 06</div>
+        <div class="ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="14" width="36" height="22" rx="2"/>
+            <circle cx="16" cy="25" r="4"/>
+            <path d="M16 21v-3M16 32v-3"/>
+            <line x1="26" y1="20" x2="38" y2="20"/>
+            <line x1="26" y1="25" x2="38" y2="25"/>
+            <line x1="26" y1="30" x2="32" y2="30"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Génératrices</h4>
+          <p>Vente, installation et entretien — gaz naturel ou propane, transfert automatique.</p>
+          <div class="meta">10–50 kW</div>
+        </div>
+      </article>
+
+      <article class="bento-card">
+        <div class="num">04 / 06</div>
+        <div class="ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 24h6M36 24h6"/>
+            <path d="M11 18a18 18 0 0126 0M11 30a18 18 0 0026 0"/>
+            <circle cx="24" cy="24" r="3"/>
+            <path d="M16 14v-4M32 14v-4M16 38v-4M32 38v-4"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Domotique</h4>
+          <p>Maison intelligente, éclairage scénarisé, intégration Lutron, Control4, Apple&nbsp;Home.</p>
+          <div class="meta">Lutron · Control4</div>
+        </div>
+      </article>
+
+      <article class="bento-card">
+        <div class="num">05 / 06</div>
+        <div class="ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 30a10 10 0 1116 0c0 4-2 6-3 8H19c-1-2-3-4-3-8z"/>
+            <line x1="20" y1="42" x2="28" y2="42"/>
+            <line x1="22" y1="46" x2="26" y2="46"/>
+            <path d="M24 6v4M9 18l3 2M39 18l-3 2M6 32h4M38 32h4"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Éclairage DEL</h4>
+          <p>Conception et installation d'éclairage architectural, intérieur et paysager.</p>
+          <div class="meta">Économie ~70%</div>
+        </div>
+      </article>
+
+      <article class="bento-card wide">
+        <div class="num">06 / 06</div>
+        <div class="ico">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="20" cy="20" r="11"/>
+            <line x1="28" y1="28" x2="40" y2="40"/>
+            <path d="M16 20h2l2-4 4 8 2-4h2"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Inspection &amp; thermographie</h4>
+          <p>Évaluation préachat, mise aux normes et thermographie infrarouge pour détecter les surchauffes invisibles à l'œil.</p>
+          <div class="meta">Préachat · Thermographie</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APPROCHE — bg-4 + concentric arcs ============ -->
+<section class="section approche" id="approche">
+  <!-- CONCENTRIC ARCS PATTERN -->
+  <div class="pattern-bg" aria-hidden="true" style="opacity:.55">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMid slice">
+      <defs>
+        <radialGradient id="arcFade" cx="100%" cy="50%" r="100%">
+          <stop offset="0%" stop-color="#2DD4BF" stop-opacity=".22"/>
+          <stop offset="50%" stop-color="#2DD4BF" stop-opacity=".05"/>
+          <stop offset="100%" stop-color="#2DD4BF" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g transform="translate(0,0)" stroke="#244038" fill="none" stroke-width="1">
+        <circle cx="100%" cy="50%" r="200"/>
+        <circle cx="100%" cy="50%" r="320"/>
+        <circle cx="100%" cy="50%" r="450"/>
+        <circle cx="100%" cy="50%" r="600"/>
+        <circle cx="100%" cy="50%" r="780"/>
+        <circle cx="100%" cy="50%" r="1000"/>
+      </g>
+      <rect width="100%" height="100%" fill="url(#arcFade)"/>
+    </svg>
+  </div>
+
+  <div class="container section-content">
+    <div class="section-head reveal">
+      <div class="section-head-row">
+        <div>
+          <div class="section-tag">03 / Approche</div>
+          <h2 class="section-title">L'électricité<br>sans <span class="accent">compromis</span>.</h2>
+        </div>
+        <p class="section-desc">Quatre engagements concrets — du devis initial à la livraison finale. Nos clients reviennent parce qu'on tient parole, pas parce qu'on fait des promesses.</p>
+      </div>
+    </div>
+
+    <div class="manifesto reveal">
+      <div class="manifesto-item">
+        <div class="big-num">01</div>
+        <div class="marker">— Certification</div>
+        <h5>Maître électricien <span style="color:var(--turq-bright);font-weight:300">RBQ certifié</span>.</h5>
+        <p>Tous nos travaux sont supervisés par un maître électricien membre en règle de la CMEQ. Conforme au Code de l'électricité du Québec, sans exception ni raccourci.</p>
+      </div>
+      <div class="manifesto-item">
+        <div class="big-num">02</div>
+        <div class="marker">— Transparence</div>
+        <h5>Soumission claire, <span style="color:var(--turq-bright);font-weight:300">sans surprise</span>.</h5>
+        <p>Chaque devis détaille le matériel, les heures et la garantie. Pas de coûts cachés, pas d'extras inventés — un prix ferme accepté avant le début des travaux.</p>
+      </div>
+      <div class="manifesto-item">
+        <div class="big-num">03</div>
+        <div class="marker">— Exécution</div>
+        <h5>Travail propre <span style="color:var(--turq-bright);font-weight:300">et signé</span>.</h5>
+        <p>On laisse le chantier plus propre qu'à l'arrivée. Câblage organisé, panneaux étiquetés, photos avant-après livrées avec le rapport final.</p>
+      </div>
+      <div class="manifesto-item">
+        <div class="big-num">04</div>
+        <div class="marker">— Disponibilité</div>
+        <h5>Urgences <span style="color:var(--turq-bright);font-weight:300">24/7</span>, partout au Québec.</h5>
+        <p>Panne, court-circuit, surchauffe&nbsp;? On répond rapidement, jour et nuit. Camions équipés pour intervenir en résidentiel comme en industriel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUOTE FORM — bg-2 + mesh gradient ============ -->
+<section class="quote-section" id="contact">
+  <div class="container section">
+    <div class="quote-grid">
+      <div class="quote-info reveal">
+        <div class="section-tag">04 / Soumission</div>
+        <h2>Demandez votre <span class="accent">soumission gratuite</span>.</h2>
+        <p>Décrivez votre projet en quelques mots — un maître électricien vous répond en moins de 24 heures avec une évaluation précise et une plage horaire d'intervention.</p>
+
+        <div class="quote-contacts">
+          <div class="item">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <div>
+              <div class="lbl">Téléphone · 24/7</div>
+              <div class="val">514 742-XXXX</div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div>
+              <div class="lbl">Courriel</div>
+              <div class="val">info@decelectrique.com</div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div>
+              <div class="lbl">Zone desservie</div>
+              <div class="val">Grand Montréal · Laval · Rive-Sud · Rive-Nord</div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div>
+              <div class="lbl">Délai de réponse</div>
+              <div class="val">Moins de 24 h ouvrables</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="quote-form reveal" id="quoteForm" onsubmit="return submitQuote(event)">
+        <div class="form-head">
+          <h3>Formulaire de soumission</h3>
+          <span class="badge"><span class="dot"></span> Disponibles</span>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label>Nom complet <span class="req">*</span></label>
+            <input type="text" name="name" placeholder="Jean Tremblay" required>
+          </div>
+          <div class="field">
+            <label>Téléphone <span class="req">*</span></label>
+            <input type="tel" name="phone" placeholder="514 555-1234" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field full">
+            <label>Courriel <span class="req">*</span></label>
+            <input type="email" name="email" placeholder="vous@exemple.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field full">
+            <label>Type de projet <span class="req">*</span></label>
+            <div class="chips">
+              <label class="chip">
+                <input type="radio" name="type" value="residentiel" checked>
+                <span class="chip-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+                  Résidentiel
+                </span>
+              </label>
+              <label class="chip">
+                <input type="radio" name="type" value="commercial">
+                <span class="chip-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+                  Commercial
+                </span>
+              </label>
+              <label class="chip">
+                <input type="radio" name="type" value="industriel">
+                <span class="chip-content">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V9l6 4V9l6 4V5l4 3v12"/></svg>
+                  Industriel
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label>Service requis</label>
+            <select name="service">
+              <option value="">— Choisir un service —</option>
+              <option>Panneau électrique</option>
+              <option>Borne de recharge VE</option>
+              <option>Génératrice</option>
+              <option>Éclairage</option>
+              <option>Domotique</option>
+              <option>Filage / câblage</option>
+              <option>Inspection / diagnostic</option>
+              <option>Mise aux normes</option>
+              <option>Urgence électrique</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Délai souhaité</label>
+            <select name="delai">
+              <option value="">— Quand? —</option>
+              <option>Urgence (cette semaine)</option>
+              <option>Sous 2 semaines</option>
+              <option>Dans le mois</option>
+              <option>3 mois et plus</option>
+              <option>Pas pressé / planification</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field full">
+            <label>Adresse du projet</label>
+            <input type="text" name="address" placeholder="Ville ou code postal — facultatif">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field full">
+            <label>Description du projet <span class="req">*</span></label>
+            <textarea name="message" placeholder="Décrivez ce que vous voulez accomplir : type d'installation, ampérage, contraintes…" required></textarea>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <span class="form-note">→ Réponse en moins de 24 h</span>
+          <button type="submit" class="submit-btn">
+            Envoyer ma demande
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+          <strong>✓ Merci&nbsp;!</strong> Votre demande a été reçue. Un maître électricien vous contactera dans les prochaines 24 heures.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER — bg-0 + horizontal lines ============ -->
+<footer>
+  <!-- HORIZONTAL LINES PATTERN -->
+  <div class="pattern-bg" aria-hidden="true" style="opacity:.4">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="hlines" width="100" height="80" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="40" x2="100" y2="40" stroke="#15302A" stroke-width="1"/>
+        </pattern>
+        <linearGradient id="hlinesFade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#050B0A" stop-opacity=".4"/>
+          <stop offset="100%" stop-color="#050B0A" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hlines)"/>
+      <rect width="100%" height="100%" fill="url(#hlinesFade)"/>
+    </svg>
+  </div>
+
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="logo">
+          <svg class="logo-mark" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="1" width="42" height="42" rx="10" fill="none" stroke="#2DD4BF" stroke-width="1.5"/>
+            <text x="9" y="29" font-family="Bricolage Grotesque, sans-serif" font-weight="700" font-size="18" fill="#E8F0EE" letter-spacing="-1">DE</text>
+            <path d="M28 9 L23 22 L28 22 L24 35 L34 20 L29 20 L33 9 Z" fill="#2DD4BF" stroke="#5EEAD4" stroke-width=".5" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-text">
+            <span class="l1">DEC électrique</span>
+            <span class="l2">Maîtres électriciens · QC</span>
+          </span>
+        </a>
+        <p class="footer-tag">Maîtres électriciens. Résidentiel, commercial et industriel — au Québec depuis 2010.</p>
+      </div>
+      <div>
+        <h6>Services</h6>
+        <ul>
+          <li><a href="#services">Résidentiel</a></li>
+          <li><a href="#services">Commercial</a></li>
+          <li><a href="#services">Industriel</a></li>
+          <li><a href="#expertise">Bornes VE</a></li>
+          <li><a href="#expertise">Génératrices</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Entreprise</h6>
+        <ul>
+          <li><a href="#approche">Notre approche</a></li>
+          <li><a href="#contact">Soumission</a></li>
+          <li><a href="#contact">Urgences 24/7</a></li>
+          <li><a href="#">Carrières</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>Contact</h6>
+        <ul>
+          <li><a href="tel:5147420000">514 742-XXXX</a></li>
+          <li><a href="mailto:info@decelectrique.com">info@decelectrique.com</a></li>
+          <li>Grand Montréal</li>
+          <li>Laval · Rive-Sud · Rive-Nord</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 DEC Électrique — Tous droits réservés</span>
+      <span class="rbq">RBQ #5XXX-XXXX-XX · Membre CMEQ</span>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  function submitQuote(e) {
+    e.preventDefault();
+    const form = e.target;
+    const success = document.getElementById('formSuccess');
+    Array.from(form.querySelectorAll('.form-row, .form-submit')).forEach(el => el.style.display = 'none');
+    success.classList.add('show');
+    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return false;
+  }
+</script>
+
+</body>
+</html>
