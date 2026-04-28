@@ -218,11 +218,26 @@ body{
 }
 
 /* ============== LOGO ============== */
+.nav-spacer{display:inline-block;width:1px}
+
+.nav-brand{
+  display:inline-flex;align-items:center;
+  color:var(--text);
+  transition:opacity .2s var(--ease);
+}
+.nav-brand:hover{opacity:.7}
+.nav-brand-text{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:18px;
+  letter-spacing:-.025em;
+  color:var(--text);
+}
+
 .logo{display:inline-flex;align-items:center;gap:12px;color:var(--text)}
 .logo-img{
   height:38px;
   width:auto;
-  /* Logo en couleurs originales (turquoise + vert lime selon les normes) */
   transition:opacity .2s var(--ease);
 }
 .logo:hover .logo-img{opacity:.85}
@@ -243,69 +258,76 @@ body{
   overflow:hidden;
 }
 
-/* Container van à droite */
+/* VAN en background - container moitié-droite, image dedans */
 .hero-bg{
   position:absolute;
   top:0;right:0;bottom:0;
-  width:80%;
+  width:62%;
   z-index:1;
-  overflow:hidden;
   pointer-events:none;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
 }
 .hero-bg img{
-  width:120%;height:120%;
+  width:100%;
+  height:100%;
   object-fit:contain;
   object-position:right center;
   display:block;
-
-  opacity:.82;
+  opacity:.92;
   filter:
-    drop-shadow(0 25px 50px rgba(0,147,145,.30))
-    drop-shadow(0 0 80px rgba(26,181,179,.20))
-    saturate(.85)
-    brightness(.95)
-    contrast(.95);
+    drop-shadow(-15px 25px 50px rgba(0,147,145,.30))
+    drop-shadow(0 0 100px rgba(26,181,179,.22))
+    saturate(.95)
+    brightness(1.05)
+    contrast(.98);
 }
-/* Voile turquoise très léger sur la van pour intégration */
+/* Voile dégradé DOUX qui adoucit le passage à gauche - sur tout le hero */
 .hero-bg::after{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 60% at 65% 50%,
-    rgba(0,147,145,.12) 0%,
-    transparent 70%);
-  mix-blend-mode:soft-light;
+  content:"";position:absolute;
+  top:0;bottom:0;left:0;
+  width:60%;
+  background:linear-gradient(90deg,
+    rgba(5,11,10,.6) 0%,
+    rgba(7,15,13,.35) 35%,
+    rgba(7,15,13,.10) 70%,
+    transparent 100%);
   pointer-events:none;
+  z-index:2;
 }
 
-/* SVG décoratifs flottants - INTÉGRATION VAN */
+/* SVG décoratifs flottants - sur la zone de la van */
 .hero-svg-deco{
   position:absolute;
   top:0;right:0;bottom:0;
-  width:80%;
+  width:62%;
   z-index:0;
   overflow:hidden;
   pointer-events:none;
 }
 .hero-svg-deco svg{position:absolute}
 
-/* Halo turquoise rayonnant derrière la van */
 .hero-svg-deco .halo{
-  inset:0;
   position:absolute;
+  top:50%;left:50%;
+  width:90%;height:80%;
+  transform:translate(-50%,-50%);
   background:
-    radial-gradient(ellipse 60% 55% at 55% 55%,rgba(0,147,145,.42),transparent 60%),
-    radial-gradient(ellipse 80% 70% at 55% 55%,rgba(26,181,179,.15),transparent 70%);
+    radial-gradient(ellipse 60% 55% at 50% 50%,rgba(0,147,145,.42),transparent 60%),
+    radial-gradient(ellipse 80% 70% at 50% 50%,rgba(26,181,179,.15),transparent 70%);
   pointer-events:none;
   animation:halo-pulse 7s ease-in-out infinite;
 }
 @keyframes halo-pulse{
-  0%,100%{opacity:.85;transform:scale(1)}
-  50%{opacity:1;transform:scale(1.06)}
+  0%,100%{opacity:.85;transform:translate(-50%,-50%) scale(1)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}
 }
 
-/* Cercles techniques rotatifs derrière la van */
 .hero-svg-deco .circles{
-  top:50%;left:55%;
-  width:680px;height:680px;
+  top:50%;left:50%;
+  width:720px;height:720px;
   transform:translate(-50%,-50%);
   animation:rotate-slow 80s linear infinite;
   opacity:.20;
@@ -314,46 +336,41 @@ body{
   to{transform:translate(-50%,-50%) rotate(360deg)}
 }
 
-/* Particules turquoise flottantes */
 .hero-svg-deco .particle{
   animation:float-particle 8s ease-in-out infinite;
 }
-.hero-svg-deco .particle-1{top:18%;left:15%;width:14px;height:14px;animation-delay:0s}
-.hero-svg-deco .particle-2{top:35%;left:62%;width:10px;height:10px;animation-delay:-2s}
-.hero-svg-deco .particle-3{top:72%;left:10%;width:18px;height:18px;animation-delay:-4s}
-.hero-svg-deco .particle-4{top:62%;left:80%;width:8px;height:8px;animation-delay:-1s}
-.hero-svg-deco .particle-5{top:25%;left:80%;width:12px;height:12px;animation-delay:-5s}
-.hero-svg-deco .particle-6{top:85%;left:55%;width:10px;height:10px;animation-delay:-3s}
+.hero-svg-deco .particle-1{top:18%;left:20%;width:14px;height:14px;animation-delay:0s}
+.hero-svg-deco .particle-2{top:35%;right:10%;width:10px;height:10px;animation-delay:-2s}
+.hero-svg-deco .particle-3{top:72%;left:18%;width:18px;height:18px;animation-delay:-4s}
+.hero-svg-deco .particle-4{top:62%;right:6%;width:8px;height:8px;animation-delay:-1s}
+.hero-svg-deco .particle-5{top:25%;right:18%;width:12px;height:12px;animation-delay:-5s}
+.hero-svg-deco .particle-6{top:85%;left:50%;width:10px;height:10px;animation-delay:-3s}
 
 @keyframes float-particle{
   0%,100%{transform:translateY(0) translateX(0);opacity:.5}
   50%{transform:translateY(-25px) translateX(10px);opacity:.95}
 }
 
-/* Lignes électriques qui pulsent */
 .hero-svg-deco .pulse-line{
-  position:absolute;
-  height:1.5px;
+  position:absolute;height:1.5px;
   background:linear-gradient(90deg,transparent,var(--turq-bright),transparent);
   animation:pulse-fade 4s ease-in-out infinite;
 }
 .hero-svg-deco .line-1{top:20%;left:8%;width:160px;animation-delay:0s}
-.hero-svg-deco .line-2{top:78%;left:20%;width:120px;animation-delay:-1.5s}
-.hero-svg-deco .line-3{top:45%;left:70%;width:90px;animation-delay:-2.5s}
+.hero-svg-deco .line-2{top:78%;left:12%;width:120px;animation-delay:-1.5s}
+.hero-svg-deco .line-3{top:45%;right:8%;width:90px;animation-delay:-2.5s}
 
 @keyframes pulse-fade{
   0%,100%{opacity:.20;transform:scaleX(.7)}
   50%{opacity:.7;transform:scaleX(1)}
 }
 
-/* Grille de points subtile */
 .hero-svg-deco .dotgrid{
-  position:absolute;
-  inset:0;
+  position:absolute;inset:0;
   background-image:radial-gradient(circle,rgba(26,181,179,.20) 1px,transparent 1.5px);
   background-size:26px 26px;
-  -webkit-mask:radial-gradient(ellipse 70% 65% at 55% 55%,#000 0%,transparent 75%);
-  mask:radial-gradient(ellipse 70% 65% at 55% 55%,#000 0%,transparent 75%);
+  -webkit-mask:radial-gradient(ellipse 80% 70% at 50% 50%,#000 0%,transparent 75%);
+  mask:radial-gradient(ellipse 80% 70% at 50% 50%,#000 0%,transparent 75%);
 }
 
 /* Bloc texte */
@@ -367,60 +384,44 @@ body{
 }
 .hero-text-inner{max-width:560px}
 
-/* annotation technique en haut à droite */
-.hero-id{
-  position:absolute;top:32px;right:var(--pad);
-  z-index:6;
-  font-family:var(--mono);font-size:10px;
-  letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(232,240,238,.85);
-  border:1px solid rgba(26,181,179,.35);
-  padding:7px 14px;border-radius:999px;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+/* TAGS */
+.hero-tags{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-bottom:32px;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;
+  font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--text-2);
+  padding:6px 12px;
+  border:1px solid var(--line-hi);
+  border-radius:4px;
   background:rgba(5,11,10,.5);
-  display:flex;align-items:center;gap:10px;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
 }
-.hero-id::before{
-  content:"";width:6px;height:6px;border-radius:50%;
-  background:var(--turq-bright);
-  box-shadow:0 0 10px var(--turq-glow);
-  animation:pulse 1.8s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-
-.eyebrow{
-  display:inline-flex;align-items:center;gap:12px;
-  font-family:var(--mono);font-size:11px;
-  letter-spacing:.22em;text-transform:uppercase;
-  color:var(--turq-bright);margin-bottom:32px;
-  padding:8px 16px;
-  border:1px solid rgba(26,181,179,.3);
-  border-radius:999px;
-  background:rgba(0,147,145,.08);
-  align-self:flex-start;
-}
-.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--turq-bright);box-shadow:0 0 8px var(--turq-glow)}
-
-.hero h1{
-  font-family:var(--display);font-weight:500;
-  font-size:clamp(56px,8vw,128px);
-  line-height:.92;
-  letter-spacing:-.04em;
-  margin:0 0 28px;
-  color:var(--text);
-  max-width:14ch;
-}
-.hero h1 .accent{
-  font-weight:300;
+.hero-tag:first-child{
   color:var(--turq-bright);
-  font-style:italic;
-  letter-spacing:-.03em;
+  border-color:rgba(26,181,179,.4);
+  background:rgba(0,147,145,.10);
+}
+
+/* Logo image dans le hero */
+.hero-logo{
+  margin:0 0 32px;
+  max-width:480px;
+}
+.hero-logo img{
+  width:100%;
+  height:auto;
+  display:block;
+  filter:drop-shadow(0 8px 30px rgba(0,147,145,.25));
 }
 
 .hero p.lead{
   font-size:clamp(15.5px,1.2vw,17.5px);
   color:var(--text-2);
-  max-width:460px;
+  max-width:480px;
   line-height:1.6;
   margin:0 0 40px;
 }
@@ -439,18 +440,62 @@ body{
 .btn-ghost:hover{border-color:var(--turq-bright);color:var(--turq-bright);background:rgba(20,184,166,.12)}
 .btn svg{width:15px;height:15px}
 
-/* MOBILE - van empilée sous le texte */
+/* ===== TABLET ===== */
 @media(max-width:980px){
-  .hero{min-height:auto;padding:24px 0 50px;display:flex;flex-direction:column;align-items:stretch}
-  .hero-bg,.hero-svg-deco{position:relative;width:100%;height:320px;order:2;margin-top:24px}
-  .hero-bg img{object-position:center center}
-  .hero-text{order:1;padding:24px var(--pad) 0}
-  .hero h1{font-size:clamp(40px,11vw,60px)}
-  .hero-id{top:14px;right:14px;font-size:9px;padding:6px 10px}
-  .hero-svg-deco .circles{width:400px;height:400px}
+  .hero{min-height:calc(100vh - 74px)}
+  .hero-bg{
+    width:75%;
+    opacity:.6;
+  }
+  .hero-bg::after{
+    width:100%;
+    background:linear-gradient(180deg,
+      rgba(7,15,13,.55) 0%,
+      rgba(7,15,13,.30) 35%,
+      rgba(7,15,13,.55) 75%,
+      rgba(7,15,13,.85) 100%);
+  }
+  .hero-svg-deco{width:75%}
+  .hero-svg-deco .circles{width:500px;height:500px}
+  .hero-text-inner{max-width:100%}
 }
+
+/* ===== MOBILE ===== */
 @media(max-width:560px){
-  .hero-bg,.hero-svg-deco{height:240px}
+  .hero{min-height:90vh}
+  .hero-bg{
+    width:100%;
+    opacity:.35;
+  }
+  .hero-bg img{
+    object-position:right center;
+    transform:translateX(15%);
+  }
+  .hero-bg::after{
+    background:linear-gradient(180deg,
+      rgba(7,15,13,.85) 0%,
+      rgba(7,15,13,.55) 35%,
+      rgba(7,15,13,.45) 60%,
+      rgba(7,15,13,.92) 100%);
+  }
+  .hero-svg-deco{width:100%}
+  .hero-svg-deco .circles{width:380px;height:380px}
+  .hero-svg-deco .halo{
+    width:100%;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%,rgba(0,147,145,.35),transparent 65%);
+  }
+  .hero-svg-deco .particle-1,
+  .hero-svg-deco .particle-3,
+  .hero-svg-deco .pulse-line{display:none}
+
+  .hero-text{padding:60px var(--pad) 80px}
+  .hero-tags{margin-bottom:24px}
+  .hero-tag{font-size:9.5px;padding:5px 10px}
+  .hero-logo{max-width:260px;margin-bottom:22px}
+  .hero p.lead{font-size:14.5px;margin-bottom:30px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-actions .btn{width:100%;justify-content:center;padding:14px 20px;font-size:13.5px}
 }
 
 /* ============== SECTION ============== */
@@ -1075,14 +1120,14 @@ a.footer-contact-value:hover{color:var(--turq-bright)}
 /* ============== ANIMATIONS ============== */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.hero .eyebrow,.hero h1,.hero p.lead,.hero-actions{opacity:0;animation:fadeUp .9s var(--ease) forwards}
-.hero .eyebrow{animation-delay:.05s}
-.hero h1{animation-delay:.18s}
+.hero-tags,.hero-logo,.hero p.lead,.hero-actions{opacity:0;animation:fadeUp .9s var(--ease) forwards}
+.hero-tags{animation-delay:.05s}
+.hero-logo{animation-delay:.18s}
 .hero p.lead{animation-delay:.4s}
 .hero-actions{animation-delay:.55s}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .hero-bg img{opacity:0;animation:fadePhotoVan 1.4s var(--ease) .2s forwards;transform:scale(.94)}
-@keyframes fadePhotoVan{to{opacity:.82;transform:scale(1)}}
+@keyframes fadePhotoVan{to{opacity:.95;transform:scale(1)}}
 
 /* ============== COMPACTAGE MOBILE ============== */
 @media(max-width:768px){
@@ -1146,9 +1191,7 @@ a.footer-contact-value:hover{color:var(--turq-bright)}
 <!-- ============ NAV ============ -->
 <header class="nav">
   <div class="container nav-inner">
-    <a href="#" class="logo" aria-label="DEC Électrique, accueil">
-      <img src="https://decelectrique.com/logonoir.png" alt="DEC Électrique" class="logo-img" />
-    </a>
+    <span class="nav-spacer"></span>
 
     <nav class="nav-links" aria-label="Navigation principale">
       <a href="#services">Services</a>
@@ -1225,18 +1268,18 @@ a.footer-contact-value:hover{color:var(--turq-bright)}
   <!-- CONTENU TEXTE -->
   <div class="hero-text">
     <div class="hero-text-inner">
-      <span class="eyebrow">
-        <span class="dot"></span>
-        Maître électricien certifié RBQ
-      </span>
+      <div class="hero-tags">
+        <span class="hero-tag">RBQ 5852-0255-01</span>
+        <span class="hero-tag">CMEQ</span>
+        <span class="hero-tag">24/7</span>
+      </div>
 
-      <h1>
-        DEC<br>
-        <span class="accent">Électrique.</span>
+      <h1 class="hero-logo">
+        <img src="https://decelectrique.com/Logot.png" alt="DEC Électrique" />
       </h1>
 
       <p class="lead">
-        Précision, fiabilité et travail soigné depuis 2025. Maître électricien à Saint-Jean-sur-Richelieu, au service du résidentiel, du commercial et de l'industriel sur la Rive-Sud et le Grand Montréal.
+        Précision, fiabilité et travail soigné. Maître électricien à Saint-Jean-sur-Richelieu, au service du résidentiel, du commercial et de l'industriel sur la Rive-Sud et le Grand Montréal.
       </p>
 
       <div class="hero-actions">
@@ -2009,7 +2052,7 @@ a.footer-contact-value:hover{color:var(--turq-bright)}
       <!-- COLONNE 1 : MARQUE -->
       <div class="footer-brand">
         <a href="#" class="logo" aria-label="DEC Électrique">
-          <img src="https://decelectrique.com/logonoir.png" alt="DEC Électrique" class="logo-img" />
+          <img src="https://decelectrique.com/Logot.png" alt="DEC Électrique" class="logo-img" />
         </a>
         <p class="footer-tagline">Maître électricien à Saint-Jean-sur-Richelieu, au service de la Rive-Sud et du Grand Montréal.</p>
       </div>
