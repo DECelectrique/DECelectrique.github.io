@@ -25,13 +25,13 @@
 <meta property="og:description" content="Maître électricien à Saint-Jean-sur-Richelieu et Rive-Sud. Panneaux, bornes de recharge, génératrices, urgences 24/7. Soumission gratuite : 514-717-6907." />
 <meta property="og:url" content="https://decelectrique.com/" />
 <meta property="og:site_name" content="DEC Électrique" />
-<meta property="og:image" content="https://decelectrique.com/van.jpg" />
+<meta property="og:image" content="https://decelectrique.com/van.png" />
 
 <!-- TWITTER -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Électricien Saint-Jean-sur-Richelieu | DEC Électrique" />
 <meta name="twitter:description" content="Maître électricien Rive-Sud. Soumission gratuite : 514-717-6907." />
-<meta name="twitter:image" content="https://decelectrique.com/van.jpg" />
+<meta name="twitter:image" content="https://decelectrique.com/van.png" />
 
 <!-- CANONICAL -->
 <link rel="canonical" href="https://decelectrique.com/" />
@@ -46,7 +46,7 @@
   "alternateName": "DEC Électrique inc.",
   "description": "Maître électricien à Saint-Jean-sur-Richelieu desservant la Rive-Sud, la Montérégie et le Grand Montréal. Services résidentiels, commerciaux et industriels.",
   "url": "https://decelectrique.com",
-  "image": "https://decelectrique.com/van.jpg",
+  "image": "https://decelectrique.com/van.png",
   "logo": "https://decelectrique.com/logo.png",
   "telephone": "+1-514-717-6907",
   "email": "info@decelectrique.com",
@@ -134,8 +134,8 @@ input,textarea,select{font:inherit;color:inherit}
   --bg-0:#050B0A;          /* le plus noir */
   --bg-1:#070F0D;          /* hero bg */
   --bg-2:#091814;          /* secteurs */
-  --bg-3:#0C211C;          /* expertise */
-  --bg-4:#0F2C25;          /* approche - le plus turquoise */
+  --bg-3:#0E2A24;          /* expertise - plus turquoise maintenant */
+  --bg-4:#103A33;          /* approche - le plus turquoise */
   --bg-5:#143830;          /* card hover */
 
   /* Texte */
@@ -244,7 +244,7 @@ body{
   overflow:hidden;
 }
 
-/* IMAGE EN ARRIÈRE-PLAN — bien visible */
+/* IMAGE EN ARRIÈRE-PLAN — effet cinéma premium */
 .hero-bg{
   position:absolute;
   inset:0;
@@ -256,31 +256,44 @@ body{
   width:100%;height:100%;
   object-fit:cover;
   object-position:center 50%;
-  /* léger ajustement, image reste très visible */
-  filter:saturate(.85) contrast(1.05) brightness(.92);
+  /* Image déjà traitée, juste un léger ajustement */
+  filter:saturate(1.05) contrast(1.04);
   display:block;
+  image-rendering:auto;
+  -ms-interpolation-mode:bicubic;
 }
-/* overlay côté gauche pour lisibilité du texte uniquement */
+/* Overlay vignette + dégradés - plus subtil car image déjà traitée */
 .hero-bg::after{
-  content:"";position:absolute;inset:0;
+  content:"";position:absolute;inset:0;z-index:2;
   background:
     linear-gradient(90deg,
-      rgba(7,15,13,.92) 0%,
-      rgba(7,15,13,.78) 25%,
-      rgba(7,15,13,.45) 50%,
-      rgba(7,15,13,.15) 75%,
-      rgba(7,15,13,.05) 100%),
+      rgba(7,15,13,.85) 0%,
+      rgba(7,15,13,.55) 25%,
+      rgba(7,15,13,.18) 55%,
+      rgba(7,15,13,.05) 80%,
+      transparent 100%),
     linear-gradient(180deg,
       transparent 0%,
-      transparent 75%,
-      rgba(7,15,13,.55) 100%);
+      transparent 70%,
+      rgba(7,15,13,.7) 100%);
   pointer-events:none;
 }
-/* teinte turquoise globale - mix-blend pour réchauffer */
+/* Pellicule turquoise pour cohérence chromatique avec la marque */
 .hero-bg::before{
   content:"";position:absolute;inset:0;z-index:1;
-  background:radial-gradient(ellipse 60% 50% at 25% 60%, rgba(20,184,166,.10), transparent 65%);
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 60%, rgba(0,147,145,.22), transparent 65%),
+    radial-gradient(ellipse 60% 50% at 75% 35%, rgba(26,181,179,.14), transparent 60%);
   pointer-events:none;
+  mix-blend-mode:screen;
+}
+/* Grain de film - texture qui masque la pixellisation */
+.hero-grain{
+  position:absolute;inset:0;z-index:3;
+  pointer-events:none;
+  opacity:.22;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode:overlay;
 }
 
 .hero-text{
@@ -450,76 +463,153 @@ body{
 
 .section-desc{color:var(--text-2);font-size:16px;line-height:1.65;max-width:480px}
 
-/* ============== SECTORS — section bg-2 ============== */
-.section.sectors{background:var(--bg-2)}
-
-.sectors-stack{display:flex;flex-direction:column}
-.sector-row{
-  display:grid;
-  grid-template-columns:90px minmax(0,1.1fr) minmax(0,1fr);
-  gap:clamp(28px,4vw,56px);
-  padding:clamp(40px,5vw,72px) clamp(16px,2.5vw,32px);
-  margin:0 calc(clamp(16px,2.5vw,32px) * -1);
-  border-top:1px solid var(--line);
-  align-items:start;
-  transition:background .4s var(--ease);
-  border-radius:8px;
+/* ============== SECTORS — section turquoise foncé ============== */
+.section.sectors{
+  background:linear-gradient(180deg,var(--bg-4) 0%,var(--bg-3) 100%);
   position:relative;
 }
-.sector-row:last-child{border-bottom:1px solid var(--line)}
-.sector-row::before{
-  content:"";position:absolute;left:0;top:-1px;bottom:-1px;
-  width:3px;background:var(--turq);
-  transform:scaleY(0);transform-origin:top;
+/* Éléments SVG décoratifs flottants pour la section secteurs */
+.sectors-decor{
+  position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+}
+.sectors-decor svg{position:absolute}
+.sectors-decor .float-1{
+  top:8%;right:5%;width:140px;height:140px;
+  animation:floatY 9s ease-in-out infinite;
+  opacity:.18;
+}
+.sectors-decor .float-2{
+  bottom:12%;left:6%;width:100px;height:100px;
+  animation:floatY 7s ease-in-out infinite reverse;
+  animation-delay:-2s;
+  opacity:.15;
+}
+.sectors-decor .float-3{
+  top:50%;right:14%;width:80px;height:80px;
+  animation:floatY 11s ease-in-out infinite;
+  animation-delay:-4s;
+  opacity:.20;
+}
+@keyframes floatY{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-22px) rotate(8deg)}
+}
+
+/* Grille des 3 secteurs - compact */
+.sectors-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+  position:relative;z-index:2;
+}
+@media(max-width:880px){.sectors-grid{grid-template-columns:1fr;gap:14px}}
+
+.sector-card{
+  position:relative;
+  background:rgba(5,11,10,.4);
+  border:1px solid var(--line-hi);
+  border-radius:var(--radius);
+  padding:clamp(24px,3vw,36px);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transition:transform .4s var(--ease),background .35s var(--ease),border-color .35s var(--ease),box-shadow .4s var(--ease);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+/* Glow en arrière-plan du card au hover */
+.sector-card::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(0,147,145,.18),transparent 60%);
+  opacity:0;transition:opacity .5s var(--ease);
+  pointer-events:none;
+}
+.sector-card:hover{
+  transform:translateY(-4px);
+  background:rgba(5,11,10,.6);
+  border-color:var(--turq);
+  box-shadow:
+    0 24px 50px -20px rgba(0,147,145,.5),
+    0 0 0 1px rgba(26,181,179,.25);
+}
+.sector-card:hover::after{opacity:1}
+.sector-card:hover .sector-icon{transform:translateY(-6px) rotate(-4deg)}
+.sector-card:hover .sector-icon svg{filter:drop-shadow(0 8px 20px rgba(26,181,179,.5))}
+.sector-card:hover .sector-card-num{color:var(--turq-bright);opacity:.6}
+
+.sector-card>*{position:relative;z-index:1}
+
+.sector-card-header{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:24px;
+}
+.sector-icon{
+  width:64px;height:64px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--turq-bright);
   transition:transform .5s var(--ease);
 }
-.sector-row:hover{background:rgba(0,147,145,.04)}
-.sector-row:hover::before{transform:scaleY(1)}
-.sector-row:hover .sector-num{color:var(--turq-bright);transform:translateX(4px)}
-
-@media(max-width:880px){.sector-row{grid-template-columns:1fr;gap:20px;padding:32px 16px;margin:0 -16px}}
-
-.sector-num{
+.sector-icon svg{
+  width:100%;height:100%;
+  transition:filter .4s var(--ease);
+}
+.sector-card-num{
   font-family:var(--display);
-  font-size:clamp(48px,5vw,72px);
+  font-size:36px;
   font-weight:300;
   line-height:1;
   color:var(--turq);
   letter-spacing:-.03em;
-  font-feature-settings:"tnum";
-  transition:color .4s var(--ease),transform .4s var(--ease);
+  opacity:.4;
+  transition:color .4s var(--ease),opacity .4s var(--ease);
 }
-.sector-info h3{
-  font-family:var(--display);font-weight:500;
-  font-size:clamp(30px,3.6vw,44px);
-  line-height:1;letter-spacing:-.028em;
+
+.sector-card h3{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(22px,2.4vw,28px);
+  line-height:1;letter-spacing:-.022em;
   margin:0 0 6px;
   color:var(--text);
 }
-.sector-info .label{
-  font-family:var(--mono);font-size:11px;
+.sector-card .label{
+  font-family:var(--mono);font-size:10.5px;
   letter-spacing:.22em;text-transform:uppercase;
-  color:var(--turq);margin-bottom:24px;
+  color:var(--turq-bright);margin-bottom:18px;
 }
-.sector-info p{color:var(--text-2);font-size:15.5px;line-height:1.65;margin:24px 0 0;max-width:380px}
-
-.sector-services{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;padding-top:8px}
-@media(max-width:520px){.sector-services{grid-template-columns:1fr}}
-.sector-services .item{
-  display:flex;align-items:flex-start;gap:12px;
-  padding:11px 0;
-  border-bottom:1px solid var(--line);
-  font-size:14.5px;color:var(--text);line-height:1.4;
+.sector-card-services{
+  display:flex;flex-direction:column;
+  gap:6px;
+  margin-top:auto;
+  padding-top:20px;
+  border-top:1px solid var(--line);
 }
-.sector-services .item:last-child{border-bottom:none}
-.sector-services .item::before{
+.sector-card-services .item{
+  display:flex;align-items:center;gap:10px;
+  font-size:13.5px;
+  color:var(--text-2);
+  padding:5px 0;
+  transition:color .25s var(--ease);
+}
+.sector-card-services .item::before{
   content:"";flex-shrink:0;
-  width:12px;height:1px;margin-top:11px;
+  width:8px;height:1px;
   background:var(--turq);
+  transition:width .25s var(--ease),background .25s var(--ease);
 }
+.sector-card:hover .sector-card-services .item::before{
+  width:14px;background:var(--turq-bright);
+}
+.sector-card:hover .sector-card-services .item{color:var(--text)}
 
-/* ============== EXPERTISE — bento, bg-3 ============== */
-.section.expertise{background:var(--bg-3)}
+/* ============== EXPERTISE — bento, bg-3 turquoise ============== */
+.section.expertise{
+  background:linear-gradient(180deg,var(--bg-2) 0%,var(--bg-3) 50%,var(--bg-2) 100%);
+  position:relative;
+}
+/* Halo turquoise central */
+.section.expertise::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 50% at 50% 50%,rgba(0,147,145,.10),transparent 70%);
+  pointer-events:none;z-index:1;
+}
 
 .bento{
   display:grid;
@@ -677,8 +767,33 @@ body{
 }
 .feature-content .meta::before{content:"";width:18px;height:1px;background:var(--turq-bright)}
 
-/* ============== APPROCHE — manifesto, bg-4 le plus turquoise ============== */
-.section.approche{background:var(--bg-4)}
+/* ============== APPROCHE — bg-4 le plus turquoise ============== */
+.section.approche{
+  background:linear-gradient(180deg,var(--bg-3) 0%,var(--bg-4) 50%,var(--bg-3) 100%);
+  position:relative;
+}
+.section.approche::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 30%,rgba(0,147,145,.18),transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 70%,rgba(26,181,179,.12),transparent 60%);
+  pointer-events:none;z-index:1;
+}
+
+/* Floaters approche */
+.approche-decor{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.approche-decor svg{position:absolute}
+.approche-decor .ap-float-1{
+  top:14%;left:5%;width:110px;height:110px;
+  animation:floatY 10s ease-in-out infinite;
+  opacity:.18;
+}
+.approche-decor .ap-float-2{
+  bottom:18%;right:8%;width:90px;height:90px;
+  animation:floatY 8s ease-in-out infinite reverse;
+  animation-delay:-3s;
+  opacity:.16;
+}
 
 .manifesto{
   display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
@@ -745,17 +860,17 @@ body{
 /* ============== QUOTE ============== */
 .quote-section{
   position:relative;
-  background:var(--bg-2);
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
+  background:var(--bg-4);
+  border-top:1px solid var(--line-bright);
+  border-bottom:1px solid var(--line-bright);
   overflow:hidden;
 }
 .quote-section::before{
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 70% 50% at 12% 18%,rgba(45,212,191,.30),transparent 65%),
-    radial-gradient(ellipse 60% 50% at 88% 82%,rgba(20,184,166,.22),transparent 65%),
-    radial-gradient(ellipse 80% 60% at 50% 100%,rgba(15,139,126,.18),transparent 65%);
+    radial-gradient(ellipse 70% 50% at 12% 18%,rgba(26,181,179,.45),transparent 65%),
+    radial-gradient(ellipse 60% 50% at 88% 82%,rgba(0,147,145,.40),transparent 65%),
+    radial-gradient(ellipse 80% 60% at 50% 100%,rgba(15,139,126,.30),transparent 65%);
   pointer-events:none;z-index:1;
 }
 .quote-grid{
@@ -940,7 +1055,7 @@ a.footer-contact-value:hover{color:var(--turq-bright)}
 .hero-actions{animation-delay:.58s}
 .hero-meta{animation-delay:.72s}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.hero-bg img{opacity:0;animation:fadePhoto 1.8s var(--ease) .1s forwards;transform:scale(1.08)}
+.hero-bg img{opacity:0;animation:fadePhoto 1.6s var(--ease) .1s forwards;transform:scale(1.04)}
 @keyframes fadePhoto{to{opacity:1;transform:scale(1)}}
 
 /* ============== COMPACTAGE MOBILE ============== */
@@ -960,11 +1075,20 @@ a.footer-contact-value:hover{color:var(--turq-bright)}
   .hero-meta .val{font-size:14px}
   .hero-meta .lbl{font-size:9px}
 
-  /* Sectors */
-  .sector-row{padding:30px 12px;gap:18px}
-  .sector-info h3{font-size:26px}
-  .sector-services .item{padding:8px 0;font-size:13px}
-  .sector-services{gap:6px 16px}
+  /* Sectors compact mobile */
+  .sectors-grid{gap:12px}
+  .sector-card{padding:22px}
+  .sector-card h3{font-size:22px}
+  .sector-card .sector-icon{width:48px;height:48px}
+  .sector-card-num{font-size:28px}
+  .sector-card-services .item{font-size:13px;padding:4px 0}
+
+  /* Cacher les floaters trop voyants sur mobile pour épurer */
+  .sectors-decor .float-3,
+  .approche-decor .ap-float-2{display:none}
+  .sectors-decor .float-1{width:90px;height:90px;top:4%;right:-20px;opacity:.12}
+  .sectors-decor .float-2{width:70px;height:70px;opacity:.10}
+  .approche-decor .ap-float-1{width:70px;height:70px;opacity:.10}
 
   /* Bento */
   .bento{gap:10px}
@@ -1024,8 +1148,9 @@ a.footer-contact-value:hover{color:var(--turq-bright)}
 <section class="hero">
   <!-- IMAGE BACKGROUND -->
   <div class="hero-bg" aria-hidden="true">
-    <img src="https://decelectrique.com/van.jpg" alt="" />
+    <img src="https://decelectrique.com/van.png" alt="" />
   </div>
+  <div class="hero-grain" aria-hidden="true"></div>
 
   <!-- DOT GRID PATTERN superposé -->
   <div class="pattern-bg" aria-hidden="true" style="z-index:2;opacity:.3">
@@ -1106,16 +1231,16 @@ a.footer-contact-value:hover{color:var(--turq-bright)}
 
 <!-- ============ SECTORS — bg-2 + diagonal pattern ============ -->
 <section class="section sectors" id="services">
-  <!-- DIAGONAL HATCH PATTERN -->
+  <!-- DIAGONAL HATCH PATTERN — adapté au fond turquoise -->
   <div class="pattern-bg" aria-hidden="true">
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="diag" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
-          <line x1="0" y1="0" x2="0" y2="80" stroke="#15302A" stroke-width="1"/>
+          <line x1="0" y1="0" x2="0" y2="80" stroke="#0F2C25" stroke-width="1"/>
         </pattern>
         <radialGradient id="diagFade" cx="50%" cy="50%" r="70%">
-          <stop offset="0%" stop-color="#091814" stop-opacity="0"/>
-          <stop offset="100%" stop-color="#091814" stop-opacity=".7"/>
+          <stop offset="0%" stop-color="#0F2C25" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#0F2C25" stop-opacity=".5"/>
         </radialGradient>
       </defs>
       <rect width="100%" height="100%" fill="url(#diag)"/>
@@ -1123,72 +1248,131 @@ a.footer-contact-value:hover{color:var(--turq-bright)}
     </svg>
   </div>
 
+  <!-- ÉLÉMENTS SVG FLOTTANTS -->
+  <div class="sectors-decor" aria-hidden="true">
+    <!-- Cercle technique flottant -->
+    <svg class="float-1" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="70" cy="70" r="64" fill="none" stroke="#1AB5B3" stroke-width="1" stroke-dasharray="2 4"/>
+      <circle cx="70" cy="70" r="48" fill="none" stroke="#1AB5B3" stroke-width=".7" opacity=".5"/>
+      <circle cx="70" cy="70" r="32" fill="none" stroke="#1AB5B3" stroke-width=".5" opacity=".3"/>
+      <circle cx="70" cy="70" r="6" fill="#1AB5B3"/>
+      <line x1="70" y1="6" x2="70" y2="20" stroke="#1AB5B3" stroke-width="1"/>
+      <line x1="70" y1="120" x2="70" y2="134" stroke="#1AB5B3" stroke-width="1"/>
+      <line x1="6" y1="70" x2="20" y2="70" stroke="#1AB5B3" stroke-width="1"/>
+      <line x1="120" y1="70" x2="134" y2="70" stroke="#1AB5B3" stroke-width="1"/>
+    </svg>
+    <!-- Éclair flottant gros -->
+    <svg class="float-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 8 L28 50 L42 50 L34 92 L70 42 L56 42 L66 8 Z"
+            fill="#1AB5B3" stroke="#4DD4D2" stroke-width="1" stroke-linejoin="round"/>
+    </svg>
+    <!-- Hexagone technique avec point central -->
+    <svg class="float-3" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="40,4 70,22 70,58 40,76 10,58 10,22"
+               fill="none" stroke="#1AB5B3" stroke-width="1.2"/>
+      <polygon points="40,16 60,28 60,52 40,64 20,52 20,28"
+               fill="none" stroke="#1AB5B3" stroke-width=".7" opacity=".5"/>
+      <circle cx="40" cy="40" r="4" fill="#1AB5B3"/>
+    </svg>
+  </div>
+
   <div class="container section-content">
     <div class="section-head reveal">
       <div class="section-head-row">
         <div>
-          <div class="section-tag">01 / Services</div>
-          <h2 class="section-title">Travaux<br>d'<span class="accent">électricité</span>.</h2>
+          <div class="section-tag">01 / Secteurs d'activités</div>
+          <h2 class="section-title">Secteurs<br>d'<span class="accent">activités</span>.</h2>
         </div>
         <p class="section-desc">Résidentiel, commercial et industriel. Installation, réparation et mise aux normes à Saint-Jean-sur-Richelieu et partout sur la Rive-Sud.</p>
       </div>
     </div>
 
-    <div class="sectors-stack reveal">
-      <div class="sector-row">
-        <div class="sector-num">01</div>
-        <div class="sector-info">
-          <div class="label">Résidentiel</div>
-          <h3>Résidentiel</h3>
-          <p>Du remplacement de panneau électrique à l'installation d'une borne de recharge, en passant par les rénovations complètes et la domotique résidentielle.</p>
+    <div class="sectors-grid reveal">
+      <!-- 01 RÉSIDENTIEL -->
+      <div class="sector-card">
+        <div class="sector-card-header">
+          <div class="sector-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 28 L32 8 L56 28" />
+              <path d="M14 24 V54 H50 V24" />
+              <rect x="26" y="36" width="12" height="18" />
+              <rect x="18" y="32" width="6" height="6" />
+              <rect x="40" y="32" width="6" height="6" />
+              <!-- petit éclair signature -->
+              <path d="M30 14 L26 22 L30 22 L28 30 L34 20 L30 20 L32 14 Z" fill="currentColor" stroke="none" opacity=".9"/>
+            </svg>
+          </div>
+          <div class="sector-card-num">01</div>
         </div>
-        <div class="sector-services">
+        <div class="label">Maison</div>
+        <h3>Résidentiel</h3>
+        <div class="sector-card-services">
           <div class="item">Panneaux 100 / 200 / 400&nbsp;A</div>
           <div class="item">Bornes de recharge VE</div>
           <div class="item">Filage de rénovation</div>
           <div class="item">Spas, piscines, thermopompes</div>
-          <div class="item">Éclairage paysager</div>
-          <div class="item">Domotique résidentielle</div>
-          <div class="item">Détection de pannes</div>
-          <div class="item">Mise à la terre</div>
+          <div class="item">Éclairage et domotique</div>
         </div>
       </div>
 
-      <div class="sector-row">
-        <div class="sector-num">02</div>
-        <div class="sector-info">
-          <div class="label">Commercial</div>
-          <h3>Commercial</h3>
-          <p>Aménagements, mises aux normes, éclairage haute performance et bornes de recharge multi-utilisateurs, planifiés autour de votre horaire d'opération.</p>
+      <!-- 02 COMMERCIAL -->
+      <div class="sector-card">
+        <div class="sector-card-header">
+          <div class="sector-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="10" y="14" width="44" height="40"/>
+              <line x1="10" y1="24" x2="54" y2="24"/>
+              <line x1="10" y1="34" x2="54" y2="34"/>
+              <line x1="10" y1="44" x2="54" y2="44"/>
+              <line x1="22" y1="14" x2="22" y2="54"/>
+              <line x1="42" y1="14" x2="42" y2="54"/>
+              <!-- portes -->
+              <rect x="28" y="44" width="8" height="10" fill="currentColor" opacity=".4"/>
+              <!-- éclair signature -->
+              <path d="M16 18 L13 25 L16 25 L14 32 L20 23 L17 23 L19 18 Z" fill="currentColor" stroke="none" opacity=".9"/>
+            </svg>
+          </div>
+          <div class="sector-card-num">02</div>
         </div>
-        <div class="sector-services">
+        <div class="label">Commerce</div>
+        <h3>Commercial</h3>
+        <div class="sector-card-services">
           <div class="item">Aménagement de locaux</div>
-          <div class="item">Mise aux normes</div>
+          <div class="item">Mise aux normes du Code</div>
           <div class="item">Bornes VE multi-postes</div>
           <div class="item">Éclairage DEL commercial</div>
           <div class="item">Génératrices d'urgence</div>
-          <div class="item">Détection / alarme incendie</div>
-          <div class="item">Systèmes de contrôle</div>
-          <div class="item">Entretien préventif annuel</div>
         </div>
       </div>
 
-      <div class="sector-row">
-        <div class="sector-num">03</div>
-        <div class="sector-info">
-          <div class="label">Industriel</div>
-          <h3>Industriel</h3>
-          <p>Câblage haute tension, démarreurs de moteurs, automatisation et thermographie. Service prioritaire pour minimiser les arrêts de production.</p>
+      <!-- 03 INDUSTRIEL -->
+      <div class="sector-card">
+        <div class="sector-card-header">
+          <div class="sector-icon">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 54 H58"/>
+              <path d="M10 54 V26 L22 34 V26 L34 34 V18 L42 24 V54"/>
+              <rect x="42" y="20" width="14" height="34"/>
+              <rect x="14" y="42" width="6" height="8" fill="currentColor" opacity=".4"/>
+              <rect x="24" y="42" width="6" height="8" fill="currentColor" opacity=".4"/>
+              <rect x="36" y="42" width="6" height="8" fill="currentColor" opacity=".4"/>
+              <!-- cheminée et fumée -->
+              <line x1="49" y1="20" x2="49" y2="12"/>
+              <circle cx="49" cy="9" r="2" opacity=".5"/>
+              <!-- éclair signature -->
+              <path d="M48 28 L45 35 L48 35 L46 42 L52 33 L49 33 L51 28 Z" fill="currentColor" stroke="none" opacity=".9"/>
+            </svg>
+          </div>
+          <div class="sector-card-num">03</div>
         </div>
-        <div class="sector-services">
+        <div class="label">Usine</div>
+        <h3>Industriel</h3>
+        <div class="sector-card-services">
           <div class="item">Câblage haute tension</div>
           <div class="item">Triphasé 600&nbsp;V</div>
           <div class="item">Démarreurs / VFD moteurs</div>
           <div class="item">Automatisation et PLC</div>
-          <div class="item">Distribution d'usine</div>
           <div class="item">Thermographie infrarouge</div>
-          <div class="item">Mise en service</div>
-          <div class="item">Service prioritaire</div>
         </div>
       </div>
     </div>
@@ -1572,6 +1756,20 @@ a.footer-contact-value:hover{color:var(--turq-bright)}
         <circle cx="100%" cy="50%" r="1000"/>
       </g>
       <rect width="100%" height="100%" fill="url(#arcFade)"/>
+    </svg>
+  </div>
+
+  <!-- ÉLÉMENTS FLOTTANTS -->
+  <div class="approche-decor" aria-hidden="true">
+    <svg class="ap-float-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="#1AB5B3" stroke-width="1" stroke-dasharray="3 3"/>
+      <circle cx="50" cy="50" r="28" fill="none" stroke="#1AB5B3" stroke-width=".7" opacity=".5"/>
+      <path d="M50 30 L38 58 L48 58 L44 78 L62 50 L52 50 L58 30 Z" fill="#1AB5B3" opacity=".7"/>
+    </svg>
+    <svg class="ap-float-2" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <rect x="14" y="14" width="52" height="52" fill="none" stroke="#1AB5B3" stroke-width="1" transform="rotate(45 40 40)"/>
+      <rect x="24" y="24" width="32" height="32" fill="none" stroke="#1AB5B3" stroke-width=".7" opacity=".5" transform="rotate(45 40 40)"/>
+      <circle cx="40" cy="40" r="3" fill="#1AB5B3"/>
     </svg>
   </div>
 
