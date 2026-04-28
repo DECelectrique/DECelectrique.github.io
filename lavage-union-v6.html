@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lavage Union — Spécialiste en entretien extérieur · Montréal & Rive-Sud</title>
+<meta name="description" content="Spécialistes en nettoyage de vitres, thermopompes, gouttières, ventilation et lavage à pression. Service clé en main pour Montréal, la Rive-Sud et la Montérégie.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'lu-navy': '#1B4F8B',
+          'lu-navy-dark': '#0F3461',
+          'lu-blue': '#2BB3D9',
+          'lu-cyan': '#7DD3F0',
+          'lu-cream': '#F4FAFD',
+          'lu-ink': '#0F2747',
+          'lu-mute': '#5E7493'
+        },
+        fontFamily: {
+          'display': ['Outfit', 'sans-serif'],
+          'sans': ['Plus Jakarta Sans', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; color: #0F2747; -webkit-font-smoothing: antialiased; }
+  .font-display { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+  html { scroll-behavior: smooth; }
+
+  /* ─── BUBBLES ─── */
+  @keyframes rise {
+    0%   { transform: translateY(0) translateX(0) scale(0.8); opacity: 0; }
+    10%  { opacity: 0.7; }
+    50%  { transform: translateY(-50vh) translateX(20px) scale(1.1); }
+    90%  { opacity: 0.7; }
+    100% { transform: translateY(-110vh) translateX(-10px) scale(0.7); opacity: 0; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    33%      { transform: translateY(-12px) translateX(8px); }
+    66%      { transform: translateY(-8px) translateX(-6px); }
+  }
+  @keyframes pulse-ring {
+    0%   { transform: scale(0.7); opacity: 0.6; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9) 0%, rgba(125,211,240,0.4) 40%, rgba(43,179,217,0.15) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    box-shadow: inset -2px -2px 6px rgba(43,179,217,0.2), 0 0 20px rgba(125,211,240,0.3);
+  }
+  .bubble::before {
+    content: '';
+    position: absolute;
+    top: 15%; left: 18%;
+    width: 28%; height: 28%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    filter: blur(1px);
+  }
+
+  .bubble-static { animation: float 6s ease-in-out infinite; }
+  .bubble-rise { animation: rise 12s linear infinite; }
+
+  /* ─── BACKGROUND GRADIENTS ─── */
+  .bg-gradient-soft-1 { background: linear-gradient(180deg, #FFFFFF 0%, #F4FAFD 50%, #FFFFFF 100%); }
+  .bg-gradient-soft-2 { background: linear-gradient(180deg, #F4FAFD 0%, #E6F4FB 50%, #F4FAFD 100%); }
+  .bg-gradient-soft-3 { background: linear-gradient(135deg, #FFFFFF 0%, #EAF6FB 50%, #F4FAFD 100%); }
+  .bg-gradient-blue-white { background: linear-gradient(180deg, #F4FAFD 0%, #FFFFFF 100%); }
+  .bg-gradient-white-blue { background: linear-gradient(180deg, #FFFFFF 0%, #F4FAFD 100%); }
+  .bg-gradient-radial-blue {
+    background: radial-gradient(ellipse at top, #E6F4FB 0%, #F4FAFD 40%, #FFFFFF 80%);
+  }
+
+  /* ─── REVEAL ON SCROLL ─── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ─── DECORATIVE WAVES ─── */
+  .wave-divider svg { display: block; width: 100%; height: 60px; }
+
+  /* ─── HOVER UNDERLINE NAV ─── */
+  .nav-link::after {
+    content: ''; position: absolute; bottom: -6px; left: 0;
+    width: 0; height: 2px; background: #2BB3D9; transition: width .3s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+
+  /* ─── SERVICE CARD HOVER ─── */
+  .service-card { transition: all .4s cubic-bezier(.4,0,.2,1); }
+  .service-card:hover { transform: translateY(-6px); }
+  .service-card:hover .service-icon-bg { background: #1B4F8B; }
+  .service-card:hover .service-icon { color: #FFFFFF; }
+  .service-card:hover .service-arrow { background: #2BB3D9; color: #FFFFFF; transform: rotate(-45deg); }
+
+  /* ─── PULSE PIN ─── */
+  .pulse-pin::after {
+    content: ''; position: absolute; inset: -10px;
+    border-radius: 50%; background: #2BB3D9;
+    animation: pulse-ring 2.5s cubic-bezier(0,0,0.2,1) infinite;
+  }
+
+  /* ─── U-SHAPE HERO BACKGROUND ─── */
+  .u-hero-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+</style>
+</head>
+<body class="bg-white">
+
+<!-- ═══════════════════════════════════════════════ NAVIGATION ═══════════════════════════════════════════════ -->
+<nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
+    <!-- Real logo with white background pill so it stays visible on dark hero -->
+    <a href="#" class="flex items-center bg-white rounded-full px-3 py-1.5 shadow-md">
+      <img src="https://decelectrique.com/LogoUnion.png" alt="Lavage Union" class="h-9 w-auto">
+    </a>
+
+    <ul class="hidden lg:flex items-center gap-10">
+      <li><a href="#services" class="nav-link relative text-sm font-medium text-white hover:text-lu-cyan transition-colors" data-nav-link>Services</a></li>
+      <li><a href="#realisations" class="nav-link relative text-sm font-medium text-white hover:text-lu-cyan transition-colors" data-nav-link>Réalisations</a></li>
+      <li><a href="#processus" class="nav-link relative text-sm font-medium text-white hover:text-lu-cyan transition-colors" data-nav-link>Notre approche</a></li>
+      <li><a href="#zones" class="nav-link relative text-sm font-medium text-white hover:text-lu-cyan transition-colors" data-nav-link>Zones desservies</a></li>
+      <li><a href="#avis" class="nav-link relative text-sm font-medium text-white hover:text-lu-cyan transition-colors" data-nav-link>Témoignages</a></li>
+    </ul>
+
+    <a href="#contact" class="hidden md:inline-flex items-center gap-2 bg-white hover:bg-lu-cyan text-lu-navy px-5 py-2.5 rounded-full text-sm font-semibold transition-colors">
+      Soumission gratuite
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ HERO — DARK GRADIENT ═══════════════════════════════════════════════ -->
+<section class="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-28 bg-gradient-to-br from-lu-navy-dark via-lu-navy to-lu-blue">
+
+  <!-- Floating bubbles inside dark hero -->
+  <div class="bubble bubble-static absolute top-32 left-[10%] w-20 h-20 opacity-30"></div>
+  <div class="bubble bubble-static absolute top-60 left-[6%] w-10 h-10 opacity-50" style="animation-delay: 1s;"></div>
+  <div class="bubble bubble-static absolute bottom-32 left-[14%] w-16 h-16 opacity-35" style="animation-delay: 2s;"></div>
+  <div class="bubble bubble-static absolute top-1/2 left-[40%] w-6 h-6 opacity-40" style="animation-delay: 1.5s;"></div>
+  <div class="bubble bubble-static absolute bottom-20 left-1/3 w-12 h-12 opacity-25" style="animation-delay: 3s;"></div>
+  <div class="bubble bubble-static absolute top-40 right-[40%] w-8 h-8 opacity-45" style="animation-delay: .5s;"></div>
+
+  <!-- Rising bubbles -->
+  <div class="bubble bubble-rise absolute bottom-0 left-[15%] w-4 h-4" style="animation-duration: 10s;"></div>
+  <div class="bubble bubble-rise absolute bottom-0 left-[55%] w-6 h-6" style="animation-delay: 2s; animation-duration: 12s;"></div>
+  <div class="bubble bubble-rise absolute bottom-0 left-[75%] w-3 h-3" style="animation-delay: 4s; animation-duration: 9s;"></div>
+
+  <!-- Soft glow blob top-right -->
+  <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-lu-cyan/20 blur-3xl pointer-events-none"></div>
+  <!-- Soft glow blob bottom-left -->
+  <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-lu-blue/30 blur-3xl pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
+
+      <!-- ─── LEFT: Text ─── -->
+      <div class="reveal relative">
+        <span class="relative inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 text-white text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full mb-6">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full rounded-full bg-lu-cyan opacity-75 animate-ping"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-lu-cyan"></span>
+          </span>
+          Disponible · Montréal & Rive-Sud
+        </span>
+
+        <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-white mb-6">
+          L'entretien<br>
+          <span class="italic font-light text-lu-cyan">complet</span> de votre<br>
+          propriété, en une<br>
+          <span class="relative inline-block">
+            <span class="relative z-10">seule visite.</span>
+            <span class="absolute bottom-2 left-0 right-0 h-3 bg-lu-cyan/30 -z-0 rounded"></span>
+          </span>
+        </h1>
+
+        <p class="text-lg text-white/75 max-w-xl mb-8 leading-relaxed">
+          Vitres, thermopompes, gouttières, ventilation, lavage à pression : un seul partenaire de confiance pour tout entretenir, en résidentiel comme en commercial.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#contact" class="group inline-flex items-center gap-2.5 bg-white hover:bg-lu-cyan text-lu-navy px-7 py-4 rounded-full font-semibold shadow-lg transition-all hover:-translate-y-0.5">
+            Obtenir mon devis
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="tel:14385212103" class="inline-flex items-center gap-2.5 border border-white/30 hover:border-lu-cyan text-white hover:text-lu-cyan font-semibold px-6 py-4 rounded-full transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            438 521-2103
+          </a>
+        </div>
+
+        <!-- Trust pills row -->
+        <div class="flex flex-wrap items-center gap-6 mt-10 pt-8 border-t border-white/15">
+          <div class="flex items-center gap-2 text-sm text-white/80">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7DD3F0" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            Membre INCV
+          </div>
+          <div class="flex items-center gap-2 text-sm text-white/80">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7DD3F0" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            Assuré & certifié
+          </div>
+          <div class="flex items-center gap-2 text-sm text-white/80">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7DD3F0" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            Devis sous 24 h
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── RIGHT: Floating video card ─── -->
+      <div class="relative h-[460px] sm:h-[560px] lg:h-[640px] reveal mt-8 lg:mt-0">
+
+        <!-- The video as a floating card -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl ring-2 ring-white/20 z-10" style="animation: float 7s ease-in-out infinite;">
+          <video
+            class="w-full h-full object-cover"
+            poster="https://static.wixstatic.com/media/b0fb25_82d0060517b34966831181990da04bbbf003.jpg"
+            autoplay muted loop playsinline preload="metadata">
+            <source src="https://video.wixstatic.com/video/b0fb25_82d0060517b34966831181990da04bbb/720p/mp4/file.mp4" type="video/mp4">
+            <source src="https://video.wixstatic.com/video/b0fb25_82d0060517b34966831181990da04bbb/480p/mp4/file.mp4" type="video/mp4">
+          </video>
+          <div class="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-lu-navy-dark/95 via-lu-navy/40 to-transparent pointer-events-none">
+            <div class="text-lu-cyan text-[10px] uppercase tracking-widest font-bold mb-1">Lavage Union en action</div>
+            <div class="text-white font-display text-lg leading-tight">Service clé en main</div>
+          </div>
+        </div>
+
+        <!-- Floating "Rapport photo" badge -->
+        <div class="absolute top-4 left-0 bg-white rounded-2xl shadow-2xl p-4 flex items-center gap-3 z-20" style="animation: float 6s ease-in-out infinite reverse;">
+          <div class="w-10 h-10 rounded-full bg-lu-cyan/20 flex items-center justify-center text-lu-navy">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div>
+            <div class="text-[10px] text-lu-mute uppercase tracking-wider font-semibold">Rapport photo</div>
+            <div class="font-display text-sm text-lu-ink leading-tight">Avant / Après</div>
+          </div>
+        </div>
+
+        <!-- Floating "6 services" badge -->
+        <div class="absolute bottom-8 right-0 bg-lu-cyan text-lu-navy rounded-2xl shadow-2xl p-4 flex items-center gap-3 z-20" style="animation: float 8s ease-in-out infinite;">
+          <div class="font-display text-4xl leading-none font-medium">6</div>
+          <div class="text-[11px] leading-tight max-w-[100px] font-semibold">services sous un même toit</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ TRUSTED BY ═══════════════════════════════════════════════ -->
+<section class="bg-gradient-blue-white border-y border-lu-navy/10 py-10">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex flex-wrap items-center justify-between gap-6">
+      <span class="text-xs font-semibold uppercase tracking-widest text-lu-mute">Ils nous font confiance</span>
+      <div class="flex flex-wrap items-center gap-x-12 gap-y-4 opacity-70">
+        <div class="font-display text-xl text-lu-navy">Syndicats de copropriété</div>
+        <div class="font-display text-xl text-lu-navy">Gestion immobilière</div>
+        <div class="font-display text-xl text-lu-navy">PME locales</div>
+        <div class="font-display text-xl text-lu-navy">Centres commerciaux</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ SERVICES ═══════════════════════════════════════════════ -->
+<section id="services" class="py-24 lg:py-32 relative overflow-hidden bg-gradient-soft-1">
+<!-- Decorative bubble cluster -->
+  <div class="bubble bubble-static absolute top-10 right-10 w-16 h-16 opacity-50"></div>
+  <div class="bubble bubble-static absolute top-32 right-32 w-8 h-8 opacity-60" style="animation-delay: 1s;"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 reveal">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="h-px w-8 bg-lu-blue"></span>
+          <span class="text-xs font-semibold uppercase tracking-widest text-lu-blue">Nos expertises</span>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-none text-lu-ink mb-4">
+          Six services, <span class="italic text-lu-navy">un seul</span> partenaire.
+        </h2>
+        <p class="text-lg text-lu-mute leading-relaxed max-w-lg">
+          Centralisez l'entretien de votre propriété auprès d'une équipe expérimentée. Profitez de forfaits multi-services avantageux.
+        </p>
+      </div>
+      <a href="#contact" class="inline-flex items-center gap-2 text-lu-navy hover:text-lu-blue font-semibold transition-colors whitespace-nowrap">
+        Demander un devis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+      <!-- Service 1 -->
+      <div class="service-card bg-white border border-lu-navy/10 rounded-3xl p-8 cursor-pointer group shadow-sm hover:shadow-lg">
+        <div class="flex items-start justify-between mb-6">
+          <div class="service-icon-bg w-14 h-14 rounded-full bg-lu-cyan/20 flex items-center justify-center transition-colors">
+            <svg class="service-icon text-lu-navy transition-colors" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h18M12 3v18"/></svg>
+          </div>
+          <span class="text-sm font-display text-lu-mute">01</span>
+        </div>
+        <h3 class="font-display text-2xl text-lu-ink mb-2">Nettoyage de vitres</h3>
+        <p class="text-sm text-lu-mute leading-relaxed mb-6">Lavage intérieur et extérieur sans traces. Méthodes sécuritaires, produits de qualité, transparence éclatante.</p>
+        <div class="service-arrow w-10 h-10 rounded-full border border-lu-navy/15 flex items-center justify-center text-lu-navy transition-all">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card bg-white border border-lu-navy/10 rounded-3xl p-8 cursor-pointer group shadow-sm hover:shadow-lg">
+        <div class="flex items-start justify-between mb-6">
+          <div class="service-icon-bg w-14 h-14 rounded-full bg-lu-cyan/20 flex items-center justify-center transition-colors">
+            <svg class="service-icon text-lu-navy transition-colors" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4l12.8-12.8"/></svg>
+          </div>
+          <span class="text-sm font-display text-lu-mute">02</span>
+        </div>
+        <h3 class="font-display text-2xl text-lu-ink mb-2">Entretien de thermopompes</h3>
+        <p class="text-sm text-lu-mute leading-relaxed mb-6">Nettoyage et dégraissage des unités pour améliorer la performance, prolonger la durée de vie et optimiser la qualité de l'air.</p>
+        <div class="service-arrow w-10 h-10 rounded-full border border-lu-navy/15 flex items-center justify-center text-lu-navy transition-all">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card bg-white border border-lu-navy/10 rounded-3xl p-8 cursor-pointer group shadow-sm hover:shadow-lg">
+        <div class="flex items-start justify-between mb-6">
+          <div class="service-icon-bg w-14 h-14 rounded-full bg-lu-cyan/20 flex items-center justify-center transition-colors">
+            <svg class="service-icon text-lu-navy transition-colors" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h12M3 18h18"/><circle cx="19" cy="12" r="2"/></svg>
+          </div>
+          <span class="text-sm font-display text-lu-mute">03</span>
+        </div>
+        <h3 class="font-display text-2xl text-lu-ink mb-2">Entretien de ventilation</h3>
+        <p class="text-sm text-lu-mute leading-relaxed mb-6">Nettoyage complet des conduits et systèmes pour une qualité d'air optimale et une efficacité énergétique accrue.</p>
+        <div class="service-arrow w-10 h-10 rounded-full border border-lu-navy/15 flex items-center justify-center text-lu-navy transition-all">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card bg-white border border-lu-navy/10 rounded-3xl p-8 cursor-pointer group shadow-sm hover:shadow-lg">
+        <div class="flex items-start justify-between mb-6">
+          <div class="service-icon-bg w-14 h-14 rounded-full bg-lu-cyan/20 flex items-center justify-center transition-colors">
+            <svg class="service-icon text-lu-navy transition-colors" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17l4-4 4 4 4-4 6 6M3 11l4-4 4 4 4-4 6 6"/></svg>
+          </div>
+          <span class="text-sm font-display text-lu-mute">04</span>
+        </div>
+        <h3 class="font-display text-2xl text-lu-ink mb-2">Lavage à pression</h3>
+        <p class="text-sm text-lu-mute leading-relaxed mb-6">Élimination des saletés, moisissures et graisses. Idéal pour terrasses, stationnements, revêtements et pavés.</p>
+        <div class="service-arrow w-10 h-10 rounded-full border border-lu-navy/15 flex items-center justify-center text-lu-navy transition-all">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="service-card bg-white border border-lu-navy/10 rounded-3xl p-8 cursor-pointer group shadow-sm hover:shadow-lg">
+        <div class="flex items-start justify-between mb-6">
+          <div class="service-icon-bg w-14 h-14 rounded-full bg-lu-cyan/20 flex items-center justify-center transition-colors">
+            <svg class="service-icon text-lu-navy transition-colors" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M2 12h2M20 12h2M12 2v2M12 20v2"/></svg>
+          </div>
+          <span class="text-sm font-display text-lu-mute">05</span>
+        </div>
+        <h3 class="font-display text-2xl text-lu-ink mb-2">Conduits de sécheuse</h3>
+        <p class="text-sm text-lu-mute leading-relaxed mb-6">Élimination de l'accumulation de charpie pour prévenir les risques d'incendie et améliorer la performance.</p>
+        <div class="service-arrow w-10 h-10 rounded-full border border-lu-navy/15 flex items-center justify-center text-lu-navy transition-all">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="service-card bg-white border border-lu-navy/10 rounded-3xl p-8 cursor-pointer group shadow-sm hover:shadow-lg">
+        <div class="flex items-start justify-between mb-6">
+          <div class="service-icon-bg w-14 h-14 rounded-full bg-lu-cyan/20 flex items-center justify-center transition-colors">
+            <svg class="service-icon text-lu-navy transition-colors" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6l3 12h12l3-12M3 6h18M7 10v4M12 10v4M17 10v4"/></svg>
+          </div>
+          <span class="text-sm font-display text-lu-mute">06</span>
+        </div>
+        <h3 class="font-display text-2xl text-lu-ink mb-2">Entretien de gouttières</h3>
+        <p class="text-sm text-lu-mute leading-relaxed mb-6">Nettoyage et inspection pour prévenir les débordements et protéger les fondations de votre propriété.</p>
+        <div class="service-arrow w-10 h-10 rounded-full border border-lu-navy/15 flex items-center justify-center text-lu-navy transition-all">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ VIDÉOS / RÉALISATIONS ═══════════════════════════════════════════════ -->
+<section id="realisations" class="py-24 lg:py-32 bg-gradient-soft-3 relative overflow-hidden">
+  <!-- Decorative bubbles -->
+  <div class="bubble bubble-static absolute top-20 right-20 w-24 h-24 opacity-40"></div>
+  <div class="bubble bubble-static absolute top-60 left-10 w-16 h-16 opacity-50" style="animation-delay: 1s;"></div>
+  <div class="bubble bubble-static absolute bottom-20 right-1/4 w-20 h-20 opacity-30" style="animation-delay: 2s;"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 reveal">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="h-px w-8 bg-lu-blue"></span>
+          <span class="text-xs font-semibold uppercase tracking-widest text-lu-blue">Réalisations</span>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-none text-lu-ink mb-4">
+          Nos services, <span class="italic text-lu-navy">en action</span>.
+        </h2>
+        <p class="text-lg text-lu-mute leading-relaxed max-w-lg">
+          Découvrez nos équipes au travail. Lavage à pression, vitres, gouttières — la qualité Lavage Union en direct.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+      <!-- Vidéo 1 -->
+      <div class="group relative bg-lu-navy rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-xl shadow-lu-navy/10 ring-1 ring-lu-navy/10">
+        <video
+          class="absolute inset-0 w-full h-full object-cover"
+          poster="https://static.wixstatic.com/media/b0fb25_e50c6f43903a4dec8787dfe4029bca49f003.jpg"
+          preload="metadata"
+          playsinline
+          controls>
+          <source src="https://video.wixstatic.com/video/b0fb25_e50c6f43903a4dec8787dfe4029bca49/720p/mp4/file.mp4" type="video/mp4">
+          <source src="https://video.wixstatic.com/video/b0fb25_e50c6f43903a4dec8787dfe4029bca49/480p/mp4/file.mp4" type="video/mp4">
+        </video>
+        <!-- Overlay info (visible avant lecture) -->
+        <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-lu-navy-dark/95 via-lu-navy/70 to-transparent pointer-events-none">
+          <div class="text-lu-cyan text-xs uppercase tracking-widest mb-1 font-semibold">Lavage à pression</div>
+          <div class="font-display text-white text-xl">Revêtements et pavés</div>
+        </div>
+        <!-- Play badge top-right -->
+        <div class="absolute top-5 right-5 w-12 h-12 rounded-full bg-white/95 flex items-center justify-center group-hover:scale-110 transition-transform pointer-events-none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1B4F8B"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+
+      <!-- Vidéo 2 -->
+      <div class="group relative bg-lu-navy rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-xl shadow-lu-navy/10 ring-1 ring-lu-navy/10">
+        <video
+          class="absolute inset-0 w-full h-full object-cover"
+          poster="https://static.wixstatic.com/media/b0fb25_82d0060517b34966831181990da04bbbf003.jpg"
+          preload="metadata"
+          playsinline
+          controls>
+          <source src="https://video.wixstatic.com/video/b0fb25_82d0060517b34966831181990da04bbb/720p/mp4/file.mp4" type="video/mp4">
+          <source src="https://video.wixstatic.com/video/b0fb25_82d0060517b34966831181990da04bbb/480p/mp4/file.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-lu-navy-dark/95 via-lu-navy/70 to-transparent pointer-events-none">
+          <div class="text-lu-cyan text-xs uppercase tracking-widest mb-1 font-semibold">Nettoyage de vitres</div>
+          <div class="font-display text-white text-xl">Sans traces, en hauteur</div>
+        </div>
+        <div class="absolute top-5 right-5 w-12 h-12 rounded-full bg-white/95 flex items-center justify-center group-hover:scale-110 transition-transform pointer-events-none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1B4F8B"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+
+      <!-- Vidéo 3 -->
+      <div class="group relative bg-lu-navy rounded-3xl overflow-hidden aspect-[3/4] cursor-pointer shadow-xl shadow-lu-navy/10 ring-1 ring-lu-navy/10">
+        <video
+          class="absolute inset-0 w-full h-full object-cover"
+          poster="https://static.wixstatic.com/media/8d59ab_633b832b3eed4b86b87beb57fc034048f003.jpg"
+          preload="metadata"
+          playsinline
+          controls>
+          <source src="https://video.wixstatic.com/video/8d59ab_633b832b3eed4b86b87beb57fc034048/720p/mp4/file.mp4" type="video/mp4">
+          <source src="https://video.wixstatic.com/video/8d59ab_633b832b3eed4b86b87beb57fc034048/480p/mp4/file.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-lu-navy-dark/95 via-lu-navy/70 to-transparent pointer-events-none">
+          <div class="text-lu-cyan text-xs uppercase tracking-widest mb-1 font-semibold">Entretien</div>
+          <div class="font-display text-white text-xl">Gouttières & toitures</div>
+        </div>
+        <div class="absolute top-5 right-5 w-12 h-12 rounded-full bg-white/95 flex items-center justify-center group-hover:scale-110 transition-transform pointer-events-none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1B4F8B"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 text-center reveal">
+      <p class="text-sm text-lu-mute mb-4">Plus de réalisations sur nos réseaux</p>
+      <div class="flex justify-center gap-3">
+        <a href="https://www.facebook.com/profile.php?id=61573112379951" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white border border-lu-navy/15 hover:border-lu-blue hover:text-lu-blue text-lu-ink px-5 py-2.5 rounded-full text-sm font-semibold transition-colors">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+        </a>
+        <a href="https://www.linkedin.com/company/lavage-union" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white border border-lu-navy/15 hover:border-lu-blue hover:text-lu-blue text-lu-ink px-5 py-2.5 rounded-full text-sm font-semibold transition-colors">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ PROCESS — TIMELINE ═══════════════════════════════════════════════ -->
+<section id="processus" class="py-24 lg:py-32 relative overflow-hidden bg-gradient-soft-2">
+<div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+    <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+      <div class="inline-flex items-center gap-3 mb-4">
+        <span class="h-px w-8 bg-lu-blue"></span>
+        <span class="text-xs font-semibold uppercase tracking-widest text-lu-blue">Notre approche</span>
+        <span class="h-px w-8 bg-lu-blue"></span>
+      </div>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-tight text-lu-ink mb-6">
+        Une méthode <span class="italic font-light text-lu-navy">simple</span>,<br>des résultats durables.
+      </h2>
+      <p class="text-lg text-lu-mute leading-relaxed">
+        De la première prise de contact au rapport final, chaque étape est pensée pour vous offrir un service efficace, transparent et sans tracas.
+      </p>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="relative reveal">
+      <!-- Horizontal connecting line (desktop only) -->
+      <div class="hidden lg:block absolute top-12 left-[12%] right-[12%] h-0.5">
+        <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 1">
+          <line x1="0" y1="0.5" x2="100" y2="0.5" stroke="#2BB3D9" stroke-width="0.4" stroke-dasharray="1.5,1" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-6 relative">
+
+        <!-- Step 1 -->
+        <div class="text-center relative">
+          <div class="relative inline-flex">
+            <div class="w-24 h-24 rounded-full bg-white border-4 border-lu-cyan flex items-center justify-center mx-auto mb-6 relative z-10 shadow-lg shadow-lu-cyan/20">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1B4F8B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-lu-navy text-white font-display font-semibold text-sm flex items-center justify-center z-20">1</div>
+          </div>
+          <h3 class="font-display text-xl font-medium text-lu-ink mb-2">Soumission</h3>
+          <p class="text-sm text-lu-mute leading-relaxed max-w-[220px] mx-auto">Décrivez vos besoins. Devis détaillé en moins de 24 h, sans engagement.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center relative">
+          <div class="relative inline-flex">
+            <div class="w-24 h-24 rounded-full bg-white border-4 border-lu-cyan flex items-center justify-center mx-auto mb-6 relative z-10 shadow-lg shadow-lu-cyan/20">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1B4F8B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="15" r="1.2" fill="#2BB3D9" stroke="none"/></svg>
+            </div>
+            <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-lu-navy text-white font-display font-semibold text-sm flex items-center justify-center z-20">2</div>
+          </div>
+          <h3 class="font-display text-xl font-medium text-lu-ink mb-2">Planification</h3>
+          <p class="text-sm text-lu-mute leading-relaxed max-w-[220px] mx-auto">Nous fixons une date qui vous convient. Une seule visite pour tous vos services.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center relative">
+          <div class="relative inline-flex">
+            <div class="w-24 h-24 rounded-full bg-white border-4 border-lu-cyan flex items-center justify-center mx-auto mb-6 relative z-10 shadow-lg shadow-lu-cyan/20">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1B4F8B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-lu-navy text-white font-display font-semibold text-sm flex items-center justify-center z-20">3</div>
+          </div>
+          <h3 class="font-display text-xl font-medium text-lu-ink mb-2">Intervention</h3>
+          <p class="text-sm text-lu-mute leading-relaxed max-w-[220px] mx-auto">Notre équipe expérimentée intervient avec des équipements à la fine pointe.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="text-center relative">
+          <div class="relative inline-flex">
+            <div class="w-24 h-24 rounded-full bg-lu-navy border-4 border-lu-cyan flex items-center justify-center mx-auto mb-6 relative z-10 shadow-lg shadow-lu-navy/30">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#7DD3F0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-lu-cyan text-lu-navy font-display font-semibold text-sm flex items-center justify-center z-20">4</div>
+          </div>
+          <h3 class="font-display text-xl font-medium text-lu-ink mb-2">Rapport photo</h3>
+          <p class="text-sm text-lu-mute leading-relaxed max-w-[220px] mx-auto">Vous recevez un compte-rendu personnalisé avec photos avant / après.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ REPORT FEATURE ═══════════════════════════════════════════════ -->
+<section class="py-24 lg:py-32 bg-gradient-soft-2 relative overflow-hidden">
+  <div class="bubble bubble-static absolute top-20 left-10 w-32 h-32 opacity-40"></div>
+  <div class="bubble bubble-static absolute bottom-20 right-10 w-20 h-20 opacity-50" style="animation-delay: 1s;"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="reveal order-2 lg:order-1">
+        <div class="relative aspect-square bg-white rounded-3xl p-8 lg:p-12 shadow-xl shadow-lu-navy/10 overflow-hidden flex items-center justify-center">
+          <!-- Mockup tablet/phone showing report -->
+          <div class="bg-white border border-lu-navy/10 rounded-2xl p-6 max-w-sm w-full shadow-lg">
+            <div class="flex items-center justify-between pb-4 border-b border-lu-navy/10 mb-4">
+              <div class="font-display text-base text-lu-ink">Rapport d'intervention</div>
+              <div class="text-xs text-lu-mute">22 oct. 2025</div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mb-4">
+              <div class="aspect-square rounded-xl bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=80');">
+                <span class="absolute bottom-1.5 left-1.5 bg-white/90 text-lu-ink text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wider">AVANT</span>
+              </div>
+              <div class="aspect-square rounded-xl bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&q=80');">
+                <span class="absolute bottom-1.5 left-1.5 bg-lu-blue text-white text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wider">APRÈS</span>
+              </div>
+            </div>
+            <div class="space-y-2 mb-4">
+              <div class="h-2 bg-lu-navy/10 rounded"></div>
+              <div class="h-2 bg-lu-navy/10 rounded w-3/5"></div>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2 text-xs text-lu-ink">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2BB3D9" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                Vitres extérieures · 32 unités
+              </div>
+              <div class="flex items-center gap-2 text-xs text-lu-ink">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2BB3D9" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                Cadres et moustiquaires nettoyés
+              </div>
+              <div class="flex items-center gap-2 text-xs text-lu-ink">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2BB3D9" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                Aucune anomalie détectée
+              </div>
+            </div>
+          </div>
+          <!-- Floating bubbles around mockup -->
+          <div class="bubble bubble-static absolute top-6 right-6 w-8 h-8"></div>
+          <div class="bubble bubble-static absolute bottom-12 left-6 w-6 h-6" style="animation-delay: 1s;"></div>
+          <div class="bubble bubble-static absolute top-1/3 left-8 w-10 h-10" style="animation-delay: 2s;"></div>
+        </div>
+      </div>
+
+      <div class="reveal order-1 lg:order-2">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="h-px w-8 bg-lu-blue"></span>
+          <span class="text-xs font-semibold uppercase tracking-widest text-lu-blue">Suivi & transparence</span>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-none text-lu-ink mb-6">
+          Un rapport <span class="italic text-lu-navy">après chaque</span> intervention.
+        </h2>
+        <p class="text-lg text-lu-mute leading-relaxed mb-8">
+          Pour rester informé sur l'état de votre propriété et anticiper les besoins futurs, sans avoir à demander.
+        </p>
+
+        <ul class="space-y-5">
+          <li class="flex items-start gap-4 pb-5 border-b border-lu-navy/10">
+            <span class="w-10 h-10 rounded-full bg-lu-cyan/20 flex items-center justify-center flex-shrink-0 text-lu-navy">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </span>
+            <div>
+              <div class="font-semibold text-lu-ink mb-1">Photos avant / après</div>
+              <div class="text-sm text-lu-mute leading-relaxed">Constatez les résultats sur chaque zone traitée.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-4 pb-5 border-b border-lu-navy/10">
+            <span class="w-10 h-10 rounded-full bg-lu-cyan/20 flex items-center justify-center flex-shrink-0 text-lu-navy">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </span>
+            <div>
+              <div class="font-semibold text-lu-ink mb-1">Commentaires détaillés</div>
+              <div class="text-sm text-lu-mute leading-relaxed">Notes spécifiques sur les surfaces et éléments nettoyés.</div>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="w-10 h-10 rounded-full bg-lu-cyan/20 flex items-center justify-center flex-shrink-0 text-lu-navy">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </span>
+            <div>
+              <div class="font-semibold text-lu-ink mb-1">Recommandations</div>
+              <div class="text-sm text-lu-mute leading-relaxed">Identifiez en amont les besoins d'entretien à venir.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ STATS ═══════════════════════════════════════════════ -->
+<section class="bg-gradient-soft-1 border-y border-lu-navy/10">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 divide-x divide-lu-navy/10">
+    <div class="p-10 lg:p-14 text-center reveal">
+      <div class="font-display text-5xl lg:text-7xl font-light text-lu-ink mb-2 leading-none">
+        <span class="italic text-lu-blue">6</span>
+      </div>
+      <div class="text-xs uppercase tracking-widest text-lu-mute font-semibold">Services experts</div>
+    </div>
+    <div class="p-10 lg:p-14 text-center reveal">
+      <div class="font-display text-5xl lg:text-7xl font-light text-lu-ink mb-2 leading-none">
+        40<span class="italic text-lu-blue font-thin">+</span>
+      </div>
+      <div class="text-xs uppercase tracking-widest text-lu-mute font-semibold">Villes desservies</div>
+    </div>
+    <div class="p-10 lg:p-14 text-center reveal">
+      <div class="font-display text-5xl lg:text-7xl font-light text-lu-ink mb-2 leading-none">
+        100<span class="italic text-lu-blue font-thin">%</span>
+      </div>
+      <div class="text-xs uppercase tracking-widest text-lu-mute font-semibold">Service clé en main</div>
+    </div>
+    <div class="p-10 lg:p-14 text-center reveal">
+      <div class="font-display text-5xl lg:text-7xl font-light text-lu-ink mb-2 leading-none">
+        24<span class="italic text-lu-blue font-thin">h</span>
+      </div>
+      <div class="text-xs uppercase tracking-widest text-lu-mute font-semibold">Délai de soumission</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ COVERAGE / SERVICE AREA ═══════════════════════════════════════════════ -->
+<section id="zones" class="py-24 lg:py-32 relative overflow-hidden bg-gradient-soft-1">
+<div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+    <div class="grid lg:grid-cols-[1.1fr_1fr] gap-16 items-center">
+      <div class="reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="h-px w-8 bg-lu-blue"></span>
+          <span class="text-xs font-semibold uppercase tracking-widest text-lu-blue">Zones desservies</span>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-tight text-lu-ink mb-4">
+          Montréal, <span class="italic font-light text-lu-navy">Rive-Sud</span><br>& Montérégie.
+        </h2>
+        <p class="text-lg text-lu-mute leading-relaxed mb-10">
+          Plus de 40 municipalités couvertes par notre équipe locale, basée à Saint-Jean-sur-Richelieu.
+        </p>
+
+        <!-- 9 main cities in a tight 3x3 grid -->
+        <div class="grid grid-cols-3 gap-3">
+          <div class="bg-white rounded-2xl p-4 border border-lu-navy/10 text-center hover:border-lu-blue hover:shadow-md transition-all">
+            <div class="font-display font-medium text-lu-ink text-sm">Longueuil</div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 border border-lu-navy/10 text-center hover:border-lu-blue hover:shadow-md transition-all">
+            <div class="font-display font-medium text-lu-ink text-sm">Brossard</div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 border border-lu-navy/10 text-center hover:border-lu-blue hover:shadow-md transition-all">
+            <div class="font-display font-medium text-lu-ink text-sm">Boucherville</div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 border border-lu-navy/10 text-center hover:border-lu-blue hover:shadow-md transition-all">
+            <div class="font-display font-medium text-lu-ink text-sm">Saint-Hubert</div>
+          </div>
+          <div class="bg-lu-navy text-white rounded-2xl p-4 border border-lu-navy text-center shadow-lg shadow-lu-navy/20">
+            <div class="font-display font-medium text-sm">St-Jean-Richelieu</div>
+            <div class="text-[10px] text-lu-cyan uppercase tracking-wider mt-0.5">Siège social</div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 border border-lu-navy/10 text-center hover:border-lu-blue hover:shadow-md transition-all">
+            <div class="font-display font-medium text-lu-ink text-sm">Chambly</div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 border border-lu-navy/10 text-center hover:border-lu-blue hover:shadow-md transition-all">
+            <div class="font-display font-medium text-lu-ink text-sm">Sainte-Julie</div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 border border-lu-navy/10 text-center hover:border-lu-blue hover:shadow-md transition-all">
+            <div class="font-display font-medium text-lu-ink text-sm">Granby</div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 border border-lu-navy/10 text-center hover:border-lu-blue hover:shadow-md transition-all">
+            <div class="font-display font-medium text-lu-ink text-sm">St-Hyacinthe</div>
+          </div>
+        </div>
+
+        <p class="text-sm text-lu-mute mt-6 flex items-center gap-2">
+          <span class="font-display font-medium text-lu-navy">+ 30 autres municipalités.</span>
+          <a href="#contact" class="text-lu-blue font-semibold hover:text-lu-navy transition-colors">Vérifier votre ville →</a>
+        </p>
+      </div>
+
+      <div class="relative aspect-square bg-white rounded-3xl overflow-hidden p-8 lg:p-10 reveal border border-lu-navy/10 shadow-xl shadow-lu-navy/5">
+        <!-- Stylized regional map -->
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+          <defs>
+            <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+              <circle cx="10" cy="10" r="1" fill="rgba(27,79,139,0.15)"/>
+            </pattern>
+            <linearGradient id="riverGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#7DD3F0" stop-opacity="0.4"/>
+              <stop offset="50%" stop-color="#2BB3D9" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#7DD3F0" stop-opacity="0.4"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="400" fill="url(#dots)"/>
+          <!-- Stylized Saint-Laurent -->
+          <path d="M 30 180 Q 100 150 160 170 Q 220 195 280 165 Q 340 135 380 155 L 380 230 Q 320 210 260 230 Q 200 250 140 230 Q 80 210 30 230 Z"
+                fill="url(#riverGrad)" stroke="#2BB3D9" stroke-width="1.5" opacity="0.7"/>
+          <text x="200" y="290" text-anchor="middle" font-family="Outfit" font-size="14" fill="rgba(27,79,139,0.5)" font-style="italic">Saint-Laurent</text>
+        </svg>
+        <!-- Pins -->
+        <div class="absolute top-[30%] left-[24%] pulse-pin">
+          <div class="w-3 h-3 bg-lu-blue rounded-full ring-4 ring-white"></div>
+        </div>
+        <div class="absolute top-[42%] left-[44%] pulse-pin" style="animation-delay: .5s;">
+          <div class="w-3 h-3 bg-lu-blue rounded-full ring-4 ring-white"></div>
+        </div>
+        <div class="absolute top-[36%] left-[62%] pulse-pin" style="animation-delay: 1s;">
+          <div class="w-3 h-3 bg-lu-blue rounded-full ring-4 ring-white"></div>
+        </div>
+        <div class="absolute top-[54%] left-[36%] pulse-pin" style="animation-delay: 1.5s;">
+          <div class="w-3 h-3 bg-lu-blue rounded-full ring-4 ring-white"></div>
+        </div>
+        <div class="absolute top-[48%] left-[70%] pulse-pin" style="animation-delay: 2s;">
+          <div class="w-3 h-3 bg-lu-blue rounded-full ring-4 ring-white"></div>
+        </div>
+        <!-- Bigger HQ pin -->
+        <div class="absolute top-[60%] left-[50%]">
+          <div class="relative">
+            <div class="w-5 h-5 bg-lu-navy rounded-full ring-4 ring-white shadow-lg"></div>
+            <div class="absolute top-7 left-1/2 -translate-x-1/2 bg-lu-navy text-white text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-bold whitespace-nowrap">St-Jean</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ TESTIMONIALS ═══════════════════════════════════════════════ -->
+<section id="avis" class="py-24 lg:py-32 bg-gradient-soft-1 relative overflow-hidden">
+  <div class="bubble bubble-static absolute top-20 left-10 w-24 h-24 opacity-40"></div>
+  <div class="bubble bubble-static absolute bottom-32 right-20 w-32 h-32 opacity-30" style="animation-delay: 2s;"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="mb-16 reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="h-px w-8 bg-lu-blue"></span>
+        <span class="text-xs font-semibold uppercase tracking-widest text-lu-blue">Témoignages</span>
+      </div>
+      <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-none text-lu-ink">
+        Ce que disent <span class="italic text-lu-navy">nos clients</span>.
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+      <div class="bg-white border border-lu-navy/10 rounded-3xl p-8 flex flex-col">
+        <div class="font-display text-7xl text-lu-cyan leading-none h-7 mb-4 italic">"</div>
+        <div class="flex gap-0.5 text-lu-blue mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+        </div>
+        <p class="text-base text-lu-ink leading-relaxed flex-1 mb-6">
+          Service ponctuel et très professionnel. L'équipe est arrivée avec tout le matériel nécessaire et le résultat sur les vitres et la thermopompe a dépassé mes attentes.
+        </p>
+        <div class="flex items-center gap-3 pt-5 border-t border-lu-navy/10">
+          <div class="w-11 h-11 rounded-full bg-lu-cyan/20 text-lu-navy flex items-center justify-center font-display font-semibold text-sm">MG</div>
+          <div>
+            <div class="font-semibold text-sm text-lu-ink">Marie-Claude G.</div>
+            <div class="text-xs text-lu-mute">Saint-Bruno-de-Montarville</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-lu-navy/10 rounded-3xl p-8 flex flex-col">
+        <div class="font-display text-7xl text-lu-cyan leading-none h-7 mb-4 italic">"</div>
+        <div class="flex gap-0.5 text-lu-blue mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+        </div>
+        <p class="text-base text-lu-ink leading-relaxed flex-1 mb-6">
+          Le rapport photo après les services est génial — j'ai vu exactement ce qui avait été fait. Forfait multi-services à un excellent prix. Je recommande sans hésiter.
+        </p>
+        <div class="flex items-center gap-3 pt-5 border-t border-lu-navy/10">
+          <div class="w-11 h-11 rounded-full bg-lu-cyan/20 text-lu-navy flex items-center justify-center font-display font-semibold text-sm">PL</div>
+          <div>
+            <div class="font-semibold text-sm text-lu-ink">Patrick L.</div>
+            <div class="text-xs text-lu-mute">Longueuil</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border border-lu-navy/10 rounded-3xl p-8 flex flex-col">
+        <div class="font-display text-7xl text-lu-cyan leading-none h-7 mb-4 italic">"</div>
+        <div class="flex gap-0.5 text-lu-blue mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+        </div>
+        <p class="text-base text-lu-ink leading-relaxed flex-1 mb-6">
+          Comme gestionnaire d'immeubles, je cherchais un partenaire fiable pour l'entretien extérieur. Lavage Union répond toujours rapidement et la qualité est constante.
+        </p>
+        <div class="flex items-center gap-3 pt-5 border-t border-lu-navy/10">
+          <div class="w-11 h-11 rounded-full bg-lu-cyan/20 text-lu-navy flex items-center justify-center font-display font-semibold text-sm">SB</div>
+          <div>
+            <div class="font-semibold text-sm text-lu-ink">Sophie B.</div>
+            <div class="text-xs text-lu-mute">Gestionnaire commerciale</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ FINAL CTA ═══════════════════════════════════════════════ -->
+<section id="contact" class="py-24 lg:py-32 relative overflow-hidden bg-gradient-soft-2">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="bg-gradient-to-br from-lu-navy-dark via-lu-navy to-lu-blue rounded-[2.5rem] p-12 lg:p-20 text-center relative overflow-hidden reveal">
+<!-- Bubbles inside CTA card -->
+      <div class="bubble bubble-static absolute top-12 left-12 w-20 h-20 opacity-40"></div>
+      <div class="bubble bubble-static absolute top-32 right-20 w-12 h-12 opacity-50" style="animation-delay: 1s;"></div>
+      <div class="bubble bubble-static absolute bottom-20 left-1/3 w-16 h-16 opacity-35" style="animation-delay: 2s;"></div>
+      <div class="bubble bubble-static absolute bottom-12 right-12 w-24 h-24 opacity-30" style="animation-delay: 1.5s;"></div>
+      <div class="bubble bubble-static absolute top-1/2 left-20 w-8 h-8 opacity-60" style="animation-delay: .5s;"></div>
+
+      <div class="relative z-10 max-w-3xl mx-auto">
+        <h2 class="font-display font-light text-4xl md:text-5xl lg:text-6xl text-white leading-none mb-6">
+          Prêt pour un<br><span class="italic text-lu-cyan">entretien</span> sans tracas ?
+        </h2>
+        <p class="text-lg text-white/75 mb-10 max-w-xl mx-auto leading-relaxed">
+          Obtenez votre soumission gratuite en moins de 24 heures. Aucun engagement, aucune surprise.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a href="#" class="inline-flex items-center gap-2.5 bg-white hover:bg-lu-cyan text-lu-navy px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-0.5 shadow-lg">
+            Obtenir mon devis
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="tel:14385212103" class="inline-flex items-center gap-2.5 border border-white/30 hover:border-lu-cyan text-white hover:text-lu-cyan px-8 py-4 rounded-full font-semibold transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            438 521-2103
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ FOOTER ═══════════════════════════════════════════════ -->
+<footer class="bg-lu-navy-dark text-white pt-20 pb-8 relative overflow-hidden">
+  <div class="bubble bubble-static absolute top-10 right-20 w-16 h-16 opacity-15"></div>
+  <div class="bubble bubble-static absolute bottom-20 left-10 w-24 h-24 opacity-10" style="animation-delay: 2s;"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      <div>
+        <a href="#" class="inline-block mb-4 bg-white p-3 rounded-xl">
+          <img src="https://decelectrique.com/LogoUnion.png" alt="Lavage Union" class="h-10 w-auto">
+        </a>
+        <p class="text-sm text-white/60 leading-relaxed max-w-xs">
+          Spécialiste en entretien extérieur de bâtiment, basé à Saint-Jean-sur-Richelieu. Au service de Montréal, la Rive-Sud et la Montérégie.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-display text-sm text-lu-cyan mb-5 tracking-wide">Services</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="#" class="text-white/70 hover:text-white transition-colors">Nettoyage de vitres</a></li>
+          <li><a href="#" class="text-white/70 hover:text-white transition-colors">Thermopompes</a></li>
+          <li><a href="#" class="text-white/70 hover:text-white transition-colors">Ventilation</a></li>
+          <li><a href="#" class="text-white/70 hover:text-white transition-colors">Lavage à pression</a></li>
+          <li><a href="#" class="text-white/70 hover:text-white transition-colors">Conduits de sécheuse</a></li>
+          <li><a href="#" class="text-white/70 hover:text-white transition-colors">Gouttières</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-display text-sm text-lu-cyan mb-5 tracking-wide">Entreprise</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="#" class="text-white/70 hover:text-white transition-colors">À propos</a></li>
+          <li><a href="#processus" class="text-white/70 hover:text-white transition-colors">Notre approche</a></li>
+          <li><a href="#zones" class="text-white/70 hover:text-white transition-colors">Zones desservies</a></li>
+          <li><a href="#avis" class="text-white/70 hover:text-white transition-colors">Témoignages</a></li>
+          <li><a href="#contact" class="text-white/70 hover:text-white transition-colors">Soumission gratuite</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-display text-sm text-lu-cyan mb-5 tracking-wide">Nous joindre</h4>
+        <div class="space-y-3 text-sm">
+          <a href="tel:14385212103" class="flex items-start gap-2.5 text-white/70 hover:text-white transition-colors">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2BB3D9" stroke-width="2" class="flex-shrink-0 mt-0.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            438 521-2103
+          </a>
+          <a href="mailto:info@lavageunion.com" class="flex items-start gap-2.5 text-white/70 hover:text-white transition-colors">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2BB3D9" stroke-width="2" class="flex-shrink-0 mt-0.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@lavageunion.com
+          </a>
+          <div class="flex items-start gap-2.5 text-white/70">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2BB3D9" stroke-width="2" class="flex-shrink-0 mt-0.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Saint-Jean-sur-Richelieu, QC
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+          <a href="https://www.facebook.com/profile.php?id=61573112379951" class="w-9 h-9 rounded-full border border-white/15 hover:border-lu-cyan hover:text-lu-cyan flex items-center justify-center transition-colors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/lavage-union" class="w-9 h-9 rounded-full border border-white/15 hover:border-lu-cyan hover:text-lu-cyan flex items-center justify-center transition-colors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://plannit.io/merchants/lavageunion" class="w-9 h-9 rounded-full border border-white/15 hover:border-lu-cyan hover:text-lu-cyan flex items-center justify-center transition-colors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-8 flex flex-wrap justify-between items-center gap-4 text-xs text-white/50">
+      <div>© 2026 Lavage Union · Tous droits réservés</div>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white transition-colors">Confidentialité</a>
+        <a href="#" class="hover:text-white transition-colors">Mentions légales</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav background on scroll + switch text color
+  const nav = document.getElementById('nav');
+  const navLinks = document.querySelectorAll('[data-nav-link]');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+      nav.classList.remove('py-5');
+      navLinks.forEach(l => {
+        l.classList.remove('text-white', 'hover:text-lu-cyan');
+        l.classList.add('text-lu-ink', 'hover:text-lu-navy');
+      });
+    } else {
+      nav.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+      nav.classList.add('py-5');
+      navLinks.forEach(l => {
+        l.classList.add('text-white', 'hover:text-lu-cyan');
+        l.classList.remove('text-lu-ink', 'hover:text-lu-navy');
+      });
+    }
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
