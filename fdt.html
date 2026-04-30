@@ -108,16 +108,17 @@
   padding:60px 40px;
   gap:28px;
 
-  /* MAX 30% OPACITÉ (comme demandé) */
+  /* overlay premium lisible (max ~30–55%) */
   background:linear-gradient(
     to top,
+    rgba(0,0,0,.55),
     rgba(0,0,0,.30),
-    rgba(0,0,0,.18),
+    rgba(0,0,0,.10),
     transparent
   );
 
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
 }
 
 /* TITRE */
@@ -213,35 +214,40 @@
   }
 }
 
-/* MOBILE FIX IMPORTANT */
+/* MOBILE FIX STABLE */
 
-@media (max-width:768px){
+  @media (max-width:768px){
 
   .hero{
-    height:100dvh; /* mieux que svh pour éviter overlap barre mobile */
+    height: 100dvh;
+    min-height: 100dvh;
   }
 
   .hero-image{
-    object-position:center top;
-    transform:scale(1.03); /* léger seulement */
+    object-fit: cover;
+    object-position: center top;
+    transform: none;
   }
 
   .hero-text-block{
-    padding:24px 16px 48px; /* IMPORTANT: remonte le CTA */
-    gap:16px;
+    padding: 32px 24px 48px;
+  }
+
+  .hero h1{
+    font-size: 26px;
   }
 
   .hero-buttons{
-    flex-direction:column;
-    width:100%;
-    max-width:320px;
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
   }
 
   .hero-btn{
-    width:100%;
-    justify-content:center;
+    justify-content: center;
   }
 }
+
   /* ============ PRICE BAND ============ */
   .price-band{padding:64px 0;background:var(--white);border-bottom:1px solid var(--line)}
   .price-band .container{
