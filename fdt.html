@@ -836,9 +836,20 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-image-wrap">
-    <img class="hero-image" src="https://decelectrique.com/HEROM.png" alt="Maison neuve construite par FDT Construction">
-  </div>
+<picture class="hero-image-wrap">
+
+  <!-- IMAGE MOBILE -->
+  <source 
+    media="(max-width: 768px)" 
+    srcset="https://decelectrique.com/HEROM-mobile.jpg">
+
+  <!-- IMAGE DESKTOP -->
+  <img 
+    class="hero-image"
+    src="https://decelectrique.com/HEROM.png"
+    alt="Maison neuve construite par FDT Construction">
+
+</picture>
   <div class="hero-text-block">
     <h1>Entrepreneur général.<br>Maison neuve <em>clé en main.</em></h1>
     <div class="hero-buttons">
