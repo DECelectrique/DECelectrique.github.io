@@ -219,26 +219,43 @@
 @media (max-width:768px){
 
   .hero{
-    height: 100dvh;
+    height: 100vh; /* fallback */
+    height: 100dvh; /* Safari mobile correct */
+    min-height: unset;
     display: flex;
-    align-items: center;
+    position: relative;
+  }
+
+    .hero-image-wrap{
+    position:absolute;
+    inset:0;
   }
 
   .hero-image{
+    width:100%;
+    height:100%;
     object-fit: cover;
-        object-position: center 20%;
-      width: 100%;
-    height: 100%;
+
+    /* 🔥 IMPORTANT: enlève le zoom qui casse tout */
     transform: none;
-     scale: 1;
+    scale: 1;
+
+    /* meilleure composition mobile */
+    object-position: center 25%;
   }
 
+  /* TEXTE EN BAS FIXE */
   .hero-text-block{
     position: absolute;
-    bottom: auto;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 24px 20px 40px;
+    bottom: 0;
+    top: auto;
+    transform: none;
+
+    width: 100%;
+    padding: 28px 20px 34px;
+
+    gap: 18px;
+    z-index: 2;
   }
 
   .hero h1{
@@ -248,11 +265,12 @@
   .hero-buttons{
     flex-direction: column;
     width: 100%;
-    align-items: stretch;
   }
 
   .hero-btn{
+    width: 100%;
     justify-content: center;
+    padding: 14px 20px;
   }
 }
   /* ============ PRICE BAND ============ */
