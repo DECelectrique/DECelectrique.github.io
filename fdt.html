@@ -265,24 +265,27 @@
       );
   }
 
-  .hero-text-block{
-    position:absolute;
+ .hero-text-block{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:2;
 
-    left:0;
-    right:0;
-    bottom:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
 
-    z-index:2;
+  padding:60px 24px calc(env(safe-area-inset-bottom) + 28px);
 
-    padding:
-      0 20px
-      calc(env(safe-area-inset-bottom) + 34px);
-
-    background:none;
-
-    align-items:flex-start;
-    text-align:left;
-  }
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.65),
+    rgba(0,0,0,.25),
+    transparent
+  );
+}
 
   .hero h1{
     font-size:34px;
