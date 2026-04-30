@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FDT Construction — Entrepreneur Général en Construction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#ffffff;
+    --off-white:#fafafa;
+    --black:#000000;
+    --ink:#1a1a1a;
+    --muted:#6b6b6b;
+    --line:#e5e5e5;
+    --line-strong:#d0d0d0;
+    --brown:#5c3a22;
+    --brown-dark:#3d2614;
+    --brown-light:#8b5a3c;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',-apple-system,sans-serif;
+    background:var(--white);
+    color:var(--ink);
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .container{max-width:1280px;margin:0 auto;padding:0 32px}
+
+  /* ============ HEADER ============ */
+  header{
+    background:var(--black);
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .nav-row{display:flex;justify-content:space-between;align-items:center;padding:18px 0;gap:24px}
+  .logo-wrap{display:flex;align-items:center;text-decoration:none}
+  .logo-wrap img{height:62px;width:auto;display:block}
+  nav ul{display:flex;list-style:none;gap:36px;align-items:center}
+  nav a{
+    text-decoration:none;color:var(--white);font-family:'Manrope',sans-serif;
+    font-size:14px;font-weight:500;letter-spacing:.02em;
+    position:relative;padding:6px 0;transition:color .25s;cursor:pointer;
+  }
+  nav a::after{
+    content:'';position:absolute;bottom:-2px;left:0;
+    width:0;height:1.5px;background:var(--brown-light);transition:width .3s ease;
+  }
+  nav a:hover{color:var(--brown-light)}
+  nav a:hover::after,nav a.active::after{width:100%}
+  nav a.active{color:var(--brown-light)}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+  .menu-toggle span{width:22px;height:1.5px;background:var(--white);display:block}
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    height:78vh;
+    min-height:540px;
+    max-height:820px;
+    background:#0a0a0a;
+    overflow:hidden;
+  }
+  .hero-image{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+  }
+  /* subtle gradient on the right side to help readability of the box */
+  .hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(270deg,rgba(0,0,0,.4) 0%,rgba(0,0,0,0) 55%);
+    pointer-events:none;
+    z-index:1;
+  }
+  .hero-content{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    padding:40px 48px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    justify-content:flex-start;
+  }
+  .hero-box{
+    background:rgba(0,0,0,.42);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.12);
+    padding:22px 26px;
+    max-width:340px;
+    text-align:right;
+    box-shadow:0 10px 32px rgba(0,0,0,.2);
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(18px,2.2vw,28px);
+    line-height:1.1;
+    letter-spacing:-.02em;
+    color:var(--white);
+    font-variation-settings:"opsz" 144;
+    margin:0;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:300;
+    color:#d4a884;
+  }
+
+  /* ============ PRICE BAND ============ */
+  .price-band{padding:64px 0;background:var(--white);border-bottom:1px solid var(--line)}
+  .price-band .container{
+    display:grid;grid-template-columns:1fr auto;
+    gap:48px;align-items:center;
+  }
+  .price-band-text{
+    font-family:'Fraunces',serif;
+    font-size:clamp(28px,3.5vw,42px);font-weight:400;
+    line-height:1.15;letter-spacing:-.02em;color:var(--ink);
+    font-variation-settings:"opsz" 144;
+  }
+  .price-band-text em{font-style:italic;color:var(--brown);font-weight:400}
+  .btn{
+    display:inline-flex;align-items:center;gap:12px;
+    padding:18px 32px;background:var(--black);color:var(--white);
+    border:none;border-radius:0;
+    font-family:'Manrope',sans-serif;font-size:14px;
+    font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+    text-decoration:none;cursor:pointer;
+    transition:background .25s ease,transform .2s ease;white-space:nowrap;
+  }
+  .btn:hover{background:var(--brown-dark);transform:translateY(-2px)}
+  .btn .arrow{transition:transform .25s ease;display:inline-block}
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  /* ============ MODELS SECTION (interactive) ============ */
+  .models{padding:120px 0;background:var(--white)}
+  .section-title{text-align:center;margin-bottom:64px}
+  .section-eyebrow{
+    font-family:'Manrope',sans-serif;
+    font-size:12px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--brown);font-weight:600;margin-bottom:18px;
+  }
+  .section-title h2{
+    font-family:'Fraunces',serif;
+    font-size:clamp(36px,5vw,60px);font-weight:400;
+    line-height:1.05;letter-spacing:-.025em;color:var(--ink);
+    font-variation-settings:"opsz" 144;
+  }
+  .section-title h2 em{font-style:italic;color:var(--brown);font-weight:300}
+
+  /* Category tiles (always visible, click to switch) */
+  .category-tiles{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:24px;margin-bottom:0;
+  }
+  .category-tile{
+    cursor:pointer;
+    border:none;background:none;padding:0;
+    text-align:left;font-family:inherit;
+    position:relative;overflow:hidden;
+    transition:transform .3s ease;
+  }
+  .category-tile:hover{transform:translateY(-4px)}
+  .category-image{
+    aspect-ratio:4/5;overflow:hidden;
+    background:var(--ink);position:relative;
+  }
+  .category-image img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .8s cubic-bezier(.2,.6,.2,1),filter .4s;
+  }
+  .category-tile:hover .category-image img{transform:scale(1.05)}
+  .category-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.85) 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:32px;z-index:2;transition:background .4s;
+  }
+  .category-tile:hover .category-overlay{
+    background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(61,38,20,.88) 100%);
+  }
+  .category-tile.active .category-overlay{
+    background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(92,58,34,.92) 100%);
+  }
+  .category-tile.active .category-image{
+    box-shadow:inset 0 0 0 3px var(--brown-light);
+  }
+  .category-num{
+    position:absolute;top:24px;left:24px;
+    font-family:'Fraunces',serif;font-style:italic;
+    font-size:14px;color:var(--white);
+    letter-spacing:.05em;z-index:3;
+  }
+  .category-status{
+    position:absolute;top:24px;right:24px;z-index:3;
+    font-family:'Manrope',sans-serif;font-size:10px;
+    letter-spacing:.2em;text-transform:uppercase;
+    color:var(--white);font-weight:600;
+    background:var(--brown);padding:6px 12px;
+    opacity:0;transition:opacity .3s;
+  }
+  .category-tile.active .category-status{opacity:1}
+  .category-name{
+    font-family:'Fraunces',serif;
+    font-size:clamp(22px,2.4vw,28px);font-weight:400;
+    color:var(--white);letter-spacing:-.01em;margin-bottom:8px;
+    font-variation-settings:"opsz" 144;
+  }
+  .category-cta{
+    font-family:'Manrope',sans-serif;
+    font-size:13px;color:rgba(255,255,255,.85);
+    text-transform:uppercase;letter-spacing:.12em;
+    line-height:1.5;display:flex;align-items:center;gap:10px;
+    font-weight:500;
+  }
+  .category-cta::after{content:'↓';transition:transform .3s ease;font-size:14px}
+  .category-tile:hover .category-cta::after{transform:translateY(3px)}
+  .category-tile.active .category-cta::after{content:'✓';color:var(--brown-light)}
+
+  /* Models reveal panel */
+  .models-panel{
+    margin-top:48px;
+    overflow:hidden;
+    max-height:0;opacity:0;
+    transition:max-height .6s ease,opacity .4s ease,margin-top .4s ease;
+  }
+  .models-panel.open{
+    max-height:3000px;opacity:1;
+  }
+  .models-panel-inner{
+    padding:48px 40px;
+    background:var(--off-white);
+    border:1px solid var(--line);
+    position:relative;
+  }
+  .panel-header{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    flex-wrap:wrap;gap:24px;margin-bottom:36px;
+    padding-bottom:24px;border-bottom:1px solid var(--line);
+  }
+  .panel-eyebrow{
+    font-family:'Manrope',sans-serif;
+    font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--brown);font-weight:600;margin-bottom:8px;
+  }
+  .panel-title{
+    font-family:'Fraunces',serif;
+    font-size:clamp(28px,3.5vw,40px);font-weight:400;
+    line-height:1.1;letter-spacing:-.02em;color:var(--ink);
+    font-variation-settings:"opsz" 144;
+  }
+  .panel-title em{font-style:italic;color:var(--brown);font-weight:300}
+  .panel-close{
+    background:none;border:1px solid var(--line-strong);
+    padding:10px 18px;cursor:pointer;
+    font-family:'Manrope',sans-serif;font-size:11px;
+    letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;
+    transition:all .25s;
+  }
+  .panel-close:hover{border-color:var(--brown);color:var(--brown)}
+
+  /* Models grid inside panel */
+  .panel-models{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .model-tile{
+    background:var(--white);border:1px solid var(--line);
+    overflow:hidden;cursor:pointer;
+    transition:transform .3s ease,box-shadow .3s ease;
+    text-decoration:none;color:inherit;display:block;
+  }
+  .model-tile:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 32px rgba(0,0,0,.08);
+  }
+  .model-tile-image{
+    aspect-ratio:4/3;overflow:hidden;
+    background:var(--ink);position:relative;
+  }
+  .model-tile-image img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .6s cubic-bezier(.2,.6,.2,1);
+  }
+  .model-tile:hover .model-tile-image img{transform:scale(1.06)}
+  .model-tile-info{padding:24px}
+  .model-tile-name{
+    font-family:'Fraunces',serif;
+    font-size:22px;font-weight:500;
+    color:var(--ink);letter-spacing:-.01em;
+    margin-bottom:8px;font-variation-settings:"opsz" 144;
+  }
+  .model-tile-meta{
+    font-family:'Manrope',sans-serif;
+    font-size:13px;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:12px;
+  }
+  .model-tile-meta span{
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .model-tile-meta span::before{
+    content:'';width:4px;height:4px;border-radius:50%;
+    background:var(--brown-light);
+  }
+  .model-tile-meta span:first-child::before{display:none}
+
+  /* Plan badge on model tile */
+  .plan-badge{
+    position:absolute;top:14px;right:14px;z-index:3;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    color:var(--white);
+    font-family:'Manrope',sans-serif;font-size:10px;
+    letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+    padding:6px 10px;display:flex;align-items:center;gap:6px;
+    transition:background .2s;
+  }
+  .plan-badge svg{width:11px;height:11px}
+  .model-tile:hover .plan-badge{background:var(--brown)}
+
+  /* Model ID badge (top-left) */
+  .model-id-badge{
+    position:absolute;top:14px;left:14px;z-index:3;
+    background:var(--brown);color:var(--white);
+    font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+    font-size:13px;padding:5px 10px;
+    letter-spacing:.02em;
+    font-variation-settings:"opsz" 144;
+  }
+
+  /* Model price below tile meta */
+  .model-tile-price{
+    margin-top:14px;padding-top:14px;
+    border-top:1px solid var(--line);
+    font-family:'Fraunces',serif;
+    font-size:16px;color:var(--brown);font-weight:500;
+    font-variation-settings:"opsz" 144;
+  }
+
+  /* ============ LIGHTBOX MODAL ============ */
+  .lightbox{
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(0,0,0,.92);
+    display:flex;align-items:center;justify-content:center;
+    padding:32px;
+    opacity:0;visibility:hidden;
+    transition:opacity .35s ease,visibility .35s ease;
+  }
+  .lightbox.open{opacity:1;visibility:visible}
+  .lightbox-inner{
+    background:var(--white);
+    max-width:1200px;width:100%;max-height:92vh;
+    overflow-y:auto;
+    position:relative;
+    transform:translateY(20px);
+    transition:transform .4s cubic-bezier(.2,.7,.2,1);
+  }
+  .lightbox.open .lightbox-inner{transform:translateY(0)}
+  .lightbox-close{
+    position:absolute;top:20px;right:20px;z-index:5;
+    width:44px;height:44px;border:none;border-radius:50%;
+    background:var(--white);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:18px;
+    box-shadow:0 4px 16px rgba(0,0,0,.15);
+    transition:background .2s,color .2s,transform .2s;
+  }
+  .lightbox-close:hover{background:var(--brown);color:var(--white);transform:rotate(90deg)}
+  .lightbox-images{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+  }
+  .lightbox-img-wrap{
+    position:relative;aspect-ratio:4/3;
+    background:var(--off-white);overflow:hidden;
+  }
+  .lightbox-img-wrap img{width:100%;height:100%;object-fit:cover}
+  .lightbox-img-wrap.plan img{object-fit:contain;background:var(--white);padding:24px}
+  .lightbox-img-label{
+    position:absolute;top:16px;left:16px;z-index:2;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    color:var(--white);
+    font-family:'Manrope',sans-serif;font-size:10px;
+    letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+    padding:8px 12px;
+  }
+  .lightbox-info{
+    padding:40px 48px;
+    border-top:1px solid var(--line);
+  }
+  .lightbox-eyebrow{
+    font-family:'Manrope',sans-serif;font-size:11px;
+    letter-spacing:.25em;text-transform:uppercase;
+    color:var(--brown);font-weight:600;margin-bottom:8px;
+  }
+  .lightbox-title{
+    font-family:'Fraunces',serif;
+    font-size:36px;font-weight:400;letter-spacing:-.02em;
+    color:var(--ink);margin-bottom:20px;line-height:1.05;
+    font-variation-settings:"opsz" 144;
+  }
+  .lightbox-meta{
+    display:flex;flex-wrap:wrap;gap:24px;
+    margin-bottom:32px;padding-bottom:32px;
+    border-bottom:1px solid var(--line);
+  }
+  .lightbox-meta-item{
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .lightbox-meta-label{
+    font-family:'Manrope',sans-serif;font-size:10px;
+    letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;
+  }
+  .lightbox-meta-value{
+    font-family:'Fraunces',serif;font-size:18px;
+    color:var(--ink);font-weight:500;
+    font-variation-settings:"opsz" 144;
+  }
+  .lightbox-cta{
+    display:inline-flex;align-items:center;gap:12px;
+    padding:16px 28px;background:var(--black);color:var(--white);
+    border:none;font-family:'Manrope',sans-serif;
+    font-size:13px;font-weight:600;letter-spacing:.05em;
+    text-transform:uppercase;text-decoration:none;cursor:pointer;
+    transition:background .25s,transform .2s;
+  }
+  .lightbox-cta:hover{background:var(--brown);transform:translateY(-2px)}
+
+  .lightbox-details{
+    display:inline-flex;align-items:center;gap:8px;
+    margin-left:16px;padding:16px 0;
+    color:var(--muted);text-decoration:none;
+    font-family:'Manrope',sans-serif;font-size:13px;
+    font-weight:500;letter-spacing:.02em;
+    border-bottom:1px solid transparent;
+    transition:color .2s,border-color .2s;
+  }
+  .lightbox-details:hover{color:var(--brown);border-bottom-color:var(--brown)}
+
+  /* ============ WHY US ============ */
+  .why{
+    padding:120px 0;background:var(--off-white);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .features-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border:1px solid var(--line);background:var(--white);
+  }
+  .feature{
+    padding:48px 36px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    transition:background .3s ease;position:relative;
+  }
+  .feature:nth-child(3n){border-right:none}
+  .feature:nth-last-child(-n+3){border-bottom:none}
+  .feature::before{
+    content:'';position:absolute;top:0;left:0;
+    width:0;height:2px;background:var(--brown);
+    transition:width .4s ease;
+  }
+  .feature:hover{background:var(--off-white)}
+  .feature:hover::before{width:100%}
+  .feature-num{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+    font-size:14px;color:var(--brown);
+    margin-bottom:24px;display:block;letter-spacing:.05em;
+  }
+  .feature-title{
+    font-family:'Fraunces',serif;font-size:24px;font-weight:500;
+    color:var(--ink);margin-bottom:14px;letter-spacing:-.01em;
+    font-variation-settings:"opsz" 144;
+  }
+  .feature-desc{
+    font-family:'Manrope',sans-serif;
+    font-size:15px;line-height:1.6;color:var(--muted);
+  }
+
+  /* ============ CONTACT ============ */
+  .contact-section{padding:120px 0 0;background:var(--white)}
+  .contact-grid{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:80px;margin-bottom:80px;align-items:start;
+  }
+  .contact-info h2{
+    font-family:'Fraunces',serif;
+    font-size:clamp(36px,5vw,56px);font-weight:400;
+    line-height:1.05;letter-spacing:-.02em;
+    margin-bottom:24px;color:var(--ink);
+    font-variation-settings:"opsz" 144;
+  }
+  .contact-info h2 em{font-style:italic;color:var(--brown)}
+  .contact-info > p{
+    font-family:'Manrope',sans-serif;color:var(--muted);
+    font-size:17px;margin-bottom:48px;line-height:1.65;
+    max-width:440px;
+  }
+  .info-list{
+    display:flex;flex-direction:column;
+    border-top:1px solid var(--line);
+  }
+  .info-item{
+    display:flex;align-items:center;gap:18px;
+    padding:20px 0;border-bottom:1px solid var(--line);
+    text-decoration:none;color:var(--ink);
+    transition:padding-left .25s;font-family:'Manrope',sans-serif;
+  }
+  .info-item:hover{padding-left:8px}
+  .info-icon{
+    width:40px;height:40px;border-radius:50%;
+    background:var(--brown);color:var(--white);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    transition:background .25s;
+  }
+  .info-item:hover .info-icon{background:var(--brown-dark)}
+  .info-label{
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;margin-bottom:2px;
+  }
+  .info-value{font-size:15px;color:var(--ink);font-weight:500}
+
+  /* Form */
+  .contact-form{
+    background:var(--off-white);
+    padding:48px;border:1px solid var(--line);
+  }
+  .form-eyebrow{
+    font-family:'Manrope',sans-serif;
+    font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--brown);font-weight:600;margin-bottom:8px;
+  }
+  .form-title{
+    font-family:'Fraunces',serif;
+    font-size:32px;font-weight:400;letter-spacing:-.01em;
+    color:var(--ink);margin-bottom:32px;
+    font-variation-settings:"opsz" 144;
+  }
+  .form-title em{font-style:italic;color:var(--brown);font-weight:300}
+  .field{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+  .field label{
+    font-family:'Manrope',sans-serif;font-size:11px;
+    letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;
+  }
+  .field input,.field textarea,.field select{
+    border:none;border-bottom:1px solid var(--line-strong);
+    padding:12px 0;background:transparent;
+    font-family:'Manrope',sans-serif;font-size:16px;
+    color:var(--ink);transition:border-color .2s;resize:none;
+    appearance:none;-webkit-appearance:none;border-radius:0;
+  }
+  .field select{cursor:pointer;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%235c3a22' stroke-width='1.5' fill='none'/></svg>");background-repeat:no-repeat;background-position:right 4px center;padding-right:24px}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--brown)}
+  .field input::placeholder,.field textarea::placeholder{color:#aaa}
+  .field textarea{min-height:100px}
+  .form-submit{
+    width:100%;margin-top:8px;padding:18px 36px;
+    background:var(--black);color:var(--white);border:none;
+    font-family:'Manrope',sans-serif;font-size:14px;
+    font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+    cursor:pointer;transition:background .25s;
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  }
+  .form-submit:hover{background:var(--brown)}
+
+  /* Copyright */
+  .copyright{
+    background:var(--black);color:var(--white);padding:32px 0;
+    font-family:'Manrope',sans-serif;font-size:13px;letter-spacing:.02em;
+  }
+  .copyright .container{
+    display:flex;justify-content:space-between;
+    align-items:center;flex-wrap:wrap;gap:16px;
+  }
+  .copyright .marks{font-family:'Fraunces',serif;font-style:italic;color:var(--brown-light)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:980px){
+    .price-band .container,
+    .category-tiles,.panel-models,
+    .features-grid,.contact-grid,
+    .lightbox-images{
+      grid-template-columns:1fr!important;
+    }
+    .lightbox{padding:0}
+    .lightbox-info{padding:32px 24px}
+    .lightbox-title{font-size:28px}
+    .price-band .container{text-align:center;gap:24px}
+    .feature{border-right:none!important;border-bottom:1px solid var(--line)!important}
+    .feature:last-child{border-bottom:none!important}
+    nav ul{display:none}
+    .menu-toggle{display:flex}
+    .hero{
+      height:58vh;
+      min-height:380px;
+      max-height:540px;
+    }
+    .hero-content{
+      padding:18px 16px;
+    }
+    .hero-box{
+      padding:16px 20px;
+      max-width:240px;
+    }
+    .hero h1{
+      font-size:18px;
+      line-height:1.15;
+    }
+    .models,.why,.contact-section{padding:72px 0}
+    .contact-section{padding-bottom:0}
+    .logo-wrap img{height:48px}
+    .models-panel-inner{padding:32px 20px}
+    .contact-form{padding:32px 24px}
+  }
+  @media (max-width:560px){
+    .container{padding:0 20px}
+    .copyright .container{flex-direction:column;text-align:center}
+    .panel-header{flex-direction:column;align-items:flex-start}
+  }
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .hero-box{animation:fadeUp .9s cubic-bezier(.2,.7,.2,1) backwards}
+  .model-tile{animation:fadeUp .6s cubic-bezier(.2,.7,.2,1) backwards}
+  .model-tile:nth-child(2){animation-delay:.08s}
+  .model-tile:nth-child(3){animation-delay:.16s}
+  .model-tile:nth-child(4){animation-delay:.24s}
+  .model-tile:nth-child(5){animation-delay:.32s}
+  .model-tile:nth-child(6){animation-delay:.4s}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container nav-row">
+    <a href="#" class="logo-wrap" title="FDT Construction">
+      <img src="https://fdtconstruction.ca/wp-content/uploads/elementor/thumbs/logo-odme6ukoj1kjzvxg7nt201cvwzle7ddm6apqs9ombk.png" alt="FDT Construction logo">
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#" class="active">Accueil</a></li>
+        <li><a href="#models">Modèles</a></li>
+        <li><a href="#why">Pourquoi nous</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-image" src="https://decelectrique.com/HEROM.png" alt="Maison neuve construite par FDT Construction">
+  <div class="hero-content">
+    <div class="hero-box">
+      <h1>Entrepreneur général.<br>Maison neuve <em>clé en main.</em></h1>
+    </div>
+  </div>
+</section>
+
+<!-- MODELS (interactive) -->
+<section class="models" id="models">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-eyebrow">— Nos modèles</div>
+      <h2>Choisissez votre maison <em>de rêve</em></h2>
+    </div>
+
+    <!-- 3 category tiles -->
+    <div class="category-tiles">
+
+      <button class="category-tile" data-cat="plain-pied" type="button">
+        <div class="category-image">
+          <span class="category-num">— 01</span>
+          <span class="category-status">Sélectionné</span>
+          <img src="https://plans-design.ca/wp-content/uploads/2025/10/893-le-Pyrifolia-plans-design-perspective_Snoc.jpg" alt="Maison plain pied">
+          <div class="category-overlay">
+            <div class="category-name">MAISON PLAIN PIED</div>
+            <div class="category-cta">Voir les modèles</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="category-tile" data-cat="paliers" type="button">
+        <div class="category-image">
+          <span class="category-num">— 02</span>
+          <span class="category-status">Sélectionné</span>
+          <img src="https://plans-design.ca/wp-content/uploads/2025/06/891-le-procera-plans-design-perspective.jpg" alt="Maison à paliers">
+          <div class="category-overlay">
+            <div class="category-name">MAISON À PALIERS</div>
+            <div class="category-cta">Voir les modèles</div>
+          </div>
+        </div>
+      </button>
+
+      <button class="category-tile" data-cat="cottage" type="button">
+        <div class="category-image">
+          <span class="category-num">— 03</span>
+          <span class="category-status">Sélectionné</span>
+          <img src="https://plans-design.ca/wp-content/uploads/2026/02/895-le-plicata-plans-design-perspective_Snoc.jpg" alt="Maison cottage">
+          <div class="category-overlay">
+            <div class="category-name">MAISON COTTAGE</div>
+            <div class="category-cta">Voir les modèles</div>
+          </div>
+        </div>
+      </button>
+
+    </div>
+
+    <!-- Reveal panel for selected category -->
+    <div class="models-panel" id="modelsPanel">
+      <div class="models-panel-inner">
+        <div class="panel-header">
+          <div>
+            <div class="panel-eyebrow" id="panelEyebrow">— Catégorie sélectionnée</div>
+            <h3 class="panel-title" id="panelTitle">Modèles <em>plain pied</em></h3>
+          </div>
+          <button class="panel-close" type="button" id="panelClose">Fermer ✕</button>
+        </div>
+        <div class="panel-models" id="panelModels">
+          <!-- Models injected by JS -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-eyebrow">— Pourquoi nous</div>
+      <h2>Pourquoi choisir <em>FDT Construction&nbsp;?</em></h2>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature">
+        <span class="feature-num">01</span>
+        <h3 class="feature-title">Expertise</h3>
+        <p class="feature-desc">Nous sommes spécialisés dans la construction de maisons neuves.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-num">02</span>
+        <h3 class="feature-title">Certification</h3>
+        <p class="feature-desc">Licence RBQ d'entrepreneur général.<br><strong style="color:var(--brown);letter-spacing:.04em">N° 5768-1496-01</strong></p>
+      </div>
+      <div class="feature">
+        <span class="feature-num">03</span>
+        <h3 class="feature-title">Solution clé en main</h3>
+        <p class="feature-desc">Gestion de votre projet du début jusqu'à la fin.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-num">04</span>
+        <h3 class="feature-title">Maison intelligente</h3>
+        <p class="feature-desc">Nous sommes également spécialisés en domotique.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-num">05</span>
+        <h3 class="feature-title">Garantie</h3>
+        <p class="feature-desc">Vous êtes protégé par la garantie maison neuve de l'APCHQ.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-num">06</span>
+        <h3 class="feature-title">Diversité</h3>
+        <p class="feature-desc">Plus de 100 modèles de maison disponibles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT (no map) -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <h2>Demande de prix &<br><em>contact</em></h2>
+        <p>Décrivez-nous votre projet de maison neuve. Nous vous répondons dans les meilleurs délais avec une estimation personnalisée.</p>
+
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="info-label">Adresse</div>
+              <div class="info-value">976 rue Antoine-Coupal, Saint-Jean-sur-Richelieu</div>
+            </div>
+          </div>
+          <a href="tel:5149222728" class="info-item">
+            <div class="info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="info-label">Téléphone</div>
+              <div class="info-value">(514) 922-2728</div>
+            </div>
+          </a>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="info-label">Heures d'ouverture</div>
+              <div class="info-value">Lundi au vendredi de 9h à 17h</div>
+            </div>
+          </div>
+          <a href="mailto:info@fdtconstruction.ca" class="info-item">
+            <div class="info-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="info-label">Courriel</div>
+              <div class="info-value">info@fdtconstruction.ca</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="event.preventDefault();alert('Démo : votre demande serait envoyée.');">
+        <div class="form-eyebrow">— Formulaire</div>
+        <h3 class="form-title">Obtenir <em>un prix</em></h3>
+
+        <div class="field">
+          <label for="name">Nom complet</label>
+          <input type="text" id="name" placeholder="Votre nom">
+        </div>
+
+        <div class="field">
+          <label for="email">Courriel *</label>
+          <input type="email" id="email" placeholder="nom@compagnie.com" required>
+        </div>
+
+        <div class="field">
+          <label for="phone">Téléphone</label>
+          <input type="tel" id="phone" placeholder="(514) 000-0000">
+        </div>
+
+        <div class="field">
+          <label for="type">Type de maison</label>
+          <select id="type">
+            <option value="">Sélectionnez un type…</option>
+            <option value="plain-pied">Maison plain pied</option>
+            <option value="paliers">Maison à paliers</option>
+            <option value="cottage">Maison cottage</option>
+            <option value="autre">Je ne suis pas certain</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Décrivez votre projet</label>
+          <textarea id="message" placeholder="Terrain, budget approximatif, échéancier, besoins particuliers…"></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">
+          Envoyer ma demande <span>→</span>
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="copyright">
+    <div class="container">
+      <div>Copyright 2026 © Tous droits réservés. FDT Construction · RBQ 5768-1496-01</div>
+      <div class="marks">Entrepreneur général · Saint-Jean-sur-Richelieu</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" type="button" id="lightboxClose" aria-label="Fermer">✕</button>
+    <div class="lightbox-images">
+      <div class="lightbox-img-wrap">
+        <span class="lightbox-img-label">Modèle</span>
+        <img id="lbPhoto" src="" alt="">
+      </div>
+      <div class="lightbox-img-wrap plan">
+        <span class="lightbox-img-label">Plan</span>
+        <img id="lbPlan" src="" alt="">
+      </div>
+    </div>
+    <div class="lightbox-info">
+      <div class="lightbox-eyebrow" id="lbEyebrow">— Modèle</div>
+      <h3 class="lightbox-title" id="lbTitle">Modèle</h3>
+      <div class="lightbox-meta" id="lbMeta"></div>
+      <a href="#contact" class="lightbox-cta" id="lbCta">
+        Demander une soumission pour ce modèle <span>→</span>
+      </a>
+      <a href="#" class="lightbox-details" id="lbDetails" target="_blank" rel="noopener">
+        Voir tous les détails sur plans-design.ca <span>↗</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== Mobile menu =====
+  const toggle = document.querySelector('.menu-toggle');
+  const navUl = document.querySelector('nav ul');
+  if(toggle){
+    toggle.addEventListener('click',()=>{
+      const open = navUl.style.display === 'flex';
+      if(open){navUl.style.display='none';}
+      else{
+        Object.assign(navUl.style,{
+          display:'flex',flexDirection:'column',position:'absolute',
+          top:'100%',right:'20px',background:'#000',padding:'24px',
+          gap:'16px',alignItems:'flex-start',
+          border:'1px solid rgba(255,255,255,.1)',
+          boxShadow:'0 12px 40px rgba(0,0,0,.4)'
+        });
+      }
+    });
+  }
+
+  // ===== Models data — REAL DATA FROM plans-design.ca =====
+  // Models, photos and plans sourced from https://plans-design.ca/plans/
+  // To add more models, copy the structure below and visit plans-design.ca
+  // ============================================================================
+  const MODELS = {
+    'plain-pied': {
+      title: 'plain pied',
+      eyebrow: '— Catégorie 01 · Maison plain pied',
+      list: [
+        {
+          id: '893', name: 'Le Pyrifolia',
+          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain',
+          superficie: '1 629 pi²', prix: 'À partir de 405 100 $',
+          url: 'https://plans-design.ca/plans/893-le-pyrifolia/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2025/10/893-le-Pyrifolia-plans-design-perspective_Snoc.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2025/10/893-le-pyrifolia-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '894', name: 'Le Douglasii',
+          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain',
+          superficie: '1 046 pi²', prix: 'À partir de 300 800 $',
+          url: 'https://plans-design.ca/plans/894-le-douglasii-2/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2025/12/894-le-douglasii-plans-design-perspective_Snoc.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2025/12/894-le-douglasii-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '887', name: 'Le Strobus',
+          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain · 1 salle d\'eau',
+          superficie: '2 860 pi²', prix: 'À partir de 704 600 $',
+          url: 'https://plans-design.ca/plans/887-le-strobus/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2024/05/887-le-strobus-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2025/08/887-le-strobus-plans-design-rezdechaussee_V-900x600.jpg'
+        },
+        {
+          id: '881', name: 'Le Taxus',
+          etages: '1 étage', chambres: '2 chambres', sdb: '1 salle de bain',
+          superficie: '1 095 pi²', prix: 'À partir de 224 000 $',
+          url: 'https://plans-design.ca/plans/881-le-taxus/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2022/09/881-le-taxus-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2022/09/881-le-taxus-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '876', name: 'Le Omorika',
+          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain',
+          superficie: '1 800 pi²', prix: 'À partir de 414 000 $',
+          url: 'https://plans-design.ca/plans/876-le-omorika/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2021/09/876-le-omorika-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2023/02/876-le-omorika-plans-design-rezdechaussee-4-900x600.jpg'
+        },
+        {
+          id: '872', name: 'Le Lentago',
+          etages: '1 étage', chambres: '2 chambres', sdb: '1 salle de bain',
+          superficie: '1 168 pi²', prix: 'À partir de 238 600 $',
+          url: 'https://plans-design.ca/plans/872-le-lentago/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2021/06/872-le-lentago-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2021/06/872-le-lentago-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '871', name: 'Le Alatus',
+          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain',
+          superficie: '1 282 pi²', prix: 'À partir de 297 800 $',
+          url: 'https://plans-design.ca/plans/871-le-alatus/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2025/10/871-le-alatus-plans-design-perspective_BP.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2022/03/871-le-alatus-plans-design-rezdechaussee-2-900x600.jpg'
+        },
+        {
+          id: '849', name: 'Le Outo',
+          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain',
+          superficie: '1 412 pi²', prix: 'À partir de 323 000 $',
+          url: 'https://plans-design.ca/plans/849-le-outo/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2019/09/849-le-outo-plans-design-perspective-900x600.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2019/09/849-le-outo-plans-design-rezdechaussee-900x600.jpg'
+        }
+      ]
+    },
+    'paliers': {
+      title: 'à paliers',
+      eyebrow: '— Catégorie 02 · Maison à paliers',
+      list: [
+        {
+          id: '863', name: 'Le Triloba',
+          etages: '1 étage', chambres: '1 à 3 chambres', sdb: '2 salles de bain',
+          superficie: '795 pi²', prix: 'À partir de 179 000 $',
+          url: 'https://plans-design.ca/plans/863-le-triloba/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2019/08/863-le-triloba-plans-design-perspective-900x600.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2020/06/863-le-triloba-plans-design-perspective-2.jpg'
+        },
+        {
+          id: '851', name: 'Le Viridis',
+          etages: '2 ou 3 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
+          superficie: '1 522 pi²', prix: 'À partir de 279 000 $',
+          url: 'https://plans-design.ca/plans/851-le-viridis/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2019/09/851-le-viridis-plans-design-perspective-900x600.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2019/09/851-le-viridis-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '891', name: 'Le Procera',
+          etages: '2 étages', chambres: '2 ou 3 chambres', sdb: '2 salles de bain · 1 salle d\'eau',
+          superficie: '1 247 pi²', prix: 'À partir de 304 400 $',
+          url: 'https://plans-design.ca/plans/891-le-procera/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2025/06/891-le-procera-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2025/06/891-le-procera-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '880', name: 'Le Corylus',
+          etages: '1 étage', chambres: '1 à 3 chambres', sdb: '1 ou 2 salles de bain',
+          superficie: '720 pi²', prix: 'À partir de 159 000 $',
+          url: 'https://plans-design.ca/plans/880-le-corylus/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2025/10/880-le-corylus-plans-design-perspective_BP.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2022/09/880-le-corylus-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '879', name: 'Le Obtusa',
+          etages: '1 étage', chambres: '2 à 4 chambres', sdb: '1 ou 2 salles de bain',
+          superficie: '1 245 pi²', prix: 'À partir de 264 000 $',
+          url: 'https://plans-design.ca/plans/879-le-obtusa/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2022/08/879-le-Obtusa-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2022/08/879-le-Obtusa-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '864', name: 'Le Mugo',
+          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
+          superficie: '1 559 pi²', prix: 'À partir de 272 400 $',
+          url: 'https://plans-design.ca/plans/864-le-mugo/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2019/08/864-le-mugo-plans-design-perspective-900x600.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2019/08/864-le-mugo-plans-design-rezdechaussee-900x600.jpg'
+        }
+      ]
+    },
+    'cottage': {
+      title: 'cottage',
+      eyebrow: '— Catégorie 03 · Maison cottage',
+      list: [
+        {
+          id: '895', name: 'Le Plicata',
+          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
+          superficie: '1 570 pi²', prix: 'À partir de 295 700 $',
+          url: 'https://plans-design.ca/plans/895-le-plicata/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2026/02/895-le-plicata-plans-design-perspective_Snoc.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2026/02/895-le-plicata-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '892', name: 'Le Syringa',
+          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
+          superficie: '1 762 pi²', prix: 'À partir de 349 800 $',
+          url: 'https://plans-design.ca/plans/892-le-syringa/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2025/10/892-le-syringa-plans-design-perspective_BP.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2025/10/892-le-syringa-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '889', name: 'Le Cordifolia',
+          etages: '2 étages', chambres: '3 ou 4 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
+          superficie: '1 470 pi²', prix: 'À partir de 269 000 $',
+          url: 'https://plans-design.ca/plans/889-le-cordifolia/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2024/11/889-le-cordifolia-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2024/11/889-le-cordifolia-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '884', name: 'Le Viminalis',
+          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
+          superficie: '1 496 pi²', prix: 'À partir de 244 400 $',
+          url: 'https://plans-design.ca/plans/884-le-viminalis/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2023/03/884-le-viminalis-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2023/03/884-le-viminalis-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '882', name: 'Le Laciniosa',
+          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
+          superficie: '1 385 pi²', prix: 'À partir de 226 600 $',
+          url: 'https://plans-design.ca/plans/882-le-laciniosa/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2022/12/882-le-laciniosa-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2022/12/882-le-laciniosa-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '877', name: 'Le Fusca',
+          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
+          superficie: '1 552 pi²', prix: 'À partir de 286 200 $',
+          url: 'https://plans-design.ca/plans/877-le-fusca/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2025/08/877-le-fusca-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2021/11/877-le-fusca-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '874', name: 'Le Cerasus',
+          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
+          superficie: '1 644 pi²', prix: 'À partir de 293 500 $',
+          url: 'https://plans-design.ca/plans/874-le-cerasus/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2021/08/874-le-cerasus-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2021/08/874-le-cerasus-plans-design-rezdechaussee-900x600.jpg'
+        },
+        {
+          id: '866', name: 'Le Ophois',
+          etages: '2 étages', chambres: '4 chambres', sdb: '3 salles de bain · 1 salle d\'eau',
+          superficie: '3 903 pi²', prix: 'À partir de 760 300 $',
+          url: 'https://plans-design.ca/plans/866-le-ophois/',
+          photo: 'https://plans-design.ca/wp-content/uploads/2020/04/866-le-ophois-plans-design-perspective.jpg',
+          plan:  'https://plans-design.ca/wp-content/uploads/2020/04/866-le-ophois-plans-design-rezdechaussee-900x600.jpg'
+        }
+      ]
+    }
+  };
+
+  // ===== Interactive category logic =====
+  const tiles = document.querySelectorAll('.category-tile');
+  const panel = document.getElementById('modelsPanel');
+  const panelTitle = document.getElementById('panelTitle');
+  const panelEyebrow = document.getElementById('panelEyebrow');
+  const panelModels = document.getElementById('panelModels');
+  const panelClose = document.getElementById('panelClose');
+  let activeCat = null;
+
+  function renderModels(catKey){
+    const data = MODELS[catKey];
+    if(!data) return;
+    panelEyebrow.textContent = data.eyebrow;
+    panelTitle.innerHTML = `Modèles <em>${data.title}</em>`;
+    panelModels.innerHTML = data.list.map((m, i)=>`
+      <button type="button" class="model-tile" data-cat="${catKey}" data-index="${i}">
+        <div class="model-tile-image">
+          <span class="model-id-badge">N° ${m.id}</span>
+          <span class="plan-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"/><path d="M9 3v18M3 9h18"/></svg>
+            Voir le plan
+          </span>
+          <img src="${m.photo}" alt="${m.name}" loading="lazy">
+        </div>
+        <div class="model-tile-info">
+          <div class="model-tile-name">${m.name}</div>
+          <div class="model-tile-meta">
+            <span>${m.chambres}</span>
+            <span>${m.superficie}</span>
+          </div>
+          <div class="model-tile-price">${m.prix}</div>
+        </div>
+      </button>
+    `).join('');
+
+    // Bind clicks to open lightbox
+    panelModels.querySelectorAll('.model-tile').forEach(tile=>{
+      tile.addEventListener('click', ()=>{
+        const cat = tile.dataset.cat;
+        const idx = parseInt(tile.dataset.index, 10);
+        openLightbox(cat, idx);
+      });
+    });
+  }
+
+  function selectCategory(catKey){
+    // Toggle: if already active, close
+    if(activeCat === catKey){
+      panel.classList.remove('open');
+      tiles.forEach(t => t.classList.remove('active'));
+      activeCat = null;
+      return;
+    }
+    activeCat = catKey;
+    tiles.forEach(t => t.classList.toggle('active', t.dataset.cat === catKey));
+    renderModels(catKey);
+    panel.classList.add('open');
+    // Smooth scroll to panel
+    setTimeout(()=>{
+      panel.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+  }
+
+  tiles.forEach(tile=>{
+    tile.addEventListener('click', ()=> selectCategory(tile.dataset.cat));
+  });
+
+  panelClose.addEventListener('click', ()=>{
+    panel.classList.remove('open');
+    tiles.forEach(t => t.classList.remove('active'));
+    activeCat = null;
+    document.getElementById('models').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  // ===== Lightbox =====
+  const lightbox = document.getElementById('lightbox');
+  const lbPhoto = document.getElementById('lbPhoto');
+  const lbPlan = document.getElementById('lbPlan');
+  const lbTitle = document.getElementById('lbTitle');
+  const lbEyebrow = document.getElementById('lbEyebrow');
+  const lbMeta = document.getElementById('lbMeta');
+  const lbCta = document.getElementById('lbCta');
+  const lbDetails = document.getElementById('lbDetails');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  function openLightbox(catKey, idx){
+    const data = MODELS[catKey];
+    if(!data || !data.list[idx]) return;
+    const m = data.list[idx];
+    lbPhoto.src = m.photo;
+    lbPhoto.alt = m.name;
+    lbPlan.src = m.plan;
+    lbPlan.alt = `Plan — ${m.name}`;
+    lbEyebrow.textContent = `— Maison ${data.title} · N° ${m.id}`;
+    lbTitle.textContent = m.name;
+    lbMeta.innerHTML = `
+      <div class="lightbox-meta-item">
+        <div class="lightbox-meta-label">Étages</div>
+        <div class="lightbox-meta-value">${m.etages}</div>
+      </div>
+      <div class="lightbox-meta-item">
+        <div class="lightbox-meta-label">Chambres</div>
+        <div class="lightbox-meta-value">${m.chambres}</div>
+      </div>
+      <div class="lightbox-meta-item">
+        <div class="lightbox-meta-label">Salles de bain</div>
+        <div class="lightbox-meta-value">${m.sdb}</div>
+      </div>
+      <div class="lightbox-meta-item">
+        <div class="lightbox-meta-label">Superficie</div>
+        <div class="lightbox-meta-value">${m.superficie}</div>
+      </div>
+      <div class="lightbox-meta-item">
+        <div class="lightbox-meta-label">Prix de construction</div>
+        <div class="lightbox-meta-value" style="color:var(--brown)">${m.prix}</div>
+      </div>
+    `;
+    // Update CTA: link to demand quote and add "voir détails" link
+    lbCta.onclick = (e)=>{
+      e.preventDefault();
+      const sel = document.getElementById('type');
+      if(sel) sel.value = catKey;
+      // Pre-fill message with model reference
+      const msg = document.getElementById('message');
+      if(msg && !msg.value){
+        msg.value = `Bonjour, je suis intéressé(e) par le modèle ${m.name} (N° ${m.id}). Pourriez-vous me faire parvenir une soumission ? Merci.`;
+      }
+      closeLightbox();
+      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+    };
+    // Update "voir détails" link
+    if(lbDetails){
+      lbDetails.href = m.url;
+    }
+
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e)=>{
+    if(e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+</script>
+
+</body>
+</html>
