@@ -216,11 +216,14 @@
 
 /* MOBILE FIX STABLE */
 
-  @media (max-width:768px){
+@media (max-width:768px){
 
   .hero{
-    height: 100dvh;
-    min-height: 100dvh;
+    /* Use small viewport height — accounts for Safari's address bar */
+    height: 100svh;
+    min-height: 100svh;
+    /* Fallback for browsers that don't support svh */
+    min-height: -webkit-fill-available;
   }
 
   .hero-image{
@@ -230,7 +233,8 @@
   }
 
   .hero-text-block{
-    padding: 32px 24px 48px;
+    /* Extra bottom padding so buttons stay above Safari's bottom toolbar */
+    padding: 32px 24px calc(32px + env(safe-area-inset-bottom, 24px));
   }
 
   .hero h1{
@@ -247,7 +251,6 @@
     justify-content: center;
   }
 }
-
   /* ============ PRICE BAND ============ */
   .price-band{padding:64px 0;background:var(--white);border-bottom:1px solid var(--line)}
   .price-band .container{
@@ -735,7 +738,7 @@
     .menu-toggle{display:flex}
     .hero{
       height:100vh;
-      min-height:600px;
+      min-height:560px;
     }
     .hero-image-wrap{
       flex:1;
