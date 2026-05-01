@@ -290,6 +290,15 @@
     width:100%;
     justify-content:center;
   }
+.mobile-break{
+  display:none;
+}
+
+@media (max-width:768px){
+  .mobile-break{
+    display:block;
+  }
+
 }
 
   /* ============ PRICE BAND ============ */
@@ -830,7 +839,12 @@
 
 </picture>
   <div class="hero-text-block">
-    <h1>Entrepreneur général.<br>Maison neuve <em>clé en main.</em></h1>
+  <h1>
+  Entrepreneur général.<br>
+  Maison neuve
+  <br class="mobile-break">
+  <em>clé en main.</em>
+</h1>
     <div class="hero-buttons">
       <a href="#contact" class="hero-btn hero-btn-primary">
         Obtenir un prix <span class="arrow">→</span>
