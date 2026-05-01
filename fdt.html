@@ -108,7 +108,6 @@
   padding:60px 40px;
   gap:28px;
 
-  /* overlay premium lisible (max ~30–55%) */
   background:linear-gradient(
     to top,
     rgba(0,0,0,.55),
@@ -214,62 +213,62 @@
   }
 }
 
-/* ===== MOBILE HERO FIX ===== */
+/* ===== MOBILE HERO FIX (stacked layout, no viewport units) ===== */
 
 @media (max-width:768px){
 
   .hero{
     position:relative;
-    height:100svh;
-    min-height:680px;
+    height:auto;
+    min-height:0;
     overflow:hidden;
     background:#000;
   }
 
   .hero-image-wrap{
-    position:absolute;
-    inset:0;
+    position:relative;
+    inset:auto;
     width:100%;
-    height:100%;
+    aspect-ratio:4/5;
+    max-height:75vh;
+    height:auto;
   }
 
-.hero-image{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:50% 35%;
-  transform:none;
-}
+  .hero-image{
+    position:relative;
+    inset:auto;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:50% 35%;
+    transform:none;
+  }
 
- .hero-text-block{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:2;
+  .hero-text-block{
+    position:relative;
+    left:auto;
+    right:auto;
+    bottom:auto;
+    z-index:2;
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
 
-  padding:60px 24px calc(env(safe-area-inset-bottom) + 28px);
+    background:#000;
+    padding:36px 24px calc(env(safe-area-inset-bottom) + 36px);
+    gap:24px;
 
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,.65),
-    rgba(0,0,0,.25),
-    transparent
-  );
-}
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
 
- .hero h1{
-  font-size:34px;
-  line-height:1.02;
-  max-width:420px;
-}
+  .hero h1{
+    font-size:32px;
+    line-height:1.05;
+    max-width:420px;
+  }
 
   .hero-buttons{
     width:100%;
@@ -283,6 +282,7 @@
     justify-content:center;
   }
 }
+
   /* ============ PRICE BAND ============ */
   .price-band{padding:64px 0;background:var(--white);border-bottom:1px solid var(--line)}
   .price-band .container{
@@ -325,7 +325,6 @@
   }
   .section-title h2 em{font-style:italic;color:var(--brown);font-weight:300}
 
-  /* Category tiles (always visible, click to switch) */
   .category-tiles{
     display:grid;grid-template-columns:repeat(3,1fr);
     gap:24px;margin-bottom:0;
@@ -394,7 +393,6 @@
   .category-tile:hover .category-cta::after{transform:translateY(3px)}
   .category-tile.active .category-cta::after{content:'✓';color:var(--brown-light)}
 
-  /* Models reveal panel */
   .models-panel{
     margin-top:48px;
     overflow:hidden;
@@ -437,7 +435,6 @@
   }
   .panel-close:hover{border-color:var(--brown);color:var(--brown)}
 
-  /* Models grid inside panel */
   .panel-models{
     display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
   }
@@ -481,7 +478,6 @@
   }
   .model-tile-meta span:first-child::before{display:none}
 
-  /* Plan badge on model tile */
   .plan-badge{
     position:absolute;top:14px;right:14px;z-index:3;
     background:rgba(0,0,0,.75);
@@ -495,7 +491,6 @@
   .plan-badge svg{width:11px;height:11px}
   .model-tile:hover .plan-badge{background:var(--brown)}
 
-  /* Model ID badge (top-left) */
   .model-id-badge{
     position:absolute;top:14px;left:14px;z-index:3;
     background:var(--brown);color:var(--white);
@@ -505,7 +500,6 @@
     font-variation-settings:"opsz" 144;
   }
 
-  /* Model price below tile meta */
   .model-tile-price{
     margin-top:14px;padding-top:14px;
     border-top:1px solid var(--line);
@@ -697,7 +691,6 @@
   }
   .info-value{font-size:15px;color:var(--ink);font-weight:500}
 
-  /* Form */
   .contact-form{
     background:var(--off-white);
     padding:48px;border:1px solid var(--line);
@@ -741,7 +734,6 @@
   }
   .form-submit:hover{background:var(--brown)}
 
-  /* Copyright */
   .copyright{
     background:var(--black);color:var(--white);padding:32px 0;
     font-family:'Manrope',sans-serif;font-size:13px;letter-spacing:.02em;
@@ -819,12 +811,12 @@
   <!-- IMAGE MOBILE -->
   <source 
     media="(max-width: 768px)" 
-    srcset="https://decelectrique.com/HEROM.png">
+    srcset="https://decelectrique.com/HEROM-mobile.png">
 
-  <!-- IMAGE DESKTOP -->
+  <!-- IMAGE DESKTOP (fallback) -->
   <img 
     class="hero-image"
-    src="https://decelectrique.com/HEROM-mobile.png"
+    src="https://decelectrique.com/HEROM.png"
     alt="Maison neuve construite par FDT Construction">
 
 </picture>
@@ -849,7 +841,6 @@
       <h2>Choisissez votre maison <em>de rêve</em></h2>
     </div>
 
-    <!-- 3 category tiles -->
     <div class="category-tiles">
 
       <button class="category-tile" data-cat="plain-pied" type="button">
@@ -890,7 +881,6 @@
 
     </div>
 
-    <!-- Reveal panel for selected category -->
     <div class="models-panel" id="modelsPanel">
       <div class="models-panel-inner">
         <div class="panel-header">
@@ -900,9 +890,7 @@
           </div>
           <button class="panel-close" type="button" id="panelClose">Fermer ✕</button>
         </div>
-        <div class="panel-models" id="panelModels">
-          <!-- Models injected by JS -->
-        </div>
+        <div class="panel-models" id="panelModels"></div>
       </div>
     </div>
 
@@ -952,7 +940,7 @@
   </div>
 </section>
 
-<!-- CONTACT (no map) -->
+<!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="container">
     <div class="contact-grid">
@@ -1081,7 +1069,6 @@
 </div>
 
 <script>
-  // ===== Mobile menu =====
   const toggle = document.querySelector('.menu-toggle');
   const navUl = document.querySelector('nav ul');
   if(toggle){
@@ -1100,208 +1087,49 @@
     });
   }
 
-  // ===== Models data — REAL DATA FROM plans-design.ca =====
-  // Models, photos and plans sourced from https://plans-design.ca/plans/
-  // To add more models, copy the structure below and visit plans-design.ca
-  // ============================================================================
   const MODELS = {
     'plain-pied': {
       title: 'plain pied',
       eyebrow: '— Catégorie 01 · Maison plain pied',
       list: [
-        {
-          id: '893', name: 'Le Pyrifolia',
-          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain',
-          superficie: '1 629 pi²', prix: 'À partir de 405 100 $',
-          url: 'https://plans-design.ca/plans/893-le-pyrifolia/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2025/10/893-le-Pyrifolia-plans-design-perspective_Snoc.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2025/10/893-le-pyrifolia-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '894', name: 'Le Douglasii',
-          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain',
-          superficie: '1 046 pi²', prix: 'À partir de 300 800 $',
-          url: 'https://plans-design.ca/plans/894-le-douglasii-2/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2025/12/894-le-douglasii-plans-design-perspective_Snoc.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2025/12/894-le-douglasii-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '887', name: 'Le Strobus',
-          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain · 1 salle d\'eau',
-          superficie: '2 860 pi²', prix: 'À partir de 704 600 $',
-          url: 'https://plans-design.ca/plans/887-le-strobus/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2024/05/887-le-strobus-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2025/08/887-le-strobus-plans-design-rezdechaussee_V-900x600.jpg'
-        },
-        {
-          id: '881', name: 'Le Taxus',
-          etages: '1 étage', chambres: '2 chambres', sdb: '1 salle de bain',
-          superficie: '1 095 pi²', prix: 'À partir de 224 000 $',
-          url: 'https://plans-design.ca/plans/881-le-taxus/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2022/09/881-le-taxus-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2022/09/881-le-taxus-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '876', name: 'Le Omorika',
-          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain',
-          superficie: '1 800 pi²', prix: 'À partir de 414 000 $',
-          url: 'https://plans-design.ca/plans/876-le-omorika/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2021/09/876-le-omorika-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2023/02/876-le-omorika-plans-design-rezdechaussee-4-900x600.jpg'
-        },
-        {
-          id: '872', name: 'Le Lentago',
-          etages: '1 étage', chambres: '2 chambres', sdb: '1 salle de bain',
-          superficie: '1 168 pi²', prix: 'À partir de 238 600 $',
-          url: 'https://plans-design.ca/plans/872-le-lentago/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2021/06/872-le-lentago-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2021/06/872-le-lentago-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '871', name: 'Le Alatus',
-          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain',
-          superficie: '1 282 pi²', prix: 'À partir de 297 800 $',
-          url: 'https://plans-design.ca/plans/871-le-alatus/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2025/10/871-le-alatus-plans-design-perspective_BP.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2022/03/871-le-alatus-plans-design-rezdechaussee-2-900x600.jpg'
-        },
-        {
-          id: '849', name: 'Le Outo',
-          etages: '1 étage', chambres: '3 chambres', sdb: '2 salles de bain',
-          superficie: '1 412 pi²', prix: 'À partir de 323 000 $',
-          url: 'https://plans-design.ca/plans/849-le-outo/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2019/09/849-le-outo-plans-design-perspective-900x600.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2019/09/849-le-outo-plans-design-rezdechaussee-900x600.jpg'
-        }
+        {id:'893',name:'Le Pyrifolia',etages:'1 étage',chambres:'3 chambres',sdb:'2 salles de bain',superficie:'1 629 pi²',prix:'À partir de 405 100 $',url:'https://plans-design.ca/plans/893-le-pyrifolia/',photo:'https://plans-design.ca/wp-content/uploads/2025/10/893-le-Pyrifolia-plans-design-perspective_Snoc.jpg',plan:'https://plans-design.ca/wp-content/uploads/2025/10/893-le-pyrifolia-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'894',name:'Le Douglasii',etages:'1 étage',chambres:'3 chambres',sdb:'2 salles de bain',superficie:'1 046 pi²',prix:'À partir de 300 800 $',url:'https://plans-design.ca/plans/894-le-douglasii-2/',photo:'https://plans-design.ca/wp-content/uploads/2025/12/894-le-douglasii-plans-design-perspective_Snoc.jpg',plan:'https://plans-design.ca/wp-content/uploads/2025/12/894-le-douglasii-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'887',name:'Le Strobus',etages:'1 étage',chambres:'3 chambres',sdb:'2 salles de bain · 1 salle d\'eau',superficie:'2 860 pi²',prix:'À partir de 704 600 $',url:'https://plans-design.ca/plans/887-le-strobus/',photo:'https://plans-design.ca/wp-content/uploads/2024/05/887-le-strobus-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2025/08/887-le-strobus-plans-design-rezdechaussee_V-900x600.jpg'},
+        {id:'881',name:'Le Taxus',etages:'1 étage',chambres:'2 chambres',sdb:'1 salle de bain',superficie:'1 095 pi²',prix:'À partir de 224 000 $',url:'https://plans-design.ca/plans/881-le-taxus/',photo:'https://plans-design.ca/wp-content/uploads/2022/09/881-le-taxus-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2022/09/881-le-taxus-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'876',name:'Le Omorika',etages:'1 étage',chambres:'3 chambres',sdb:'2 salles de bain',superficie:'1 800 pi²',prix:'À partir de 414 000 $',url:'https://plans-design.ca/plans/876-le-omorika/',photo:'https://plans-design.ca/wp-content/uploads/2021/09/876-le-omorika-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2023/02/876-le-omorika-plans-design-rezdechaussee-4-900x600.jpg'},
+        {id:'872',name:'Le Lentago',etages:'1 étage',chambres:'2 chambres',sdb:'1 salle de bain',superficie:'1 168 pi²',prix:'À partir de 238 600 $',url:'https://plans-design.ca/plans/872-le-lentago/',photo:'https://plans-design.ca/wp-content/uploads/2021/06/872-le-lentago-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2021/06/872-le-lentago-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'871',name:'Le Alatus',etages:'1 étage',chambres:'3 chambres',sdb:'2 salles de bain',superficie:'1 282 pi²',prix:'À partir de 297 800 $',url:'https://plans-design.ca/plans/871-le-alatus/',photo:'https://plans-design.ca/wp-content/uploads/2025/10/871-le-alatus-plans-design-perspective_BP.jpg',plan:'https://plans-design.ca/wp-content/uploads/2022/03/871-le-alatus-plans-design-rezdechaussee-2-900x600.jpg'},
+        {id:'849',name:'Le Outo',etages:'1 étage',chambres:'3 chambres',sdb:'2 salles de bain',superficie:'1 412 pi²',prix:'À partir de 323 000 $',url:'https://plans-design.ca/plans/849-le-outo/',photo:'https://plans-design.ca/wp-content/uploads/2019/09/849-le-outo-plans-design-perspective-900x600.jpg',plan:'https://plans-design.ca/wp-content/uploads/2019/09/849-le-outo-plans-design-rezdechaussee-900x600.jpg'}
       ]
     },
     'paliers': {
       title: 'à paliers',
       eyebrow: '— Catégorie 02 · Maison à paliers',
       list: [
-        {
-          id: '863', name: 'Le Triloba',
-          etages: '1 étage', chambres: '1 à 3 chambres', sdb: '2 salles de bain',
-          superficie: '795 pi²', prix: 'À partir de 179 000 $',
-          url: 'https://plans-design.ca/plans/863-le-triloba/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2019/08/863-le-triloba-plans-design-perspective-900x600.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2020/06/863-le-triloba-plans-design-perspective-2.jpg'
-        },
-        {
-          id: '851', name: 'Le Viridis',
-          etages: '2 ou 3 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
-          superficie: '1 522 pi²', prix: 'À partir de 279 000 $',
-          url: 'https://plans-design.ca/plans/851-le-viridis/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2019/09/851-le-viridis-plans-design-perspective-900x600.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2019/09/851-le-viridis-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '891', name: 'Le Procera',
-          etages: '2 étages', chambres: '2 ou 3 chambres', sdb: '2 salles de bain · 1 salle d\'eau',
-          superficie: '1 247 pi²', prix: 'À partir de 304 400 $',
-          url: 'https://plans-design.ca/plans/891-le-procera/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2025/06/891-le-procera-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2025/06/891-le-procera-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '880', name: 'Le Corylus',
-          etages: '1 étage', chambres: '1 à 3 chambres', sdb: '1 ou 2 salles de bain',
-          superficie: '720 pi²', prix: 'À partir de 159 000 $',
-          url: 'https://plans-design.ca/plans/880-le-corylus/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2025/10/880-le-corylus-plans-design-perspective_BP.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2022/09/880-le-corylus-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '879', name: 'Le Obtusa',
-          etages: '1 étage', chambres: '2 à 4 chambres', sdb: '1 ou 2 salles de bain',
-          superficie: '1 245 pi²', prix: 'À partir de 264 000 $',
-          url: 'https://plans-design.ca/plans/879-le-obtusa/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2022/08/879-le-Obtusa-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2022/08/879-le-Obtusa-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '864', name: 'Le Mugo',
-          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
-          superficie: '1 559 pi²', prix: 'À partir de 272 400 $',
-          url: 'https://plans-design.ca/plans/864-le-mugo/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2019/08/864-le-mugo-plans-design-perspective-900x600.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2019/08/864-le-mugo-plans-design-rezdechaussee-900x600.jpg'
-        }
+        {id:'863',name:'Le Triloba',etages:'1 étage',chambres:'1 à 3 chambres',sdb:'2 salles de bain',superficie:'795 pi²',prix:'À partir de 179 000 $',url:'https://plans-design.ca/plans/863-le-triloba/',photo:'https://plans-design.ca/wp-content/uploads/2019/08/863-le-triloba-plans-design-perspective-900x600.jpg',plan:'https://plans-design.ca/wp-content/uploads/2020/06/863-le-triloba-plans-design-perspective-2.jpg'},
+        {id:'851',name:'Le Viridis',etages:'2 ou 3 étages',chambres:'3 chambres',sdb:'1 salle de bain · 1 salle d\'eau',superficie:'1 522 pi²',prix:'À partir de 279 000 $',url:'https://plans-design.ca/plans/851-le-viridis/',photo:'https://plans-design.ca/wp-content/uploads/2019/09/851-le-viridis-plans-design-perspective-900x600.jpg',plan:'https://plans-design.ca/wp-content/uploads/2019/09/851-le-viridis-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'891',name:'Le Procera',etages:'2 étages',chambres:'2 ou 3 chambres',sdb:'2 salles de bain · 1 salle d\'eau',superficie:'1 247 pi²',prix:'À partir de 304 400 $',url:'https://plans-design.ca/plans/891-le-procera/',photo:'https://plans-design.ca/wp-content/uploads/2025/06/891-le-procera-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2025/06/891-le-procera-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'880',name:'Le Corylus',etages:'1 étage',chambres:'1 à 3 chambres',sdb:'1 ou 2 salles de bain',superficie:'720 pi²',prix:'À partir de 159 000 $',url:'https://plans-design.ca/plans/880-le-corylus/',photo:'https://plans-design.ca/wp-content/uploads/2025/10/880-le-corylus-plans-design-perspective_BP.jpg',plan:'https://plans-design.ca/wp-content/uploads/2022/09/880-le-corylus-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'879',name:'Le Obtusa',etages:'1 étage',chambres:'2 à 4 chambres',sdb:'1 ou 2 salles de bain',superficie:'1 245 pi²',prix:'À partir de 264 000 $',url:'https://plans-design.ca/plans/879-le-obtusa/',photo:'https://plans-design.ca/wp-content/uploads/2022/08/879-le-Obtusa-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2022/08/879-le-Obtusa-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'864',name:'Le Mugo',etages:'2 étages',chambres:'3 chambres',sdb:'1 salle de bain · 1 salle d\'eau',superficie:'1 559 pi²',prix:'À partir de 272 400 $',url:'https://plans-design.ca/plans/864-le-mugo/',photo:'https://plans-design.ca/wp-content/uploads/2019/08/864-le-mugo-plans-design-perspective-900x600.jpg',plan:'https://plans-design.ca/wp-content/uploads/2019/08/864-le-mugo-plans-design-rezdechaussee-900x600.jpg'}
       ]
     },
     'cottage': {
       title: 'cottage',
       eyebrow: '— Catégorie 03 · Maison cottage',
       list: [
-        {
-          id: '895', name: 'Le Plicata',
-          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
-          superficie: '1 570 pi²', prix: 'À partir de 295 700 $',
-          url: 'https://plans-design.ca/plans/895-le-plicata/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2026/02/895-le-plicata-plans-design-perspective_Snoc.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2026/02/895-le-plicata-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '892', name: 'Le Syringa',
-          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
-          superficie: '1 762 pi²', prix: 'À partir de 349 800 $',
-          url: 'https://plans-design.ca/plans/892-le-syringa/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2025/10/892-le-syringa-plans-design-perspective_BP.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2025/10/892-le-syringa-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '889', name: 'Le Cordifolia',
-          etages: '2 étages', chambres: '3 ou 4 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
-          superficie: '1 470 pi²', prix: 'À partir de 269 000 $',
-          url: 'https://plans-design.ca/plans/889-le-cordifolia/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2024/11/889-le-cordifolia-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2024/11/889-le-cordifolia-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '884', name: 'Le Viminalis',
-          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
-          superficie: '1 496 pi²', prix: 'À partir de 244 400 $',
-          url: 'https://plans-design.ca/plans/884-le-viminalis/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2023/03/884-le-viminalis-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2023/03/884-le-viminalis-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '882', name: 'Le Laciniosa',
-          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
-          superficie: '1 385 pi²', prix: 'À partir de 226 600 $',
-          url: 'https://plans-design.ca/plans/882-le-laciniosa/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2022/12/882-le-laciniosa-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2022/12/882-le-laciniosa-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '877', name: 'Le Fusca',
-          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
-          superficie: '1 552 pi²', prix: 'À partir de 286 200 $',
-          url: 'https://plans-design.ca/plans/877-le-fusca/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2025/08/877-le-fusca-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2021/11/877-le-fusca-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '874', name: 'Le Cerasus',
-          etages: '2 étages', chambres: '3 chambres', sdb: '1 salle de bain · 1 salle d\'eau',
-          superficie: '1 644 pi²', prix: 'À partir de 293 500 $',
-          url: 'https://plans-design.ca/plans/874-le-cerasus/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2021/08/874-le-cerasus-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2021/08/874-le-cerasus-plans-design-rezdechaussee-900x600.jpg'
-        },
-        {
-          id: '866', name: 'Le Ophois',
-          etages: '2 étages', chambres: '4 chambres', sdb: '3 salles de bain · 1 salle d\'eau',
-          superficie: '3 903 pi²', prix: 'À partir de 760 300 $',
-          url: 'https://plans-design.ca/plans/866-le-ophois/',
-          photo: 'https://plans-design.ca/wp-content/uploads/2020/04/866-le-ophois-plans-design-perspective.jpg',
-          plan:  'https://plans-design.ca/wp-content/uploads/2020/04/866-le-ophois-plans-design-rezdechaussee-900x600.jpg'
-        }
+        {id:'895',name:'Le Plicata',etages:'2 étages',chambres:'3 chambres',sdb:'1 salle de bain · 1 salle d\'eau',superficie:'1 570 pi²',prix:'À partir de 295 700 $',url:'https://plans-design.ca/plans/895-le-plicata/',photo:'https://plans-design.ca/wp-content/uploads/2026/02/895-le-plicata-plans-design-perspective_Snoc.jpg',plan:'https://plans-design.ca/wp-content/uploads/2026/02/895-le-plicata-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'892',name:'Le Syringa',etages:'2 étages',chambres:'3 chambres',sdb:'1 salle de bain · 1 salle d\'eau',superficie:'1 762 pi²',prix:'À partir de 349 800 $',url:'https://plans-design.ca/plans/892-le-syringa/',photo:'https://plans-design.ca/wp-content/uploads/2025/10/892-le-syringa-plans-design-perspective_BP.jpg',plan:'https://plans-design.ca/wp-content/uploads/2025/10/892-le-syringa-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'889',name:'Le Cordifolia',etages:'2 étages',chambres:'3 ou 4 chambres',sdb:'1 salle de bain · 1 salle d\'eau',superficie:'1 470 pi²',prix:'À partir de 269 000 $',url:'https://plans-design.ca/plans/889-le-cordifolia/',photo:'https://plans-design.ca/wp-content/uploads/2024/11/889-le-cordifolia-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2024/11/889-le-cordifolia-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'884',name:'Le Viminalis',etages:'2 étages',chambres:'3 chambres',sdb:'1 salle de bain · 1 salle d\'eau',superficie:'1 496 pi²',prix:'À partir de 244 400 $',url:'https://plans-design.ca/plans/884-le-viminalis/',photo:'https://plans-design.ca/wp-content/uploads/2023/03/884-le-viminalis-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2023/03/884-le-viminalis-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'882',name:'Le Laciniosa',etages:'2 étages',chambres:'3 chambres',sdb:'1 salle de bain · 1 salle d\'eau',superficie:'1 385 pi²',prix:'À partir de 226 600 $',url:'https://plans-design.ca/plans/882-le-laciniosa/',photo:'https://plans-design.ca/wp-content/uploads/2022/12/882-le-laciniosa-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2022/12/882-le-laciniosa-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'877',name:'Le Fusca',etages:'2 étages',chambres:'3 chambres',sdb:'1 salle de bain · 1 salle d\'eau',superficie:'1 552 pi²',prix:'À partir de 286 200 $',url:'https://plans-design.ca/plans/877-le-fusca/',photo:'https://plans-design.ca/wp-content/uploads/2025/08/877-le-fusca-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2021/11/877-le-fusca-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'874',name:'Le Cerasus',etages:'2 étages',chambres:'3 chambres',sdb:'1 salle de bain · 1 salle d\'eau',superficie:'1 644 pi²',prix:'À partir de 293 500 $',url:'https://plans-design.ca/plans/874-le-cerasus/',photo:'https://plans-design.ca/wp-content/uploads/2021/08/874-le-cerasus-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2021/08/874-le-cerasus-plans-design-rezdechaussee-900x600.jpg'},
+        {id:'866',name:'Le Ophois',etages:'2 étages',chambres:'4 chambres',sdb:'3 salles de bain · 1 salle d\'eau',superficie:'3 903 pi²',prix:'À partir de 760 300 $',url:'https://plans-design.ca/plans/866-le-ophois/',photo:'https://plans-design.ca/wp-content/uploads/2020/04/866-le-ophois-plans-design-perspective.jpg',plan:'https://plans-design.ca/wp-content/uploads/2020/04/866-le-ophois-plans-design-rezdechaussee-900x600.jpg'}
       ]
     }
   };
 
-  // ===== Interactive category logic =====
   const tiles = document.querySelectorAll('.category-tile');
   const panel = document.getElementById('modelsPanel');
   const panelTitle = document.getElementById('panelTitle');
@@ -1336,7 +1164,6 @@
       </button>
     `).join('');
 
-    // Bind clicks to open lightbox
     panelModels.querySelectorAll('.model-tile').forEach(tile=>{
       tile.addEventListener('click', ()=>{
         const cat = tile.dataset.cat;
@@ -1347,7 +1174,6 @@
   }
 
   function selectCategory(catKey){
-    // Toggle: if already active, close
     if(activeCat === catKey){
       panel.classList.remove('open');
       tiles.forEach(t => t.classList.remove('active'));
@@ -1358,7 +1184,6 @@
     tiles.forEach(t => t.classList.toggle('active', t.dataset.cat === catKey));
     renderModels(catKey);
     panel.classList.add('open');
-    // Smooth scroll to panel
     setTimeout(()=>{
       panel.scrollIntoView({behavior:'smooth', block:'start'});
     }, 100);
@@ -1375,7 +1200,6 @@
     document.getElementById('models').scrollIntoView({behavior:'smooth', block:'start'});
   });
 
-  // ===== Lightbox =====
   const lightbox = document.getElementById('lightbox');
   const lbPhoto = document.getElementById('lbPhoto');
   const lbPlan = document.getElementById('lbPlan');
@@ -1418,12 +1242,10 @@
         <div class="lightbox-meta-value" style="color:var(--brown)">${m.prix}</div>
       </div>
     `;
-    // Update CTA: link to demand quote and add "voir détails" link
     lbCta.onclick = (e)=>{
       e.preventDefault();
       const sel = document.getElementById('type');
       if(sel) sel.value = catKey;
-      // Pre-fill message with model reference
       const msg = document.getElementById('message');
       if(msg && !msg.value){
         msg.value = `Bonjour, je suis intéressé(e) par le modèle ${m.name} (N° ${m.id}). Pourriez-vous me faire parvenir une soumission ? Merci.`;
@@ -1431,7 +1253,6 @@
       closeLightbox();
       document.getElementById('contact').scrollIntoView({behavior:'smooth'});
     };
-    // Update "voir détails" link
     if(lbDetails){
       lbDetails.href = m.url;
     }
